@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Red Hat Developer Hub Adventure
-  url: https://blog.jromanmartin.io/rhdh-adventure/template-tutorial/index.html
+  url: https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html
   start_page: rhdh-adventure::index.adoc
 
 content:
