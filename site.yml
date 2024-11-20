@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Template Tutorial
-  url: https://redhat-scholars.github.io/course-template
+  url: https://blog.jromanmartin.io/rhdh-adventure/template-tutorial/index.html
   start_page: template-tutorial::index.adoc
 
 content:
