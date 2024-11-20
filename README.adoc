@@ -1,1 +1,40 @@
-Check the build courseware https://redhat-scholars.github.io/build-course[documentation]  on how folder structure, how to use macros and other gotchas
+# Red Hat Developer Hub Adventure
+
+## 🌟 Mission
+
+This is a workshop or an adventure to introduce your teams in features and capabilities
+of Red Hat Developer Hub improving Developer Experience and Developer Productivity.
+
+## 🏃‍♀️ Running locally
+
+To run locally the _dev_ environment, install the following `npm` package and start the npm server:
+
+1. Install the _gulp-cli_ package:
+
+```shell
+sudo npm install -g gulp-cli
+```
+
+2. Install `npm` packages:
+
+```shell
+npm install
+```
+
+3. Start the _dev_ environment:
+
+```bash
+gulp
+```
+
+Your local copy is here: http://localhost:3000/
+
+## 📝 Content Structure
+
+Check the build courseware https://redhat-scholars.github.io/build-course[documentation] on how folder structure, how to use macros and other gotchas.
+
+## 👪 Contribution
+
+Pull requests welcome 🏁. Please 🙏, review 👀 the [Contribution Guide](./CONTRIBUTING.md) to become a contributor.
+
+Changes approved and pushed to main will automatically be published to the docs site.
