@@ -2,9 +2,9 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Template Tutorial
+  title: Red Hat Developer Hub Adventure
   url: https://blog.jromanmartin.io/rhdh-adventure/template-tutorial/index.html
-  start_page: template-tutorial::index.adoc
+  start_page: rhdh-adventure::index.adoc
 
 content:
   sources:
