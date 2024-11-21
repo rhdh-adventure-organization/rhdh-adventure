@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Deploy Service :: Red Hat Developer Hub Adventure</title>
-    <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/02-deploy.html">
+    <title>Setup :: Red Hat Developer Hub Adventure</title>
+    <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/challenge-05.html">
+    <link rel="prev" href="challenge-04.html">
+    <link rel="next" href="challenge-06.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -103,15 +105,15 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="challenge-05.html">🧾 Onboard my new app</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="challenge-05.html#softwaretemplate">💀 Software Template</a>
+    <a class="nav-link" href="#softwaretemplate">💀 Software Template</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="challenge-05.html#onboard">🛬 Onboarding</a>
+    <a class="nav-link" href="#onboard">🛬 Onboarding</a>
   </li>
 </ul>
   </li>
@@ -151,91 +153,48 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="02-deploy.html">Deploy Service</a></li>
+    <li><a href="challenge-05.html">🧾 Onboard my new app</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/02-deploy.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-05.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Deploy Service</h1>
+<h1 class="page">Setup</h1>
 <div class="sect1">
-<h2 id="service"><a class="anchor" href="#service"></a>The Service</h2>
+<h2 id="intro"><a class="anchor" href="#intro"></a>🧾 Onboard my new app</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The code:</p>
+<p>You have an application skeleton; or scaffold or archetype; for a kind of architecture very common in your organization. However, it is a manual process using it to create new applications.</p>
 </div>
-<div class="listingblock lines_7 console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Main {
-
-    public static void main(String[] args) {
-
-    }
-
-}
-
-./mvnw compile</code></pre>
+<div class="paragraph">
+<p>Here you will create a software template using your application skeleton to onboard new applications in Red Hat Developer Hub. This onboarding process will include the creation of the source code repository, and the default dashboard of the application into the catalog with integrations with the documentation, dependencies (if applies) and API (if applies).</p>
 </div>
+<div class="paragraph">
+<p>TBC</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="package"><a class="anchor" href="#package"></a>Packaging the Service</h2>
+<h2 id="softwaretemplate"><a class="anchor" href="#softwaretemplate"></a>💀 Software Template</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can package the next bash script:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/sh
-echo "Hello World"</code></pre>
-</div>
+<p>TBC</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy"><a class="anchor" href="#deploy"></a>Deploy the Service</h2>
+<h2 id="onboard"><a class="anchor" href="#onboard"></a>🛬 Onboarding</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>And then you can deploy the service and execute commands inside:</p>
-</div>
-<div class="paragraph">
-<p>Check that the pod is up and running:</p>
-</div>
-<div class="listingblock lines_space console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl get pods</code></pre>
-</div>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                        READY   STATUS    RESTARTS   AGE
-apps   1/1     Running   0          5s</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then let&#8217;s go into the running pod to execute some commands:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl exec -ti apps /bin/bash</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Change the pod name with your pod name.
-</td>
-</tr>
-</table>
+<p>TBC</p>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="challenge-04.html">🕵🏻‍♂️ Where is my app?</a></span>
+  <span class="next"><a href="challenge-06.html">🔌 And beyond!</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

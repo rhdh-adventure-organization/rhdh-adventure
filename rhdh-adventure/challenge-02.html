@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Deploy Service :: Red Hat Developer Hub Adventure</title>
-    <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/02-deploy.html">
+    <title>Setup :: Red Hat Developer Hub Adventure</title>
+    <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/challenge-02.html">
+    <link rel="prev" href="challenge-01.html">
+    <link rel="next" href="challenge-03.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -61,18 +63,18 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="challenge-02.html">🎨 Customizing it!</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="challenge-02.html#configuration">🛠️ External configuration</a>
+    <a class="nav-link" href="#configuration">🛠️ External configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="challenge-02.html#title">©️ Title it!</a>
+    <a class="nav-link" href="#title">©️ Title it!</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="challenge-02.html#colors">🌈 Looking better</a>
+    <a class="nav-link" href="#colors">🌈 Looking better</a>
   </li>
 </ul>
   </li>
@@ -151,91 +153,66 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="02-deploy.html">Deploy Service</a></li>
+    <li><a href="challenge-02.html">🎨 Customizing it!</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/02-deploy.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-02.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Deploy Service</h1>
+<h1 class="page">Setup</h1>
 <div class="sect1">
-<h2 id="service"><a class="anchor" href="#service"></a>The Service</h2>
+<h2 id="intro"><a class="anchor" href="#intro"></a>🎨 Customizing it!</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The code:</p>
+<p>Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and prepare it for adding more configurations in the future, and facilitate the maintenance and operation. Here the adventure will give the opportunity to customize the following features:</p>
 </div>
-<div class="listingblock lines_7 console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Main {
-
-    public static void main(String[] args) {
-
-    }
-
-}
-
-./mvnw compile</code></pre>
+<div class="ulist">
+<ul>
+<li>
+<p>Using external ConfigMaps and Secrets to store configuration</p>
+</li>
+<li>
+<p>Adding your own title</p>
+</li>
+<li>
+<p>Defining your colors</p>
+</li>
+</ul>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="package"><a class="anchor" href="#package"></a>Packaging the Service</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>You can package the next bash script:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/sh
-echo "Hello World"</code></pre>
-</div>
+<p>Here you will practice how to configure and customize Red Hat Developer Hub to apply common things. You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy"><a class="anchor" href="#deploy"></a>Deploy the Service</h2>
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>🛠️ External configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>And then you can deploy the service and execute commands inside:</p>
+<p>TBC</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="title"><a class="anchor" href="#title"></a>©️ Title it!</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Check that the pod is up and running:</p>
-</div>
-<div class="listingblock lines_space console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl get pods</code></pre>
+<p>TBC</p>
 </div>
 </div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                        READY   STATUS    RESTARTS   AGE
-apps   1/1     Running   0          5s</code></pre>
 </div>
-</div>
+<div class="sect1">
+<h2 id="colors"><a class="anchor" href="#colors"></a>🌈 Looking better</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Then let&#8217;s go into the running pod to execute some commands:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl exec -ti apps /bin/bash</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Change the pod name with your pod name.
-</td>
-</tr>
-</table>
+<p>TBC</p>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="challenge-01.html">🚀 Let&#8217;s play</a></span>
+  <span class="next"><a href="challenge-03.html">👨‍💻 Welcome Devs</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

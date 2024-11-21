@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Setup :: Red Hat Developer Hub Adventure</title>
     <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/01-setup.html">
-    <link rel="prev" href="index.html">
-    <link rel="next" href="02-deploy.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -51,27 +49,90 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="01-setup.html">1. Setup</a>
+    <a class="nav-link" href="challenge-01.html">🚀 Let&#8217;s play</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#prerequisite">Prerequisites</a>
+    <a class="nav-link" href="challenge-01.html#helmchart">📦 Helm Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#minikube">Setup Minikube</a>
+    <a class="nav-link" href="challenge-01.html#operator">👷 Operator</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-deploy.html">2. Deploy Service</a>
+    <a class="nav-link" href="challenge-02.html">🎨 Customizing it!</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-deploy.html#package">Build Service</a>
+    <a class="nav-link" href="challenge-02.html#configuration">🛠️ External configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-deploy.html#deploy">Deploy Dervice</a>
+    <a class="nav-link" href="challenge-02.html#title">©️ Title it!</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-02.html#colors">🌈 Looking better</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="challenge-03.html">👨‍💻 Welcome Devs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-03.html#github-auth">🔑 Authentication with GitHub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-03.html#gitlab-auth">🔑 Authentication with GitLab</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-03.html#rbac">🛂 You won&#8217;t break it</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Where is my app?</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-04.html#declare">📝 Declare it</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-04.html#import">📂 Import it</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="challenge-05.html">🧾 Onboard my new app</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-05.html#softwaretemplate">💀 Software Template</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-05.html#onboard">🛬 Onboarding</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="challenge-06.html">🔌 And beyond!</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-06.html#dynamicplugins">🦄 Dynamic Plugins</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="challenge-07.html">🔬 What is happening?</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-07.html#tools">🧰 Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="challenge-07.html#metrics">👨‍🔬 Metrics</a>
   </li>
 </ul>
   </li>
@@ -90,7 +151,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="01-setup.html">1. Setup</a></li>
+    <li><a href="01-setup.html">Setup</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/01-setup.adoc">Edit this Page</a></div>
@@ -229,7 +290,7 @@ Although they are used in the tutorial, you could use others without any problem
 <h2 id="minikube"><a class="anchor" href="#minikube"></a>Setup Kubernetes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The profile my_profile is created to run the tutorial:</p>
+<p>The profile rhdh-adventure is created to run the tutorial:</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -252,7 +313,7 @@ Although they are used in the tutorial, you could use others without any problem
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=virtualbox -p my_profile</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=virtualbox -p rhdh-adventure</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -260,7 +321,7 @@ Although they are used in the tutorial, you could use others without any problem
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=kvm2 -p my_profile</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=kvm2 -p rhdh-adventure</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -268,7 +329,7 @@ Although they are used in the tutorial, you could use others without any problem
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=hyperv -p my_profile</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=hyperv -p rhdh-adventure</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -276,9 +337,9 @@ Although they are used in the tutorial, you could use others without any problem
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">😄  [my_profile] minikube v1.20.0 on Darwin 11.3
-✅  Created a new profile : my_profile
-✅  minikube profile was successfully set to my_profile
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">😄  [rhdh-adventure] minikube v1.20.0 on Darwin 11.3
+✅  Created a new profile : rhdh-adventure
+✅  minikube profile was successfully set to rhdh-adventure
 😄  [default] minikube v1.29.0 on Darwin 11.3
 ✨  Selecting 'virtualbox' driver from user configuration (alternates: [hyperkit])
 🔥  Creating virtualbox VM (CPUs=2, Memory=8192MB, Disk=50000MB) ...
@@ -287,7 +348,7 @@ Although they are used in the tutorial, you could use others without any problem
 🚜  Pulling images ...
 🚀  Launching Kubernetes ...
 ⌛  Waiting for cluster to come online ...
-🏄  Done! kubectl is now configured to use "my_profile"</code></pre>
+🏄  Done! kubectl is now configured to use "rhdh-adventure"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -295,7 +356,7 @@ Although they are used in the tutorial, you could use others without any problem
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">eval $(minikube docker-env -p my_profile)</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">eval $(minikube docker-env -p rhdh-adventure)</code></pre>
 </div>
 </div>
 </div>
@@ -350,12 +411,12 @@ Kubernetes Version: v1.26.1</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/redhat-developer-demos/rhd-tutorial-common.git" class="bare">https://github.com/redhat-developer-demos/rhd-tutorial-common.git</a> my_folder</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/rmarting/rhdh-adventure.git" class="bare">https://github.com/rmarting/rhdh-adventure.git</a> rhdh-adventure</code></pre>
 </div>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export TUTORIAL_HOME="$(pwd)/my_folder"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export TUTORIAL_HOME="$(pwd)/rhdh-adventure"</code></pre>
 </div>
 </div>
 <div class="listingblock console-input">
@@ -365,10 +426,6 @@ Kubernetes Version: v1.26.1</code></pre>
 </div>
 </div>
 </div>
-<nav class="pagination">
-  <span class="prev"><a href="index.html">Red Hat Developer Hub Adventure</a></span>
-  <span class="next"><a href="02-deploy.html">2. Deploy Service</a></span>
-</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
