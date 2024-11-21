@@ -1,0 +1,21 @@
+= Setup
+include::_attributes.adoc[]
+
+[#intro]
+== 🧾 Onboard my new app
+
+You have an application skeleton; or scaffold or archetype; for a kind of architecture very common in your organization. However, it is a manual process using it to create new applications.
+
+Here you will create a software template using your application skeleton to onboard new applications in Red Hat Developer Hub. This onboarding process will include the creation of the source code repository, and the default dashboard of the application into the catalog with integrations with the documentation, dependencies (if applies) and API (if applies).
+
+TBC
+
+[#softwaretemplate]
+== 💀 Software Template
+
+TBC
+
+[#onboard]
+== 🛬 Onboarding
+
+TBC

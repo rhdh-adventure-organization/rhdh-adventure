@@ -1,2 +1,5 @@
 :experimental:
 :source-highlighter: highlightjs
+:profile: rhdh-adventure
+:tutorial-url: https://github.com/rmarting/rhdh-adventure.git
+:folder: rhdh-adventure

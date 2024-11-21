@@ -1,0 +1,28 @@
+= Setup
+include::_attributes.adoc[]
+
+[#intro]
+== 🎨 Customizing it!
+
+Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and prepare it for adding more configurations in the future, and facilitate the maintenance and operation. Here the adventure will give the opportunity to customize the following features:
+
+* Using external ConfigMaps and Secrets to store configuration
+* Adding your own title
+* Defining your colors
+
+Here you will practice how to configure and customize Red Hat Developer Hub to apply common things. You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges.
+
+[#configuration]
+== 🛠️ External configuration
+
+TBC
+
+[#title]
+== ©️ Title it!
+
+TBC
+
+[#colors]
+== 🌈 Looking better
+
+TBC

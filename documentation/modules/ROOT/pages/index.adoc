@@ -3,18 +3,47 @@
 :!sectids:
 
 [.text-center.strong]
-== Publish Services to Kubernetes
+== A DevEx adventure from Zero to Hero
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+Your team, as platform engineers, is looking to improve the daily basis of many different development teams and create the best developer experience (DevEx) for them. Red Hat Developer Hub is key in that journey providing different features and integration capabilities with multiple tools. However, your team is facing different challenges which should be resolved before providing the Nirvana for Developers.
+
+Which challenge do you want to resolve? Here starts your adventure with Red Hat Developer Hub to become a hero, and improve the developer experience.
 
 [.tiles.browse]
-== Browse modules
+== Challenges of this Adventure
 
 [.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
+.xref:challenge-01.adoc[🚀 Let's play]
+* xref:challenge-01.adoc#minikube[📦 Helm Chart]
+* xref:challenge-01.adoc#minikube[👷 Operator]
 
 [.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+.xref:challenge-02.adoc[🎨 Looking better]
+* xref:challenge-02.adoc#package[🛠️ External configuration]
+* xref:challenge-02.adoc#deploy[©️ Title it!]
+* xref:challenge-02.adoc#deploy[🌈 Looking better]
+
+[.tile]
+.xref:challenge-03.adoc[👨‍💻 Welcome Devs]
+* xref:challenge-03.adoc#package[🔑 Authentication with GitHub]
+* xref:challenge-03.adoc#deploy[🔑 Authentication with GitLab]
+* xref:challenge-03.adoc#deploy[🛂 You won't break it]
+
+[.tile]
+.xref:challenge-04.adoc[🕵🏻‍♂️ Where is my app?]
+* xref:challenge-04.adoc#declare[📝 Declare it]
+* xref:challenge-04.adoc#import[📂 Import it]
+
+[.tile]
+.xref:challenge-05.adoc[🧾 Onboard my new app]
+* xref:challenge-04.adoc#softwaretemplate[💀 Software Template]
+* xref:challenge-04.adoc#onboard[🛬 Onboarding]
+
+[.tile]
+.xref:challenge-06.adoc[🔌 And beyond!]
+* xref:challenge-06.adoc#dynamicplugins[🦄 Dynamic Plugins]
+
+[.tile]
+.xref:challenge-07.adoc[🔬 What is happening?]
+* xref:challenge-07.adoc#tools[🧰 Tools]
+* xref:challenge-07.adoc#metrics[👨‍🔬 Metrics]

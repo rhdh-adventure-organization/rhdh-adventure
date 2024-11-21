@@ -1,0 +1,21 @@
+= Setup
+include::_attributes.adoc[]
+
+[#intro]
+== 🕵🏻‍♂️ Where is my app?
+
+Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.
+
+Here you will prepare your application to be integrated in the catalog, including the main links to your source code repository, documentation, dependencies (if applies) and API (if applies). Once your application is ready, you can import into the catalog and share with other collaborators. You will also learn about how to do it massively using some capabilities of Red Hat Developer Hub.
+
+TBC
+
+[#declare]
+== 📝 Declare it
+
+TBC
+
+[#import]
+== 📂 Import it
+
+TBC

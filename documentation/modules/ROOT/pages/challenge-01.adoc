@@ -1,0 +1,22 @@
+= Setup
+include::_attributes.adoc[]
+
+[#intro]
+== 🚀 Let's play
+
+Any journey starts with a first step … and here we have the first one: install Red Hat Developer Hub. It is easy, but you should choose which model is the most suitable for you:
+
+* Red Hat Developer Hub Helm Chart
+* Red Hat Developer Hub Operator
+
+Here you will identify which installation and operational mechanism is better to support the Red Hat Developer Hub life cycle (install, upgrade...). The rest of your adventure will continue from here.
+
+[#helmchart]
+== 📦 Helm Chart
+
+TBC
+
+[#operator]
+== 👷 Operator
+
+TBC

@@ -1,0 +1,16 @@
+= Setup
+include::_attributes.adoc[]
+
+[#intro]
+== 🔌 And beyond!
+
+Red Hat Developer Hub is very modular and it is easy to install and integrate multiple different plugins to improve the developer experience. There is a long list of different plugins allowed to be deployed on top of Red Hat Developer Hub, which one do you want to install? Choose one, configure it and deploy it in your instance. It will be fun!!!
+
+Here you will practice adding dynamic plugins to extend the capabilities of Red Hat Developer Hub and provide more value to the final users . You will learn how to choose a dynamic plugin of Red Hat Developer Hub or Backstage, set up and deploy as part of the life cycle of the product.
+
+TBC
+
+[#dynamicplugins]
+== 🦄 Dynamic Plugins
+
+TBC
