@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Red Hat Developer Hub Adventure (Dev Mode)
-  url: http://localhost:3000/rhs-build-course/index.html
+  url: http://localhost:3000/rhdh-adventure/index.html
   start_page: rhdh-adventure::index.adoc
 
 content:
@@ -11,16 +11,20 @@ content:
     - url: .
       branches: HEAD
       start_path: documentation
+
 asciidoc:
   attributes:
     title: Red Hat Developer Hub Adventure (Dev Mode)
+    page-pagination: true
   extensions:
     - ./lib/remote-include-processor.js
     - ./lib/tab-block.js
+
 ui:
   bundle:
     url: https://github.com/redhat-developer-demos/rhd-tutorial-ui/releases/download/v0.1.10/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui
+
 output:
   dir: ./gh-pages
