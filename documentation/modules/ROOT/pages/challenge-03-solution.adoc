@@ -1,8 +1,8 @@
 = Setup
 include::_attributes.adoc[]
 
-[#intro]
-== 👨‍💻 Welcome Devs
+[#intro-solution]
+== 🧞👨‍💻 Welcome Devs
 
 Your Red Hat Developer Hub looks great … However, it is not a secure place to work. Security is important in any adventure, so it is time to secure our instance with real users and authorization policies to avoid security issues in the future. What do you want to conquer?
 
@@ -12,32 +12,17 @@ Your Red Hat Developer Hub looks great … However, it is not a secure place to 
 
 Here you will integrate a SCM server as Identity Provider of Red Hat Developer Hub allowing authenticate users (developers or platform engineers). You will learn how to integrate one of those SCM in your exercise and define different rules or policies about which kind of activities are allowed for each of them.
 
-[#github-auth]
-== 🔑 Authentication with GitHub
-
-TBC
-
 [#github-auth-solution]
-=== 🧞🔑 Authentication with GitHub Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-03-solution.adoc#github-auth-solution[here].
-
-[#gitlab-auth]
-== 🔑 Authentication with GitLab
+== 🧞🔑 Authentication with GitHub
 
 TBC
 
 [#gitlab-auth-solution]
-=== 🧞🔑 Authentication with GitLab Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-03-solution.adoc#gitlab-auth-solution[here].
-
-[#rbac]
-== 🛂 You won't break it
+== 🧞🔑 Authentication with GitLab
 
 TBC
 
 [#rbac-solution]
-=== 🧞🛂 You won't break it Solution
+== 🧞🛂 You won't break it
 
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-03-solution.adoc#rbac-solution[here].
+TBC

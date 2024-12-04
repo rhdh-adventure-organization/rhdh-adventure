@@ -1,8 +1,8 @@
 = Setup
 include::_attributes.adoc[]
 
-[#intro]
-== 🎨 Customizing it!
+[#intro-solution]
+== 🧞🎨 Customizing it!
 
 Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and prepare it for adding more configurations in the future, and facilitate the maintenance and operation. Here the adventure will give the opportunity to customize the following features:
 
@@ -12,32 +12,17 @@ Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to
 
 Here you will practice how to configure and customize Red Hat Developer Hub to apply common things. You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges.
 
-[#configuration]
-== 🛠️ External configuration
-
-TBC
-
 [#configuration-solution]
-=== 🧞🛠️ External configuration Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-02-solution.adoc#configuration-solution[here].
-
-[#title]
-== ©️ Title it!
+== 🧞🛠️ External configuration
 
 TBC
 
 [#title-solution]
-=== 🧞©️ Title it! Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-02-solution.adoc#title-solution[here].
-
-[#colors]
-== 🌈 Looking better
+== 🧞©️ Title it!
 
 TBC
 
 [#colors-solution]
-=== 🧞🌈 Looking better Solution
+== 🧞🌈 Looking better
 
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-02-solution.adoc#colors-solution[here].
+TBC

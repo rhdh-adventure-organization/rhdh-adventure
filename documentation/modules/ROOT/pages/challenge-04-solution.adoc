@@ -1,8 +1,8 @@
 = Setup
 include::_attributes.adoc[]
 
-[#intro]
-== 🕵🏻‍♂️ Where is my app?
+[#intro-solution]
+== 🧞🕵🏻‍♂️ Where is my app?
 
 Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.
 
@@ -10,22 +10,12 @@ Here you will prepare your application to be integrated in the catalog, includin
 
 TBC
 
-[#declare]
-== 📝 Declare it
-
-TBC
-
 [#declare-solution]
-=== 🧞📝 Declare it Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-04-solution.adoc#declare-solution[here].
-
-[#import]
-== 📂 Import it
+== 🧞📝 Declare it
 
 TBC
 
 [#import-solution]
-=== 🧞📂 Import it Solution
+== 🧞📂 Import it
 
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-04-solution.adoc#import-solution[here].
+TBC

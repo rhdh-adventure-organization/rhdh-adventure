@@ -1,29 +1,19 @@
 = Setup
 include::_attributes.adoc[]
 
-[#intro]
-== 🔬 What is happening?
+[#intro-solution]
+== 🧞🔬 What is happening?
 
 We are near to the end of our adventure, with an incredible Red Hat Developer Hub fully functional, but we are missing something. How is it working? Which data or metrics are there? It is important to measure the usage of our instance, so the adventure will finish after we can check and measure the performance and behavior of the instance.
 
 TBC Here you will … . You will learn how to …
 
-[#tools]
-== 🧰 Tools
-
-TBC
-
 [#tools-solution]
-=== 🧞🧰 Tools Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-07-solution.adoc#tools-solution[here].
-
-[#metrics]
-== 👨‍🔬 Metrics
+== 🧞🧰 Tools
 
 TBC
 
 [#metrics-solution]
-=== 🧞👨‍🔬 Metrics Solution
+== 🧞👨‍🔬 Metrics
 
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-07-solution.adoc#metrics-solution[here].
+TBC

@@ -1,8 +1,8 @@
 = Setup
 include::_attributes.adoc[]
 
-[#intro]
-== 🧾 Onboard my new app
+[#intro-solution]
+== 🧞🧾 Onboard my new app
 
 You have an application skeleton; or scaffold or archetype; for a kind of architecture very common in your organization. However, it is a manual process using it to create new applications.
 
@@ -10,22 +10,12 @@ Here you will create a software template using your application skeleton to onbo
 
 TBC
 
-[#softwaretemplate]
-== 💀 Software Template
-
-TBC
-
 [#softwaretemplate-solution]
-=== 🧞💀 Software Template Solution
-
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-05-solution.adoc#softwaretemplate-solution[here].
-
-[#onboard]
-== 🛬 Onboarding
+== 🧞💀 Software Template
 
 TBC
 
 [#onboard-solution]
-=== 🧞🛬 Onboarding Solution
+== 🧞🛬 Onboarding
 
-Are you struggling about how to resolve it? Don't worry you can check the solution xref:challenge-05-solution.adoc#onboard-solution[here].
+TBC
