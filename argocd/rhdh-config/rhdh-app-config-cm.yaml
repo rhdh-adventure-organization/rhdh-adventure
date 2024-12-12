@@ -6,4 +6,4 @@ metadata:
 data:
   rhdh-app-config.yaml: |
     organization:
-      name: "My Organization"
+      name: "My Red Hat Developer Hub Adventure Organization"

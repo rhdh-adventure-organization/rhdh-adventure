@@ -2,15 +2,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: rhdh-config
-  namespace: argocd
+  namespace: openshift-gitops
 spec:
-  project: default
+  project: rhdh-adventure
   source:
     repoURL: 'https://github.com/rmarting/rhdh-adventure.git'
-    targetRevision: main
+    targetRevision: master
     path: "argocd/rhdh-config"
   destination:
     server: https://kubernetes.default.svc
     namespace: rhdh-adventure
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

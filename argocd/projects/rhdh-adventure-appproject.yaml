@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: rhdh-adventure
+  namespace: openshift-gitops
+spec:
+  description: Red Hat Developer Hub Adventure Project
+  sourceRepos:
+    - '*'
+  sourceNamespaces:
+    - rhdh-adventure
+  destinations:
+    - namespace: rhdh-adventure
+      server: https://kubernetes.default.svc
