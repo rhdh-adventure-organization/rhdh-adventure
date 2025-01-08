@@ -261,8 +261,19 @@ and <code>rhdh-by-operator</code> namespace for an instance managed by the Opera
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_configuration_by_helm_chart"><a class="anchor" href="#_configuration_by_helm_chart"></a>Configuration by Helm Chart</h3>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset1_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_by-helm-chart">
 <div class="paragraph">
 <p>Red Hat Developer Hub Helm Chart provides an extension to declare extra configuration by ConfigMap and Secrets.
 The definition of the resources described above will be applying the next configuration into the <code>values.yaml</code> file.
@@ -272,8 +283,6 @@ Here an example of that configuration:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
   clusterRouterBase: "${basedomain}"
-  #dynamic:
-  #  plugins: []
 upstream:
   backstage:
     extraAppConfig:
@@ -296,8 +305,7 @@ upstream:
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_configuration_by_operator"><a class="anchor" href="#_configuration_by_operator"></a>Configuration by Operator</h3>
+<div class="tab-pane" aria-labelledby="tabset1_by-operator">
 <div class="paragraph">
 <p>The Backstage CRD provides an extension to declare extra configuration by ConfigMap and Secrets.
 Here an example of that configuration:</p>
@@ -340,6 +348,8 @@ spec:
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yaml</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
