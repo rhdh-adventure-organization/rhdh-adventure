@@ -51,7 +51,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-01.html">🚀 Let&#8217;s play</a>
+    <a class="nav-link" href="challenge-01.html">🚀 The Adventure Begins</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-01.html#helmchart">📦 Helm Chart</a>
@@ -63,7 +63,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-02.html">🎨 Customizing it!</a>
+    <a class="nav-link" href="challenge-02.html">🎨 Make It Your Own</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-02.html#configuration">🛠️ External configuration</a>
@@ -78,7 +78,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-03.html">👨‍💻 Welcome Devs</a>
+    <a class="nav-link" href="challenge-03.html">👨‍💻 Lock It Down</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-03.html#github-auth">🔑 Authentication with GitHub</a>
@@ -93,7 +93,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Where is my app?</a>
+    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Import An Existing App</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-04.html#declare">📝 Declare it</a>
@@ -105,7 +105,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-05.html">🧾 Onboard my new app</a>
+    <a class="nav-link" href="challenge-05.html">🧾 Streamline Future App Dev</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-05.html#softwaretemplate">💀 Software Template</a>
@@ -117,7 +117,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-06.html">🔌 And beyond!</a>
+    <a class="nav-link" href="challenge-06.html">🔌 Unlock New Capabilities</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-06.html#dynamicplugins">🦄 Dynamic Plugins</a>
@@ -126,7 +126,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-07.html">🔬 What is happening?</a>
+    <a class="nav-link" href="challenge-07.html">🔬 Put It Under The Microscope</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-07.html#tools">🧰 Tools</a>
@@ -163,23 +163,14 @@
 <h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🎨 Customizing it!</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and prepare it for adding more configurations in the future, and facilitate the maintenance and operation. Here the adventure will give the opportunity to customize the following features:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Using external ConfigMaps and Secrets to store configuration</p>
-</li>
-<li>
-<p>Adding your own title</p>
-</li>
-<li>
-<p>Defining your colors</p>
-</li>
-</ul>
+<p>Welcome! Don&#8217;t worry about being here—it&#8217;s absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.</p>
 </div>
 <div class="paragraph">
-<p>Here you will practice how to configure and customize Red Hat Developer Hub to apply common things. You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges.</p>
+<p>Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀</p>
 </div>
 </div>
 </div>
@@ -187,7 +178,170 @@
 <h2 id="configuration-solution"><a class="anchor" href="#configuration-solution"></a>🧞🛠️ External configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Red Hat Developer Hub is very extensible and customizable, so the final configuration could be so long
+and extended making hard its maintenance. There is a proper way to customize it using external resources
+such as <code>ConfigMaps</code> and <code>Secrets</code>. Those resources can be added to the default configuration to set up
+the instance completely.</p>
+</div>
+<div class="paragraph">
+<p>This solution will use a <code>ConfigMap</code> identified as <code>rhdh-app-config</code> to extend the default configuration
+applied during the installation. Here a simple use case:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    organization:
+      name: "My Organization"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Customizing Red Hat Developer Hub will require at some point the usage of sensitive data (e.g: credentials, tokens&#8230;&#8203;)
+and we must declare in the most secure way. Using a Secret we could declare those values properly and add
+into the configuration too. For example, the <code>BACKEND_SECRET</code> variable is defined to be used for service
+to service authentication. Here a simple use case:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rhdh-secrets
+stringData:
+  # Secrets Configuration
+  BACKEND_SECRET: this-is-the-backend-secret</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can apply it using the <code>oc</code> command as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-secrets-secret.yaml</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In the previous challenge, we defined the <code>basedomain</code> variable to be used in different configurations.
+We can add that variable into the <code>rhdh-secrets</code> object for that. This patch command will add it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch secret rhdh-secrets -p '{"stringData":{"basedomain":"'"${basedomain}"'"}}'</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to create those objects inside of the namespace your are deploying Red Hat Developer Hub.
+Remember the usage of <code>rhdh-by-helm</code> namespace for an instance managed by the Helm Chart,
+and <code>rhdh-by-operator</code> namespace for an instance managed by the Operator.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_configuration_by_helm_chart"><a class="anchor" href="#_configuration_by_helm_chart"></a>Configuration by Helm Chart</h3>
+<div class="paragraph">
+<p>Red Hat Developer Hub Helm Chart provides an extension to declare extra configuration by ConfigMap and Secrets.
+The definition of the resources described above will be applying the next configuration into the <code>values.yaml</code> file.
+Here an example of that configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
+  clusterRouterBase: "${basedomain}"
+  #dynamic:
+  #  plugins: []
+upstream:
+  backstage:
+    extraAppConfig:
+      - configMapRef: rhdh-app-config
+        filename: rhdh-app-config.yaml
+    extraEnvVarsSecrets:
+      - rhdh-secrets</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To apply the new configuration setup, we need to upgrade our Helm Chart release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-02/values.yaml \
+    --set global.clusterRouterBase=$basedomain \
+    --namespace rhdh-by-helm</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuration_by_operator"><a class="anchor" href="#_configuration_by_operator"></a>Configuration by Operator</h3>
+<div class="paragraph">
+<p>The Backstage CRD provides an extension to declare extra configuration by ConfigMap and Secrets.
+Here an example of that configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: rhdh.redhat.com/v1alpha2
+kind: Backstage
+metadata:
+  name: rhdh
+spec:
+  deployment:
+    patch:
+      spec:
+        replicas: 1
+  application:
+    appConfig:
+      mountPath: /opt/app-root/src
+      configMaps:
+      - name: rhdh-app-config
+    extraFiles:
+      mountPath: /opt/app-root/src
+    extraEnvs:
+      envs:
+        # Disabling TLS verification
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: '0'
+      secrets:
+        - name: rhdh-secrets
+    route:
+      enabled: true
+  database:
+    enableLocalDb: true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To apply the new configuration setup, we need to update the Backstage object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yaml</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -195,7 +349,81 @@
 <h2 id="title-solution"><a class="anchor" href="#title-solution"></a>🧞©️ Title it!</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Using the configuration objects created previously add new configuration is easy, just add the new
+configuration there. For example, to define the title of our instance, update the <code>rhdh-app-config</code>
+configmap adding the attribute <code>app.title</code> as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    # Other configuration
+    app:
+      title: "My Adventure with Red Hat Developer Hub"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And full example from the previous activity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    organization:
+      name: "My Organization"
+    app:
+      title: "My Adventure with Red Hat Developer Hub"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Applying the new configuration by updating the ConfigMap:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you are running a Red Hat Developer Hub instance managed by the Operator, every time a configmap
+or secret included in the configuration is updated, the operator will trigger a redeploy of the
+instance. You don&#8217;t need to do anything else.</p>
+</div>
+<div class="paragraph">
+<p>However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
+with the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We can verify that our landing page is similar to:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-02/rhdh-new-title.png" alt="rhdh new title">
+</div>
 </div>
 </div>
 </div>
@@ -203,7 +431,104 @@
 <h2 id="colors-solution"><a class="anchor" href="#colors-solution"></a>🧞🌈 Looking better</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Red Hat Developer Hub includes a default theme aligned with Red Hat branding products style, however, that
+theme is customizable too. The following extension of the <code>rhdh-app-config</code> ConfigMap will define different
+colour schema:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    app:
+      # Other application configuration
+      branding:
+        theme:
+          light:
+            primaryColor: '#38be8b'
+            headerColor1: 'hsl(204 100% 71%)'
+            headerColor2: 'color(a98-rgb 1 0 0)'
+            navigationIndicatorColor: '#be0000'
+          dark:
+            primaryColor: '#ab75cf'
+            headerColor1: '#0000d0'
+            headerColor2: 'rgb(255 246 140)'
+            navigationIndicatorColor: '#f4eea9'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And full example from the previous activity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    organization:
+      name: "My Organization"
+    app:
+      title: "My Adventure with Red Hat Developer Hub"
+      branding:
+        theme:
+          light:
+            primaryColor: '#38be8b'
+            headerColor1: 'hsl(204 100% 71%)'
+            headerColor2: 'color(a98-rgb 1 0 0)'
+            navigationIndicatorColor: '#be0000'
+          dark:
+            primaryColor: '#ab75cf'
+            headerColor1: '#0000d0'
+            headerColor2: 'rgb(255 246 140)'
+            navigationIndicatorColor: '#f4eea9'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Applying the new configuration by updating the ConfigMap:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you are running a Red Hat Developer Hub instance managed by the Operator, every time a configmap
+or secret included in the configuration is updated, the operator will trigger a redeploy of the
+instance. You don&#8217;t need to do anything else.</p>
+</div>
+<div class="paragraph">
+<p>However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
+with the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We can verify that our landing page is similar to:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-02/rhdh-new-look-and-feel.png" alt="rhdh new look and feel">
+</div>
 </div>
 </div>
 </div>

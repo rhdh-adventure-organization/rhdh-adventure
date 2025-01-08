@@ -51,7 +51,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-01.html">🚀 Let&#8217;s play</a>
+    <a class="nav-link" href="challenge-01.html">🚀 The Adventure Begins</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-01.html#helmchart">📦 Helm Chart</a>
@@ -63,7 +63,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-02.html">🎨 Customizing it!</a>
+    <a class="nav-link" href="challenge-02.html">🎨 Make It Your Own</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-02.html#configuration">🛠️ External configuration</a>
@@ -78,7 +78,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-03.html">👨‍💻 Welcome Devs</a>
+    <a class="nav-link" href="challenge-03.html">👨‍💻 Lock It Down</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-03.html#github-auth">🔑 Authentication with GitHub</a>
@@ -93,7 +93,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Where is my app?</a>
+    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Import An Existing App</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-04.html#declare">📝 Declare it</a>
@@ -105,7 +105,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-05.html">🧾 Onboard my new app</a>
+    <a class="nav-link" href="challenge-05.html">🧾 Streamline Future App Dev</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-05.html#softwaretemplate">💀 Software Template</a>
@@ -117,7 +117,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-06.html">🔌 And beyond!</a>
+    <a class="nav-link" href="challenge-06.html">🔌 Unlock New Capabilities</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-06.html#dynamicplugins">🦄 Dynamic Plugins</a>
@@ -126,7 +126,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-07.html">🔬 What is happening?</a>
+    <a class="nav-link" href="challenge-07.html">🔬 Put It Under The Microscope</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-07.html#tools">🧰 Tools</a>
@@ -163,39 +163,212 @@
 <h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🚀 Let&#8217;s play Solution</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Don&#8217;t worry here we present a solution for this challenge. Use it wisely!</p>
+<p>Welcome! Don&#8217;t worry about being here—it&#8217;s absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.</p>
 </div>
 <div class="paragraph">
-<p>Any journey starts with a first step … and here we have the first one: install Red Hat Developer Hub. It is easy, but you should choose which model is the most suitable for you:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Red Hat Developer Hub Helm Chart</p>
-</li>
-<li>
-<p>Red Hat Developer Hub Operator</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Here you will identify which installation and operational mechanism is better to support the Red Hat Developer Hub life cycle (install, upgrade&#8230;&#8203;). The rest of your adventure will continue from here.</p>
+<p>Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="helm-solution"><a class="anchor" href="#helm-solution"></a>🧞📦 Helm Chart Solution</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>TBC</p>
+<p>The solution proposed assumes a namespace called <code>rhdh-by-helm</code> to store the different
+manifests and objects to resolve it. If this project does not exist, exucute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project rhdh-by-helm</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Install or update the OpenShift Helm Charts catalog:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm repo add openshift-helm-charts <a href="https://charts.openshift.io/" class="bare">https://charts.openshift.io/</a>
+helm repo update openshift-helm-charts</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To get the default values of Red Hat Developer Hub Helm Chart execute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm show values openshift-helm-charts/redhat-developer-hub &gt; values.yaml</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are multiple values to customize Red Hat Developer Hub, however, for a simple installation
+the endpoint variable is required by the <code>clusterRouterBase</code> variable. This variable represents the
+base router base of any application exposed by OpenShift. We can get that value with the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export basedomain=$(oc whoami --show-console | sed -E 's~https?://console-openshift-console\.apps\.(.*)~apps.\1~')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We export the value to the <code>basedomain</code> variable to reuse it along the adventure.</p>
+</div>
+<div class="paragraph">
+<p>We need to create a <code>values.yaml</code> file to describe the configuration to apply to the Helm Chart.
+The value of the <code>clusterRouterBase</code> variable must defined in the <code>values.yaml</code> file. This file looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
+  clusterRouterBase: "${basedomain}"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install Red Hat Developer Hub by the Helm Chart will be done by the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-01/values.yaml \
+    --set global.clusterRouterBase=$basedomain \
+    --namespace rhdh-by-helm</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Helm Chart will expose the Red Hat Developer Hub instance by an OpenShift router. This command
+shows the full url to the new instance deployed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo <a href="https://$(oc" class="bare">https://$(oc</a> get route rhdh-developer-hub -n rhdh-by-helm -o jsonpath='{.spec.host}')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can access and verify that Red Hat Developer Hub is running.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="operator-solution"><a class="anchor" href="#operator-solution"></a>🧞👷 Operator Solution</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>TBC</p>
+<p>The solution proposed assumes a namespace called <code>rhdh-by-operator</code> to store the different
+manifests and objects to resolve it. If this project does not exist, execute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project rhdh-by-operator</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Install any Kubernetes Operator requires <code>cluster-admin</code> privileges. The installation of the operator
+was done as part of the set up of the cluster with an administrator and it is available to any user.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Red Hat Developer Hub Operator provides the <code>Backstage</code> CRD to describe an instance of the application.
+This object provides multiple options, however, the minimum configuration to deploy a single instance is
+similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: rhdh.redhat.com/v1alpha2
+kind: Backstage
+metadata:
+  name: rhdh
+spec:
+  deployment:
+    patch:
+      spec:
+        replicas: 1
+  application:
+    appConfig:
+      mountPath: /opt/app-root/src
+    extraFiles:
+      mountPath: /opt/app-root/src
+    extraEnvs:
+      # Disabling TLS verification
+      envs:
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: '0'
+    route:
+      enabled: true
+  database:
+    enableLocalDb: true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Applying that definition in the namespace, the operator will deploy that instance for us:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-01/rhdh-instance.yaml -n rhdh-by-operator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the deployment is finished, the status is identified as <code>Deployed</code>. This command shows that status:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get backstage rhdh -o jsonpath='{.status.conditions[0].type}' -n rhdh-by-operator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The instance is available at:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo <a href="https://$(oc" class="bare">https://$(oc</a> get route backstage-rhdh -n rhdh-by-operator -o jsonpath='{.spec.host}')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can access and verify that Red Hat Developer Hub is running.</p>
 </div>
 </div>
 </div>

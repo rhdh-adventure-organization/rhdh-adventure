@@ -53,7 +53,7 @@
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-01.html">🚀 Let&#8217;s play</a>
+    <a class="nav-link" href="challenge-01.html">🚀 The Adventure Begins</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#helmchart">📦 Helm Chart</a>
@@ -65,7 +65,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-02.html">🎨 Customizing it!</a>
+    <a class="nav-link" href="challenge-02.html">🎨 Make It Your Own</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-02.html#configuration">🛠️ External configuration</a>
@@ -80,7 +80,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-03.html">👨‍💻 Welcome Devs</a>
+    <a class="nav-link" href="challenge-03.html">👨‍💻 Lock It Down</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-03.html#github-auth">🔑 Authentication with GitHub</a>
@@ -95,7 +95,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Where is my app?</a>
+    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Import An Existing App</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-04.html#declare">📝 Declare it</a>
@@ -107,7 +107,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-05.html">🧾 Onboard my new app</a>
+    <a class="nav-link" href="challenge-05.html">🧾 Streamline Future App Dev</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-05.html#softwaretemplate">💀 Software Template</a>
@@ -119,7 +119,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-06.html">🔌 And beyond!</a>
+    <a class="nav-link" href="challenge-06.html">🔌 Unlock New Capabilities</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-06.html#dynamicplugins">🦄 Dynamic Plugins</a>
@@ -128,7 +128,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-07.html">🔬 What is happening?</a>
+    <a class="nav-link" href="challenge-07.html">🔬 Put It Under The Microscope</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-07.html#tools">🧰 Tools</a>
@@ -153,7 +153,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="challenge-01.html">🚀 Let&#8217;s play</a></li>
+    <li><a href="challenge-01.html">🚀 The Adventure Begins</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-01.adoc">Edit this Page</a></div>
@@ -162,10 +162,11 @@
 <article class="doc">
 <h1 class="page">Setup</h1>
 <div class="sect1">
-<h2 id="intro"><a class="anchor" href="#intro"></a>🚀 Let&#8217;s play</h2>
+<h2 id="intro"><a class="anchor" href="#intro"></a>🚀 The Adventure Begins</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Any journey starts with a first step … and here we have the first one: install Red Hat Developer Hub. It is easy, but you should choose which model is the most suitable for you:</p>
+<p>Any journey starts with a first step&#8230;&#8203; and here we have the first one: install Red Hat Developer Hub.
+It is easy, but you should choose which model is the most suitable for you:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -178,7 +179,14 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Here you will identify which installation and operational mechanism is better to support the Red Hat Developer Hub life cycle (install, upgrade&#8230;&#8203;). The rest of your adventure will continue from here.</p>
+<p>Here you will identify which installation and operational mechanism is better to support
+the Red Hat Developer Hub life cycle (install, upgrade&#8230;&#8203;). The rest of your adventure will continue from here.</p>
+</div>
+<div class="paragraph">
+<p>The challenge is to create and customize the necessary manifests, successfully deploy
+a Red Hat Developer Hub instance on OpenShift, and expose it to external users. The challenge will be
+considered successful when Red Hat Developer Hub is fully functional, accessible via its landing page,
+and configured correctly using the deployment mechanism chosen.</p>
 </div>
 </div>
 </div>
@@ -186,7 +194,32 @@
 <h2 id="helmchart"><a class="anchor" href="#helmchart"></a>📦 Helm Chart</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Helm is a powerful package manager for Kubernetes, designed to simplify the deployment and management
+of complex applications. By utilizing Helm Charts, users can package pre-configured Kubernetes manifests
+into reusable templates, enabling a faster and more consistent deployment experience. Helm is widely adopted
+for its ability to manage application lifecycles efficiently, allowing teams to quickly configure and
+deploy applications across different environments.</p>
+</div>
+<div class="paragraph">
+<p>The key benefit of using Helm Charts lies in their flexibility and reusability.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat Developer Hub provides a Helm Chart which can define configurations, dependencies, and resource
+templates in one place. This enables you to deploy Red Hat Developer Hub instances with minimal effort,
+while also ensuring consistency and reducing human errors.</p>
+</div>
+<div class="paragraph">
+<p>To resolve this challenge you can start checking the following references:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/installing_red_hat_developer_hub_on_openshift_container_platform/assembly-install-rhdh-ocp-helm">Installing Red Hat Developer Hub on OpenShift with the Helm Chart</a></p>
+</li>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/upgrading_red_hat_developer_hub/proc-upgrade-rhdh-helm_title-upgrade-rhdh">Upgrading the Red Hat Developer Hub Helm Chart</a></p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="helm-solution"><a class="anchor" href="#helm-solution"></a>🧞📦 Helm Chart Solution</h3>
@@ -200,7 +233,31 @@
 <h2 id="operator"><a class="anchor" href="#operator"></a>👷 Operator</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Kubernetes Operators represent an advanced method for managing applications by automating the deployment,
+configuration, and lifecycle management of complex workloads. Operators extend Kubernetes functionality by
+encoding operational knowledge into a custom resource and a controller, making them particularly useful for
+stateful or highly complex applications.</p>
+</div>
+<div class="paragraph">
+<p>The primary benefit of using Operators is their ability to automate application management tasks that would
+typically require manual intervention.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat Developer Hub provides an Operator which can achieve self-healing, seamless scaling, and automated upgrades.
+This automation significantly reduces operational overhead while maintaining consistency and reliability.</p>
+</div>
+<div class="paragraph">
+<p>To resolve this challenge you can start checking the following references:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/installing_red_hat_developer_hub_on_openshift_container_platform/assembly-install-rhdh-ocp-operator">Installing Red Hat Developer Hub on OpenShift with the Operator</a></p>
+</li>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/upgrading_red_hat_developer_hub/proc-upgrade-rhdh-operator_title-upgrade-rhdh">Upgrading the Red Hat Developer Hub</a></p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="operator-solution"><a class="anchor" href="#operator-solution"></a>🧞👷 Operator Solution</h3>
@@ -212,7 +269,7 @@
 </div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">Red Hat Developer Hub Adventure</a></span>
-  <span class="next"><a href="challenge-02.html">🎨 Customizing it!</a></span>
+  <span class="next"><a href="challenge-02.html">🎨 Make It Your Own</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

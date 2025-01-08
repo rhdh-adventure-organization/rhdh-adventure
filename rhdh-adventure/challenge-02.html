@@ -53,7 +53,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-01.html">🚀 Let&#8217;s play</a>
+    <a class="nav-link" href="challenge-01.html">🚀 The Adventure Begins</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-01.html#helmchart">📦 Helm Chart</a>
@@ -65,7 +65,7 @@
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-02.html">🎨 Customizing it!</a>
+    <a class="nav-link" href="challenge-02.html">🎨 Make It Your Own</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#configuration">🛠️ External configuration</a>
@@ -80,7 +80,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-03.html">👨‍💻 Welcome Devs</a>
+    <a class="nav-link" href="challenge-03.html">👨‍💻 Lock It Down</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-03.html#github-auth">🔑 Authentication with GitHub</a>
@@ -95,7 +95,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Where is my app?</a>
+    <a class="nav-link" href="challenge-04.html">🕵🏻‍♂️ Import An Existing App</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-04.html#declare">📝 Declare it</a>
@@ -107,7 +107,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-05.html">🧾 Onboard my new app</a>
+    <a class="nav-link" href="challenge-05.html">🧾 Streamline Future App Dev</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-05.html#softwaretemplate">💀 Software Template</a>
@@ -119,7 +119,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-06.html">🔌 And beyond!</a>
+    <a class="nav-link" href="challenge-06.html">🔌 Unlock New Capabilities</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-06.html#dynamicplugins">🦄 Dynamic Plugins</a>
@@ -128,7 +128,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="challenge-07.html">🔬 What is happening?</a>
+    <a class="nav-link" href="challenge-07.html">🔬 Put It Under The Microscope</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="challenge-07.html#tools">🧰 Tools</a>
@@ -153,7 +153,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="challenge-02.html">🎨 Customizing it!</a></li>
+    <li><a href="challenge-02.html">🎨 Make It Your Own</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-02.adoc">Edit this Page</a></div>
@@ -162,15 +162,17 @@
 <article class="doc">
 <h1 class="page">Setup</h1>
 <div class="sect1">
-<h2 id="intro"><a class="anchor" href="#intro"></a>🎨 Customizing it!</h2>
+<h2 id="intro"><a class="anchor" href="#intro"></a>🎨 Make It Your Own!</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and prepare it for adding more configurations in the future, and facilitate the maintenance and operation. Here the adventure will give the opportunity to customize the following features:</p>
+<p>Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and
+prepare it for adding more configurations in the future, and facilitate the maintenance and operation.
+Here the adventure will give the opportunity to customize the following features:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Using external ConfigMaps and Secrets to store configuration</p>
+<p>Using <code>ConfigMaps</code> and <code>Secrets</code> objects to store configuration</p>
 </li>
 <li>
 <p>Adding your own title</p>
@@ -181,7 +183,42 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Here you will practice how to configure and customize Red Hat Developer Hub to apply common things. You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges.</p>
+<p>Here you will practice how to configure and customize Red Hat Developer Hub to apply common things.
+You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges
+and take it to the next level by customizing its behavior.</p>
+</div>
+<div class="paragraph">
+<p>This challenge is considered successful when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>External objects, such as <code>ConfigMaps</code> and <code>Secrets</code>, are correctly created and linked to the application deployment.</p>
+</li>
+<li>
+<p>The application reflects the custom title provided through the configuration.</p>
+</li>
+<li>
+<p>The look and feel of the application is distinctly different from its original state, demonstrating successful visual customization.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By the end of this challenge, you will have gained valuable hands-on experience in externalizing configuration,
+customizing deployments dynamically, and delivering a unique application experience—all essential skills for
+deploying scalable and adaptable Red Hat Developer Hub solutions in OpenShift environments.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This challenge requires the successful completion of the previous challenge.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -189,7 +226,22 @@
 <h2 id="configuration"><a class="anchor" href="#configuration"></a>🛠️ External configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>In the first activity, you&#8217;ll create external objects, such as ConfigMaps and Secrets, to define
+configurations for your application. These external configurations will enable customization without
+modifying the application&#8217;s deployment manifests directly, showcasing the flexibility of Red Hat Developer Hub.</p>
+</div>
+<div class="paragraph">
+<p>To resolve this challenge you can start checking the following references:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/configuring/provisioning-and-using-your-custom-configuration">Provisioning and using your custom Red Hat Developer Hub configuration</a></p>
+</li>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-the-backend-secret">Customizing Red Hat Developer Hub backend secret</a></p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="configuration-solution"><a class="anchor" href="#configuration-solution"></a>🧞🛠️ External configuration Solution</h3>
@@ -203,7 +255,19 @@
 <h2 id="title"><a class="anchor" href="#title"></a>©️ Title it!</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Building on the previous activity, you will extend the configuration to include a title that appears
+in the Red Hat Developer Hub landing page. This will demonstrate how to dynamically inject specific
+custom settings into the application.</p>
+</div>
+<div class="paragraph">
+<p>To resolve this challenge you can start checking the following references:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-your-product-title">Customizing your Red Hat Developer Hub title</a></p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="title-solution"><a class="anchor" href="#title-solution"></a>🧞©️ Title it! Solution</h3>
@@ -217,7 +281,19 @@
 <h2 id="colors"><a class="anchor" href="#colors"></a>🌈 Looking better</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Finally, you will fully personalize your application by customizing its look and feel, such as changing
+the color scheme or other visual elements. This step emphasizes the ability to completely transform the
+user experience while maintaining separation of concerns between deployment and configuration.</p>
+</div>
+<div class="paragraph">
+<p>To resolve this challenge you can start checking the following references:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-appearance">Customizing your Red Hat Developer Hub appearance</a></p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="colors-solution"><a class="anchor" href="#colors-solution"></a>🧞🌈 Looking better Solution</h3>
@@ -228,8 +304,8 @@
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="challenge-01.html">🚀 Let&#8217;s play</a></span>
-  <span class="next"><a href="challenge-03.html">👨‍💻 Welcome Devs</a></span>
+  <span class="prev"><a href="challenge-01.html">🚀 The Adventure Begins</a></span>
+  <span class="next"><a href="challenge-03.html">👨‍💻 Lock It Down</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
