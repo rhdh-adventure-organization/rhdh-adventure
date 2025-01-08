@@ -187,7 +187,7 @@ the instance completely.</p>
 <p>This solution will use a <code>ConfigMap</code> identified as <code>rhdh-app-config</code> to extend the default configuration
 applied during the installation. Here a simple use case:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 kind: ConfigMap
@@ -206,7 +206,7 @@ and we must declare in the most secure way. Using a Secret we could declare thos
 into the configuration too. For example, the <code>BACKEND_SECRET</code> variable is defined to be used for service
 to service authentication. Here a simple use case:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 apiVersion: v1
@@ -221,7 +221,7 @@ stringData:
 <div class="paragraph">
 <p>We can apply it using the <code>oc</code> command as:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-secrets-secret.yaml</code></pre>
@@ -238,7 +238,7 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-secrets-secr
 <p>In the previous challenge, we defined the <code>basedomain</code> variable to be used in different configurations.
 We can add that variable into the <code>rhdh-secrets</code> object for that. This patch command will add it:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch secret rhdh-secrets -p '{"stringData":{"basedomain":"'"${basedomain}"'"}}'</code></pre>
 </div>
@@ -279,7 +279,7 @@ and <code>rhdh-by-operator</code> namespace for an instance managed by the Opera
 The definition of the resources described above will be applying the next configuration into the <code>values.yaml</code> file.
 Here an example of that configuration:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
   clusterRouterBase: "${basedomain}"
@@ -295,7 +295,7 @@ upstream:
 <div class="paragraph">
 <p>To apply the new configuration setup, we need to upgrade our Helm Chart release:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
     openshift-helm-charts/redhat-developer-hub \
@@ -310,7 +310,7 @@ upstream:
 <p>The Backstage CRD provides an extension to declare extra configuration by ConfigMap and Secrets.
 Here an example of that configuration:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 apiVersion: rhdh.redhat.com/v1alpha2
@@ -345,7 +345,7 @@ spec:
 <div class="paragraph">
 <p>To apply the new configuration setup, we need to update the Backstage object:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yaml</code></pre>
 </div>
@@ -363,7 +363,7 @@ spec:
 configuration there. For example, to define the title of our instance, update the <code>rhdh-app-config</code>
 configmap adding the attribute <code>app.title</code> as:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: ConfigMap
 apiVersion: v1
@@ -379,7 +379,7 @@ data:
 <div class="paragraph">
 <p>And full example from the previous activity:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 kind: ConfigMap
@@ -397,7 +397,7 @@ data:
 <div class="paragraph">
 <p>Applying the new configuration by updating the ConfigMap:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml</code></pre>
 </div>
@@ -418,7 +418,7 @@ instance. You don&#8217;t need to do anything else.</p>
 <p>However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
 with the following command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
 </div>
@@ -445,7 +445,7 @@ with the following command:</p>
 theme is customizable too. The following extension of the <code>rhdh-app-config</code> ConfigMap will define different
 colour schema:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: ConfigMap
 apiVersion: v1
@@ -472,7 +472,7 @@ data:
 <div class="paragraph">
 <p>And full example from the previous activity:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 kind: ConfigMap
@@ -502,7 +502,7 @@ data:
 <div class="paragraph">
 <p>Applying the new configuration by updating the ConfigMap:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml</code></pre>
 </div>
@@ -523,7 +523,7 @@ instance. You don&#8217;t need to do anything else.</p>
 <p>However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
 with the following command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
 </div>

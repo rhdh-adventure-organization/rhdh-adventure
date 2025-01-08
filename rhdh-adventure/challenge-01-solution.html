@@ -186,9 +186,9 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <td class="content">
 <div class="paragraph">
 <p>The solution proposed assumes a namespace called <code>rhdh-by-helm</code> to store the different
-manifests and objects to resolve it. If this project does not exist, exucute:</p>
+manifests and objects to resolve it. If this project does not exist, execute:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project rhdh-by-helm</code></pre>
 </div>
@@ -200,7 +200,7 @@ manifests and objects to resolve it. If this project does not exist, exucute:</p
 <div class="paragraph">
 <p>Install or update the OpenShift Helm Charts catalog:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm repo add openshift-helm-charts <a href="https://charts.openshift.io/" class="bare">https://charts.openshift.io/</a>
 helm repo update openshift-helm-charts</code></pre>
@@ -216,7 +216,7 @@ helm repo update openshift-helm-charts</code></pre>
 <div class="paragraph">
 <p>To get the default values of Red Hat Developer Hub Helm Chart execute:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm show values openshift-helm-charts/redhat-developer-hub &gt; values.yaml</code></pre>
 </div>
@@ -230,7 +230,7 @@ helm repo update openshift-helm-charts</code></pre>
 the endpoint variable is required by the <code>clusterRouterBase</code> variable. This variable represents the
 base router base of any application exposed by OpenShift. We can get that value with the command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export basedomain=$(oc whoami --show-console | sed -E 's~https?://console-openshift-console\.apps\.(.*)~apps.\1~')</code></pre>
 </div>
@@ -242,7 +242,7 @@ base router base of any application exposed by OpenShift. We can get that value 
 <p>We need to create a <code>values.yaml</code> file to describe the configuration to apply to the Helm Chart.
 The value of the <code>clusterRouterBase</code> variable must defined in the <code>values.yaml</code> file. This file looks like:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
   clusterRouterBase: "${basedomain}"</code></pre>
@@ -251,7 +251,7 @@ The value of the <code>clusterRouterBase</code> variable must defined in the <co
 <div class="paragraph">
 <p>Install Red Hat Developer Hub by the Helm Chart will be done by the command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
     openshift-helm-charts/redhat-developer-hub \
@@ -264,7 +264,7 @@ The value of the <code>clusterRouterBase</code> variable must defined in the <co
 <p>The Helm Chart will expose the Red Hat Developer Hub instance by an OpenShift router. This command
 shows the full url to the new instance deployed:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo <a href="https://$(oc" class="bare">https://$(oc</a> get route rhdh-developer-hub -n rhdh-by-helm -o jsonpath='{.spec.host}')</code></pre>
 </div>
@@ -288,7 +288,7 @@ shows the full url to the new instance deployed:</p>
 <p>The solution proposed assumes a namespace called <code>rhdh-by-operator</code> to store the different
 manifests and objects to resolve it. If this project does not exist, execute:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project rhdh-by-operator</code></pre>
 </div>
@@ -315,7 +315,7 @@ was done as part of the set up of the cluster with an administrator and it is av
 This object provides multiple options, however, the minimum configuration to deploy a single instance is
 similar to:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 apiVersion: rhdh.redhat.com/v1alpha2
@@ -346,7 +346,7 @@ spec:
 <div class="paragraph">
 <p>Applying that definition in the namespace, the operator will deploy that instance for us:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-01/rhdh-instance.yaml -n rhdh-by-operator</code></pre>
 </div>
@@ -354,7 +354,7 @@ spec:
 <div class="paragraph">
 <p>Once the deployment is finished, the status is identified as <code>Deployed</code>. This command shows that status:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get backstage rhdh -o jsonpath='{.status.conditions[0].type}' -n rhdh-by-operator</code></pre>
 </div>
@@ -362,7 +362,7 @@ spec:
 <div class="paragraph">
 <p>The instance is available at:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo <a href="https://$(oc" class="bare">https://$(oc</a> get route backstage-rhdh -n rhdh-by-operator -o jsonpath='{.spec.host}')</code></pre>
 </div>
