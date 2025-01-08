@@ -7,58 +7,71 @@
 
 Your team, as platform engineers, is looking to improve the daily basis of many different development teams and create the best developer experience (DevEx) for them. Red Hat Developer Hub is key in that journey providing different features and integration capabilities with multiple tools. However, your team is facing different challenges which should be resolved before providing the Nirvana for Developers.
 
+
+
 Which challenge do you want to resolve? Here starts your adventure with Red Hat Developer Hub to become a hero, and improve the developer experience.
 
 [.tiles.browse]
-== Challenges of this Adventure
+== The Stages or your Quest
+
+Your journey to transform the Developer Experience (DevEx) begins with a series of **epic stages**—each designed
+to guide you through Red Hat Developer Hub's incredible capabilities while solving key challenges developers
+and platform engineers face daily. The adventure progresses step-by-step, starting with the basics and evolving
+into mastery. The first two stages are essential to lay the foundation of your journey, but after that, the path
+is yours to choose. Every stage is an opportunity to learn, experiment, and conquer!
+
+image:rhdh-adventure-map.png[]
 
 [.tile]
-.xref:challenge-01.adoc[🚀 The Adventure Begins]
-* xref:challenge-01.adoc#minikube[📦 Helm Chart]
-* xref:challenge-01.adoc#minikube[👷 Operator]
+.xref:challenge-01.adoc[Stage 1 - 🚀 The Adventure Begins]
+Start your journey by deploying Red Hat Developer Hub. Learn how to install and set it up effortlessly using
+tools like Helm Charts or Operators. This stage is all about getting Red Hat Developer Hub up and running on
+your platform and preparing the foundation for all the enhancements to come.
 
 [.tile]
-.xref:challenge-02.adoc[🎨 Make It Your Own]
-* xref:challenge-02.adoc#package[🛠️ External configuration]
-* xref:challenge-02.adoc#deploy[©️ Title it!]
-* xref:challenge-02.adoc#deploy[🌈 Looking better]
+.xref:challenge-02.adoc[Stage 2 -🎨 Make It Your Own]
+Customization is the key to success. Extend the deployment by using externalized configuration objects like
+ConfigMaps and Secrets. By doing this, you'll make Red Hat Developer Hub more maintainable, flexible, and
+ready to adapt to the needs of your developers and platform engineers.
 
 [.tile]
-.xref:challenge-03.adoc[👨‍💻 Lock It Down]
-* xref:challenge-03.adoc#package[🔑 Authentication with GitHub]
-* xref:challenge-03.adoc#deploy[🔑 Authentication with GitLab]
-* xref:challenge-03.adoc#deploy[🛂 You won't break it]
+.xref:challenge-03.adoc[Stage 3 - 👨‍💻 Lock It Down]
+Security is a must in any adventure. Enable authentication and authorization capabilities to safeguard your
+Red Hat Developer Hub instance. By integrating with external identity providers like GitHub or GitLab, and
+setting user access policies, you'll ensure your platform is secure for all users.
 
 [.tile]
-.xref:challenge-04.adoc[🕵🏻‍♂️ Import An Existing App]
-* xref:challenge-04.adoc#declare[📝 Declare it]
-* xref:challenge-04.adoc#import[📂 Import it]
+.xref:challenge-04.adoc[Stage 4 - 🕵🏻‍♂️ Import An Existing App]
+A strong catalog is the backbone of Red Hat Developer Hub. This stage focuses on adding components to the
+catalog, bringing visibility to existing applications and fostering collaboration between developers. Share
+the resources that matter most and make your platform a one-stop shop for developers.
 
 [.tile]
-.xref:challenge-05.adoc[🧾 Streamline Future App Dev]
-* xref:challenge-04.adoc#softwaretemplate[💀 Software Template]
-* xref:challenge-04.adoc#onboard[🛬 Onboarding]
+.xref:challenge-05.adoc[Stage 5 - 🧾 Streamline Future App Dev]
+Speed up development by creating and managing software templates. This stage teaches you how to enable developers
+to quickly onboard new applications and standardize the development process. Help developers build faster and
+smarter with guided workflows.
 
 [.tile]
-.xref:challenge-06.adoc[🔌 Unlock New Capabilities]
-* xref:challenge-06.adoc#dynamicplugins[🦄 Dynamic Plugins]
+.xref:challenge-06.adoc[Stage 6 - 🔌 Unlock New Capabilities]
+Take your platform to the next level by integrating plugins. Learn how to extend Red Hat Developer Hub using
+its dynamic plugin framework and discover how plugins can enrich your platform with new features, integrations,
+and tools that developers can utilize immediately.
 
 [.tile]
-.xref:challenge-07.adoc[🔬 Put It Under The Microscope]
-* xref:challenge-07.adoc#tools[🧰 Tools]
-* xref:challenge-07.adoc#metrics[👨‍🔬 Metrics]
+.xref:challenge-07.adoc[Stage 7 - 🔬 Put It Under The Microscope]
+What gets measured gets improved! Enable metrics and monitoring capabilities to track Red Hat Developer Hub's
+success and improve operational efficiency. Leverage tools integrated with OpenShift to gain insights into
+usage, performance, and the impact of your platform improvements.
 
 [.tiles.browse]
-== Set up your
+== Ready to Begin?
 
+Your team holds the potential to shape the future of development in your organization. As you move through
+each stage, you'll sharpen your skills, foster collaboration, and create an environment where developers thrive.
 
+The journey won't always be easy, but the rewards will be worth it. So, gather your team, ready your tools, and
+step into this adventure with Red Hat Developer Hub. From zero to hero, the Developer Experience transformation
+starts here. The only question is: which challenge will you tackle first?
 
-TBD
-
-How to setup the OpenShift Cluster
-
-GitLab instance
-
-connect to 01-setup.adoc file
-
-
+Let the adventure begin! 🚀
