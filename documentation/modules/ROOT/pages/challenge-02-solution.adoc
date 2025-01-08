@@ -23,6 +23,7 @@ the instance completely.
 This solution will use a `ConfigMap` identified as `rhdh-app-config` to extend the default configuration
 applied during the installation. Here a simple use case:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-02/rhdh-app-config-cm-01.yaml[]
@@ -33,6 +34,7 @@ and we must declare in the most secure way. Using a Secret we could declare thos
 into the configuration too. For example, the `BACKEND_SECRET` variable is defined to be used for service
 to service authentication. Here a simple use case:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-02/rhdh-secrets-secret.yaml[]
@@ -40,6 +42,7 @@ include::example$challenge-02/rhdh-secrets-secret.yaml[]
 
 We can apply it using the `oc` command as:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml
@@ -51,6 +54,7 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-secrets-secr
 In the previous challenge, we defined the `basedomain` variable to be used in different configurations.
 We can add that variable into the `rhdh-secrets` object for that. This patch command will add it:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc patch secret rhdh-secrets -p '{"stringData":{"basedomain":"'"${basedomain}"'"}}'
@@ -70,6 +74,7 @@ Red Hat Developer Hub Helm Chart provides an extension to declare extra configur
 The definition of the resources described above will be applying the next configuration into the `values.yaml` file.
 Here an example of that configuration:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-02/values.yaml[]
@@ -77,6 +82,7 @@ include::example$challenge-02/values.yaml[]
 
 To apply the new configuration setup, we need to upgrade our Helm Chart release:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 helm upgrade --install rhdh \
@@ -92,6 +98,7 @@ By Operator::
 The Backstage CRD provides an extension to declare extra configuration by ConfigMap and Secrets.
 Here an example of that configuration:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-02/rhdh-instance.yaml[]
@@ -99,6 +106,7 @@ include::example$challenge-02/rhdh-instance.yaml[]
 
 To apply the new configuration setup, we need to update the Backstage object:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yaml
@@ -113,6 +121,7 @@ Using the configuration objects created previously add new configuration is easy
 configuration there. For example, to define the title of our instance, update the `rhdh-app-config`
 configmap adding the attribute `app.title` as:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 kind: ConfigMap
@@ -128,6 +137,7 @@ data:
 
 And full example from the previous activity:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-02/rhdh-app-config-cm-02.yaml[]
@@ -135,6 +145,7 @@ include::example$challenge-02/rhdh-app-config-cm-02.yaml[]
 
 Applying the new configuration by updating the ConfigMap:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml
@@ -149,6 +160,7 @@ instance. You don't need to do anything else.
 However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
 with the following command:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc rollout restart deployment/rhdh-developer-hub
@@ -166,6 +178,7 @@ Red Hat Developer Hub includes a default theme aligned with Red Hat branding pro
 theme is customizable too. The following extension of the `rhdh-app-config` ConfigMap will define different
 colour schema:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 kind: ConfigMap
@@ -192,6 +205,7 @@ data:
 
 And full example from the previous activity:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-02/rhdh-app-config-cm-03.yaml[]
@@ -199,6 +213,7 @@ include::example$challenge-02/rhdh-app-config-cm-03.yaml[]
 
 Applying the new configuration by updating the ConfigMap:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml
@@ -213,6 +228,7 @@ instance. You don't need to do anything else.
 However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
 with the following command:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc rollout restart deployment/rhdh-developer-hub

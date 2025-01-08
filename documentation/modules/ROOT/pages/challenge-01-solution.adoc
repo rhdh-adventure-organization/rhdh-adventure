@@ -18,8 +18,9 @@ in the future. Let' 's dive in together! 🧞🚀
 [NOTE]
 ====
 The solution proposed assumes a namespace called `rhdh-by-helm` to store the different
-manifests and objects to resolve it. If this project does not exist, exucute:
+manifests and objects to resolve it. If this project does not exist, execute:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc new-project rhdh-by-helm
@@ -28,6 +29,7 @@ oc new-project rhdh-by-helm
 
 Install or update the OpenShift Helm Charts catalog:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 helm repo add openshift-helm-charts https://charts.openshift.io/
@@ -38,6 +40,7 @@ helm repo update openshift-helm-charts
 ====
 To get the default values of Red Hat Developer Hub Helm Chart execute:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 helm show values openshift-helm-charts/redhat-developer-hub > values.yaml
@@ -48,6 +51,7 @@ There are multiple values to customize Red Hat Developer Hub, however, for a sim
 the endpoint variable is required by the `clusterRouterBase` variable. This variable represents the
 base router base of any application exposed by OpenShift. We can get that value with the command:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 export basedomain=$(oc whoami --show-console | sed -E 's~https?://console-openshift-console\.apps\.(.*)~apps.\1~')
@@ -58,6 +62,7 @@ We export the value to the `basedomain` variable to reuse it along the adventure
 We need to create a `values.yaml` file to describe the configuration to apply to the Helm Chart.
 The value of the `clusterRouterBase` variable must defined in the `values.yaml` file. This file looks like:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-01/values.yaml[]
@@ -65,6 +70,7 @@ include::example$challenge-01/values.yaml[]
 
 Install Red Hat Developer Hub by the Helm Chart will be done by the command:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 helm upgrade --install rhdh \
@@ -77,6 +83,7 @@ helm upgrade --install rhdh \
 The Helm Chart will expose the Red Hat Developer Hub instance by an OpenShift router. This command
 shows the full url to the new instance deployed:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://$(oc get route rhdh-developer-hub -n rhdh-by-helm -o jsonpath='{.spec.host}')
@@ -92,6 +99,7 @@ We can access and verify that Red Hat Developer Hub is running.
 The solution proposed assumes a namespace called `rhdh-by-operator` to store the different
 manifests and objects to resolve it. If this project does not exist, execute:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc new-project rhdh-by-operator
@@ -105,6 +113,7 @@ The Red Hat Developer Hub Operator provides the `Backstage` CRD to describe an i
 This object provides multiple options, however, the minimum configuration to deploy a single instance is
 similar to:
 
+[.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
 include::example$challenge-01/rhdh-instance.yaml[]
@@ -112,6 +121,7 @@ include::example$challenge-01/rhdh-instance.yaml[]
 
 Applying that definition in the namespace, the operator will deploy that instance for us:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-01/rhdh-instance.yaml -n rhdh-by-operator
@@ -119,6 +129,7 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-01/rhdh-instance.yam
 
 Once the deployment is finished, the status is identified as `Deployed`. This command shows that status:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc get backstage rhdh -o jsonpath='{.status.conditions[0].type}' -n rhdh-by-operator
@@ -126,6 +137,7 @@ oc get backstage rhdh -o jsonpath='{.status.conditions[0].type}' -n rhdh-by-oper
 
 The instance is available at:
 
+[.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://$(oc get route backstage-rhdh -n rhdh-by-operator -o jsonpath='{.spec.host}')
