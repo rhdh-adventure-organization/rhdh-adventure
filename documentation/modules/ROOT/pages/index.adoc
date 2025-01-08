@@ -13,37 +13,52 @@ Which challenge do you want to resolve? Here starts your adventure with Red Hat 
 == Challenges of this Adventure
 
 [.tile]
-.xref:challenge-01.adoc[🚀 Let's play]
+.xref:challenge-01.adoc[🚀 The Adventure Begins]
 * xref:challenge-01.adoc#minikube[📦 Helm Chart]
 * xref:challenge-01.adoc#minikube[👷 Operator]
 
 [.tile]
-.xref:challenge-02.adoc[🎨 Looking better]
+.xref:challenge-02.adoc[🎨 Make It Your Own]
 * xref:challenge-02.adoc#package[🛠️ External configuration]
 * xref:challenge-02.adoc#deploy[©️ Title it!]
 * xref:challenge-02.adoc#deploy[🌈 Looking better]
 
 [.tile]
-.xref:challenge-03.adoc[👨‍💻 Welcome Devs]
+.xref:challenge-03.adoc[👨‍💻 Lock It Down]
 * xref:challenge-03.adoc#package[🔑 Authentication with GitHub]
 * xref:challenge-03.adoc#deploy[🔑 Authentication with GitLab]
 * xref:challenge-03.adoc#deploy[🛂 You won't break it]
 
 [.tile]
-.xref:challenge-04.adoc[🕵🏻‍♂️ Where is my app?]
+.xref:challenge-04.adoc[🕵🏻‍♂️ Import An Existing App]
 * xref:challenge-04.adoc#declare[📝 Declare it]
 * xref:challenge-04.adoc#import[📂 Import it]
 
 [.tile]
-.xref:challenge-05.adoc[🧾 Onboard my new app]
+.xref:challenge-05.adoc[🧾 Streamline Future App Dev]
 * xref:challenge-04.adoc#softwaretemplate[💀 Software Template]
 * xref:challenge-04.adoc#onboard[🛬 Onboarding]
 
 [.tile]
-.xref:challenge-06.adoc[🔌 And beyond!]
+.xref:challenge-06.adoc[🔌 Unlock New Capabilities]
 * xref:challenge-06.adoc#dynamicplugins[🦄 Dynamic Plugins]
 
 [.tile]
-.xref:challenge-07.adoc[🔬 What is happening?]
+.xref:challenge-07.adoc[🔬 Put It Under The Microscope]
 * xref:challenge-07.adoc#tools[🧰 Tools]
 * xref:challenge-07.adoc#metrics[👨‍🔬 Metrics]
+
+[.tiles.browse]
+== Set up your
+
+
+
+TBD
+
+How to setup the OpenShift Cluster
+
+GitLab instance
+
+connect to 01-setup.adoc file
+
+

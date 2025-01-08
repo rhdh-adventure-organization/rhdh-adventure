@@ -2,20 +2,43 @@
 include::_attributes.adoc[]
 
 [#intro]
-== 🎨 Customizing it!
+== 🎨 Make It Your Own!
 
-Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and prepare it for adding more configurations in the future, and facilitate the maintenance and operation. Here the adventure will give the opportunity to customize the following features:
+Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and
+prepare it for adding more configurations in the future, and facilitate the maintenance and operation.
+Here the adventure will give the opportunity to customize the following features:
 
-* Using external ConfigMaps and Secrets to store configuration
+* Using `ConfigMaps` and `Secrets` objects to store configuration
 * Adding your own title
 * Defining your colors
 
-Here you will practice how to configure and customize Red Hat Developer Hub to apply common things. You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges.
+Here you will practice how to configure and customize Red Hat Developer Hub to apply common things.
+You will learn how to use ConfigMaps and Secrets to update your instance for the rest of the challenges
+and take it to the next level by customizing its behavior.
+
+This challenge is considered successful when:
+
+* External objects, such as `ConfigMaps` and `Secrets`, are correctly created and linked to the application deployment.
+* The application reflects the custom title provided through the configuration.
+* The look and feel of the application is distinctly different from its original state, demonstrating successful visual customization.
+
+By the end of this challenge, you will have gained valuable hands-on experience in externalizing configuration,
+customizing deployments dynamically, and delivering a unique application experience—all essential skills for
+deploying scalable and adaptable Red Hat Developer Hub solutions in OpenShift environments.
+
+IMPORTANT: This challenge requires the successful completion of the previous challenge.
 
 [#configuration]
 == 🛠️ External configuration
 
-TBC
+In the first activity, you'll create external objects, such as ConfigMaps and Secrets, to define
+configurations for your application. These external configurations will enable customization without
+modifying the application's deployment manifests directly, showcasing the flexibility of Red Hat Developer Hub.
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/configuring/provisioning-and-using-your-custom-configuration[Provisioning and using your custom Red Hat Developer Hub configuration]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-the-backend-secret[Customizing Red Hat Developer Hub backend secret]
 
 [#configuration-solution]
 === 🧞🛠️ External configuration Solution
@@ -25,7 +48,14 @@ Are you struggling about how to resolve it? Don't worry you can check the soluti
 [#title]
 == ©️ Title it!
 
-TBC
+Building on the previous activity, you will extend the configuration to include a title that appears
+in the Red Hat Developer Hub landing page. This will demonstrate how to dynamically inject specific
+custom settings into the application.
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-your-product-title[Customizing your Red Hat Developer Hub title]
+
 
 [#title-solution]
 === 🧞©️ Title it! Solution
@@ -35,7 +65,13 @@ Are you struggling about how to resolve it? Don't worry you can check the soluti
 [#colors]
 == 🌈 Looking better
 
-TBC
+Finally, you will fully personalize your application by customizing its look and feel, such as changing
+the color scheme or other visual elements. This step emphasizes the ability to completely transform the
+user experience while maintaining separation of concerns between deployment and configuration.
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-appearance[Customizing your Red Hat Developer Hub appearance]
 
 [#colors-solution]
 === 🧞🌈 Looking better Solution

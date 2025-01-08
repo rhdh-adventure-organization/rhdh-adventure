@@ -4,21 +4,131 @@ include::_attributes.adoc[]
 [#intro-solution]
 == 🧞🚀 Let's play Solution
 
-Don't worry here we present a solution for this challenge. Use it wisely!
+Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.
 
-Any journey starts with a first step … and here we have the first one: install Red Hat Developer Hub. It is easy, but you should choose which model is the most suitable for you:
-
-* Red Hat Developer Hub Helm Chart
-* Red Hat Developer Hub Operator
-
-Here you will identify which installation and operational mechanism is better to support the Red Hat Developer Hub life cycle (install, upgrade...). The rest of your adventure will continue from here.
+Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀
 
 [#helm-solution]
 == 🧞📦 Helm Chart Solution
 
-TBC
+[NOTE]
+====
+The solution proposed assumes a namespace called `rhdh-by-helm` to store the different
+manifests and objects to resolve it. If this project does not exist, exucute:
+
+[source, bash, subs="+macros,+attributes"]
+----
+oc new-project rhdh-by-helm
+----
+====
+
+Install or update the OpenShift Helm Charts catalog:
+
+[source, bash, subs="+macros,+attributes"]
+----
+helm repo add openshift-helm-charts https://charts.openshift.io/
+helm repo update openshift-helm-charts
+----
+
+[TIP]
+====
+To get the default values of Red Hat Developer Hub Helm Chart execute:
+
+[source, bash, subs="+macros,+attributes"]
+----
+helm show values openshift-helm-charts/redhat-developer-hub > values.yaml
+----
+====
+
+There are multiple values to customize Red Hat Developer Hub, however, for a simple installation
+the endpoint variable is required by the `clusterRouterBase` variable. This variable represents the
+base router base of any application exposed by OpenShift. We can get that value with the command:
+
+[source, bash, subs="+macros,+attributes"]
+----
+export basedomain=$(oc whoami --show-console | sed -E 's~https?://console-openshift-console\.apps\.(.*)~apps.\1~')
+----
+
+We export the value to the `basedomain` variable to reuse it along the adventure.
+
+We need to create a `values.yaml` file to describe the configuration to apply to the Helm Chart.
+The value of the `clusterRouterBase` variable must defined in the `values.yaml` file. This file looks like:
+
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$challenge-01/values.yaml[]
+----
+
+Install Red Hat Developer Hub by the Helm Chart will be done by the command:
+
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-01/values.yaml \
+    --set global.clusterRouterBase=$basedomain \
+    --namespace rhdh-by-helm
+----
+
+The Helm Chart will expose the Red Hat Developer Hub instance by an OpenShift router. This command
+shows the full url to the new instance deployed:
+
+[source, bash, subs="+macros,+attributes"]
+----
+echo https://$(oc get route rhdh-developer-hub -n rhdh-by-helm -o jsonpath='{.spec.host}')
+----
+
+We can access and verify that Red Hat Developer Hub is running.
 
 [#operator-solution]
 == 🧞👷 Operator Solution
 
-TBC
+[NOTE]
+====
+The solution proposed assumes a namespace called `rhdh-by-operator` to store the different
+manifests and objects to resolve it. If this project does not exist, execute:
+
+[source, bash, subs="+macros,+attributes"]
+----
+oc new-project rhdh-by-operator
+----
+====
+
+IMPORTANT: Install any Kubernetes Operator requires `cluster-admin` privileges. The installation of the operator
+was done as part of the set up of the cluster with an administrator and it is available to any user.
+
+The Red Hat Developer Hub Operator provides the `Backstage` CRD to describe an instance of the application.
+This object provides multiple options, however, the minimum configuration to deploy a single instance is
+similar to:
+
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$challenge-01/rhdh-instance.yaml[]
+----
+
+Applying that definition in the namespace, the operator will deploy that instance for us:
+
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-01/rhdh-instance.yaml -n rhdh-by-operator
+----
+
+Once the deployment is finished, the status is identified as `Deployed`. This command shows that status:
+
+[source, bash, subs="+macros,+attributes"]
+----
+oc get backstage rhdh -o jsonpath='{.status.conditions[0].type}' -n rhdh-by-operator
+----
+
+The instance is available at:
+
+[source, bash, subs="+macros,+attributes"]
+----
+echo https://$(oc get route backstage-rhdh -n rhdh-by-operator -o jsonpath='{.spec.host}')
+----
+
+We can access and verify that Red Hat Developer Hub is running.

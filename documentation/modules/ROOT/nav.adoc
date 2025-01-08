@@ -1,28 +1,28 @@
-* xref:challenge-01.adoc[🚀 Let's play]
+* xref:challenge-01.adoc[🚀 The Adventure Begins]
 ** xref:challenge-01.adoc#helmchart[📦 Helm Chart]
 ** xref:challenge-01.adoc#operator[👷 Operator]
 
-* xref:challenge-02.adoc[🎨 Customizing it!]
+* xref:challenge-02.adoc[🎨 Make It Your Own]
 ** xref:challenge-02.adoc#configuration[🛠️ External configuration]
 ** xref:challenge-02.adoc#title[©️ Title it!]
 ** xref:challenge-02.adoc#colors[🌈 Looking better]
 
-* xref:challenge-03.adoc[👨‍💻 Welcome Devs]
+* xref:challenge-03.adoc[👨‍💻 Lock It Down]
 ** xref:challenge-03.adoc#github-auth[🔑 Authentication with GitHub]
 ** xref:challenge-03.adoc#gitlab-auth[🔑 Authentication with GitLab]
 ** xref:challenge-03.adoc#rbac[🛂 You won't break it]
 
-* xref:challenge-04.adoc[🕵🏻‍♂️ Where is my app?]
+* xref:challenge-04.adoc[🕵🏻‍♂️ Import An Existing App]
 ** xref:challenge-04.adoc#declare[📝 Declare it]
 ** xref:challenge-04.adoc#import[📂 Import it]
 
-* xref:challenge-05.adoc[🧾 Onboard my new app]
+* xref:challenge-05.adoc[🧾 Streamline Future App Dev]
 ** xref:challenge-05.adoc#softwaretemplate[💀 Software Template]
 ** xref:challenge-05.adoc#onboard[🛬 Onboarding]
 
-* xref:challenge-06.adoc[🔌 And beyond!]
+* xref:challenge-06.adoc[🔌 Unlock New Capabilities]
 ** xref:challenge-06.adoc#dynamicplugins[🦄 Dynamic Plugins]
 
-* xref:challenge-07.adoc[🔬 What is happening?]
+* xref:challenge-07.adoc[🔬 Put It Under The Microscope]
 ** xref:challenge-07.adoc#tools[🧰 Tools]
 ** xref:challenge-07.adoc#metrics[👨‍🔬 Metrics]

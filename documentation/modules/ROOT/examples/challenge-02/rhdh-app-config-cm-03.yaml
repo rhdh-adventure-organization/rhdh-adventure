@@ -1,0 +1,23 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    organization:
+      name: "My Organization"
+    app:
+      title: "My Adventure with Red Hat Developer Hub"
+      branding:
+        theme:
+          light:
+            primaryColor: '#38be8b'
+            headerColor1: 'hsl(204 100% 71%)'
+            headerColor2: 'color(a98-rgb 1 0 0)'
+            navigationIndicatorColor: '#be0000'
+          dark:
+            primaryColor: '#ab75cf'
+            headerColor1: '#0000d0'
+            headerColor2: 'rgb(255 246 140)'
+            navigationIndicatorColor: '#f4eea9'
