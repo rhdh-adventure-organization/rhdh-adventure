@@ -1,7 +1,5 @@
 global:
   clusterRouterBase: "${basedomain}"
-  #dynamic:
-  #  plugins: []
 upstream:
   backstage:
     extraAppConfig:

@@ -61,8 +61,11 @@ IMPORTANT: Don't forget to create those objects inside of the namespace your are
 Remember the usage of `rhdh-by-helm` namespace for an instance managed by the Helm Chart,
 and `rhdh-by-operator` namespace for an instance managed by the Operator.
 
-=== Configuration by Helm Chart
-
+[tabs]
+====
+By Helm Chart::
++
+--
 Red Hat Developer Hub Helm Chart provides an extension to declare extra configuration by ConfigMap and Secrets.
 The definition of the resources described above will be applying the next configuration into the `values.yaml` file.
 Here an example of that configuration:
@@ -82,9 +85,10 @@ helm upgrade --install rhdh \
     --set global.clusterRouterBase=$basedomain \
     --namespace rhdh-by-helm
 ----
-
-=== Configuration by Operator
-
+--
+By Operator::
++
+--
 The Backstage CRD provides an extension to declare extra configuration by ConfigMap and Secrets.
 Here an example of that configuration:
 
@@ -99,6 +103,8 @@ To apply the new configuration setup, we need to update the Backstage object:
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yaml
 ----
+--
+====
 
 [#title-solution]
 == 🧞©️ Title it!
