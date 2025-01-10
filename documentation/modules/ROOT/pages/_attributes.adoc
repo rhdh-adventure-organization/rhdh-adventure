@@ -3,3 +3,5 @@
 :profile: rhdh-adventure
 :tutorial-url: https://github.com/rmarting/rhdh-adventure.git
 :folder: rhdh-adventure
+
+:ocp-version: 4.16.9

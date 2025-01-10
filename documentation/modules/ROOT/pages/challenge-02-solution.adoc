@@ -2,7 +2,7 @@
 include::_attributes.adoc[]
 
 [#intro-solution]
-== 🧞🎨 Customizing it!
+== 🧞🎨 Make It Your Own Solution
 
 Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
 to the challenge, offering a step-by-step implementation as a reference to guide you.
@@ -13,7 +13,7 @@ The goal is to help you understand the process and give you the confidence to ta
 in the future. Let' 's dive in together! 🧞🚀
 
 [#configuration-solution]
-== 🧞🛠️ External configuration
+== 🧞🛠️ External configuration Solution
 
 Red Hat Developer Hub is very extensible and customizable, so the final configuration could be so long
 and extended making hard its maintenance. There is a proper way to customize it using external resources
@@ -88,8 +88,7 @@ To apply the new configuration setup, we need to upgrade our Helm Chart release:
 helm upgrade --install rhdh \
     openshift-helm-charts/redhat-developer-hub \
     -f ./documentation/modules/ROOT/examples/challenge-02/values.yaml \
-    --set global.clusterRouterBase=$basedomain \
-    --namespace rhdh-by-helm
+    --set global.clusterRouterBase=$basedomain
 ----
 --
 By Operator::
@@ -115,7 +114,7 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yam
 ====
 
 [#title-solution]
-== 🧞©️ Title it!
+== 🧞©️ Title it Solution
 
 Using the configuration objects created previously add new configuration is easy, just add the new
 configuration there. For example, to define the title of our instance, update the `rhdh-app-config`
@@ -172,7 +171,7 @@ We can verify that our landing page is similar to:
 image::challenge-02/rhdh-new-title.png[]
 
 [#colors-solution]
-== 🧞🌈 Looking better
+== 🧞🌈 Looking better Solution
 
 Red Hat Developer Hub includes a default theme aligned with Red Hat branding products style, however, that
 theme is customizable too. The following extension of the `rhdh-app-config` ConfigMap will define different

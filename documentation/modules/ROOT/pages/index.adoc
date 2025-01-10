@@ -7,8 +7,6 @@
 
 Your team, as platform engineers, is looking to improve the daily basis of many different development teams and create the best developer experience (DevEx) for them. Red Hat Developer Hub is key in that journey providing different features and integration capabilities with multiple tools. However, your team is facing different challenges which should be resolved before providing the Nirvana for Developers.
 
-
-
 Which challenge do you want to resolve? Here starts your adventure with Red Hat Developer Hub to become a hero, and improve the developer experience.
 
 [.tiles.browse]
@@ -20,7 +18,7 @@ and platform engineers face daily. The adventure progresses step-by-step, starti
 into mastery. The first two stages are essential to lay the foundation of your journey, but after that, the path
 is yours to choose. Every stage is an opportunity to learn, experiment, and conquer!
 
-image:rhdh-adventure-map.png[]
+image:rhdh-adventure-map.jpg[Red Hat Developer Hub Adventure Map]
 
 [.tile]
 .xref:challenge-01.adoc[Stage 1 - 🚀 The Adventure Begins]
@@ -75,3 +73,8 @@ step into this adventure with Red Hat Developer Hub. From zero to hero, the Deve
 starts here. The only question is: which challenge will you tackle first?
 
 Let the adventure begin! 🚀
+
+[.tiles.browse]
+=== Is OpenShift Ready?
+
+If you are setting up this adventure, please, follow xref:01-setup.adoc[these instructions].

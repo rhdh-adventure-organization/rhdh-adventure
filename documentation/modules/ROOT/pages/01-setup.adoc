@@ -1,25 +1,232 @@
 = Setup
 include::_attributes.adoc[]
+include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/versions.adoc[]
 
 [#prerequisite]
 == Prerequisite CLI tools
 
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/prerequisites-kubernetes.adoc[]
+The following CLI tools are required for running the exercises in this adventure.
+Please have them installed and configured before you get started with any of the tutorial chapters.
+
+[cols="4*^,4*.",options="header,+attributes"]
 |===
+|**Tool**|**macOS**|**Fedora**|**windows**
 
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/optional-requisites.adoc[]
+| `oc client {ocp-version}`
+| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-mac-{ocp-version}.tar.gz[Download]
+| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-linux-arm64-{ocp-version}.tar.gz[Download]
+| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-windows-{ocp-version}.zip[Download]
+
 |===
-
-[#minikube]
-== Setup Kubernetes
-
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/kubernetes-setup.adoc[]
-
-And then you are ready for start using Kubernetes:
-
-image::kubelogo.png[]
 
 [#downloadtutorial]
 == Get tutorial sources
 
 include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/download-sources.adoc[]
+
+[#ocpsetup]
+== Set up OpenShift
+
+This adventure requires a Red Hat OpenShift Container Platform {ocp-version} available and with a set of operators
+installed before starting this adventure.
+
+If you do not have a Red Hat OpenShift Container Platform, you can request one at
+link:https://catalog.demo.redhat.com/catalog[Red Hat Demo Platform] system. From the catalog of options the
+link:https://catalog.demo.redhat.com/catalog?search=openshift&item=babylon-catalog-prod%2Fsandboxes-gpte.ocp-wksp.prod[Red Hat OpenShift Container Platform Cluster (AWS)] is the most suitable for this.
+
+Once you have your Red Hat OpenShift Container Platform instance ready, the following instructions must be done
+with a user with `cluster-admin` privileges. This is because a set of OpenShift Operators will be installed.
+
+[#ocpsetup-certmanager]
+=== Install Cert Manager
+
+Before installing the Cert Manager Operator, check it:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get csv -n cert-manager-operator
+----
+
+It the output is similar to, then it is not needed to install it.
+
+[source, bash, subs="+macros,+attributes"]
+----
+NAME                            DISPLAY                                       VERSION   REPLACES                        PHASE
+cert-manager-operator.v1.14.1   cert-manager Operator for Red Hat OpenShift   1.14.1    cert-manager-operator.v1.14.0   Succeeded
+----
+
+To install it:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/setup/cert-manager-operator.yaml
+----
+
+[#ocpsetup-rhdh-operator]
+=== Install Red Hat Developer Hub Operator
+
+This is an adventure about Red Hat Developer Hub and there is a challenge to play with the features
+provided by the Operator. Install the operator is just apply the next manifest:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$/setup/rhdh-operator.yaml[]
+----
+
+This is the command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/setup/rhdh-operator.yaml
+----
+
+The operator is installed in the `rhdh-operator` namespace:
+
+```sh
+on 🎩 ❯ oc get csv -n rhdh-operator
+NAME                   DISPLAY                          VERSION   REPLACES               PHASE
+rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.1   Succeeded
+```
+[#ocpsetup-gitlab]
+=== Install GitLab
+
+Some challenges require to integrate Red Hat Developer Hub with GitHub or GitLab, you can use public
+instances of those servers, however, there is an option to install a local instance of GitLab in your
+OpenShift cluster.
+
+Follow this instructions if you want to have your own instance of GitLab.
+
+Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecyle Manager:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-operator.yaml
+----
+
+This operator will be installed in the `gitlab-system` namespace:
+
+[source, bash, subs="+macros,+attributes"]
+----
+on 🎩 ❯ oc get csv -n gitlab-system
+NAME                                DISPLAY    VERSION   REPLACES                            PHASE
+gitlab-operator-kubernetes.v1.8.2   GitLab     1.8.2     gitlab-operator-kubernetes.v1.8.1   Succeeded
+----
+
+To install a local instance of GitLab this command will create one. It will the base domain of the
+OpenShift cluster to public it externally.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+export basedomain=$(oc get ingresscontroller -n openshift-ingress-operator default -o jsonpath='{.status.domain}')
+envsubst < ./documentation/modules/ROOT/examples/setup/gitlab.yaml | oc apply -f -
+----
+
+TIP: The `basedomain` variable is used later in different challenges. Don't forget it!
+
+Deploying GitLab takes some time, so check its status as `Running` before continuing with next steps:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get gitlabs gitlab -o jsonpath='{.status.phase}' -n gitlab-system
+----
+
+The GitLab instance is available at
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+echo https://gitlab.$basedomain
+----
+
+GitLab is now accessible with user `root/<password in "gitlab-gitlab-initial-root-password" secret>`.
+To get the plain value of that password:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get secret gitlab-gitlab-initial-root-password -o jsonpath='{.data.password}' -n gitlab-system | base64 -d
+----
+
+Setup GitLab with some initial configuration:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+./documentation/modules/ROOT/examples/setup/gitlab-setup.sh
+----
+
+The initial configuration requires to push some content into GitLab, you should use the `user1` credentials to do it.
+
+[CAUTION]
+====
+If GitLab is deployed using self-signed certificates, you can get the following exception:
+
+`SSL certificate problem: self-signed certificate in certificate chain`
+
+In that case, execute the script with the `--ssl_certs_self_signed=y` argument.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+./documentation/modules/ROOT/examples/setup/gitlab-setup.sh --ssl_certs_self_signed=y
+----
+====
+
+This script will do the following:
+
+[source, text, subs="+macros,+attributes"]
+----
+Create two groups:
+
+- team-a
+- team-b
+
+Create two users/passwords:
+
+- user1/@abc1cde2
+- user2/@abc1cde2
+
+Ensure `user1` belongs to `team-a` and `user2` belongs to `team-b`.
+
+Create a repo called `sample-app` under `team-a` add the `catalog-info.yaml` and `users-groups.yaml` at the root of the repo.
+----
+
+[#ocpsetup-gitlab-runner]
+### Deploy GitLab runner
+
+GitLab instance can be extended installing a GitLab Runner to enable some automations.
+This section will install the GitLab Runner operator and prepare to be used by the GitLab instance:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-runner-operator.yaml -n gitlab-system
+----
+
+To test the installation
+
+[source, bash, subs="+macros,+attributes"]
+----
+on 🎩 ❯ oc get csv -n gitlab-system
+NAME                             DISPLAY         VERSION   REPLACES                         PHASE
+gitlab-runner-operator.v1.32.0   GitLab Runner   1.32.0    gitlab-runner-operator.v1.31.0   Succeeded
+----
+
+The technical docs will be created as part of the CI pipelines of the components, so
+we need to set up the GitLab instance to run pipelines and use some variables to
+identify the new bucket to store the results.
+
+Deploy a GitLab runner to run pipelines:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+envsubst < ./documentation/modules/ROOT/examples/setup/gitlab-runner.yaml | oc apply -n gitlab-system -f -
+----
