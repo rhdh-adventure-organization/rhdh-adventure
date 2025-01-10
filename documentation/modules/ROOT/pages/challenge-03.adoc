@@ -2,20 +2,45 @@
 include::_attributes.adoc[]
 
 [#intro]
-== 👨‍💻 Welcome Devs
+== 👨‍💻 Lock It Down
 
-Your Red Hat Developer Hub looks great … However, it is not a secure place to work. Security is important in any adventure, so it is time to secure our instance with real users and authorization policies to avoid security issues in the future. What do you want to conquer?
+Your Red Hat Developer Hub looks great... However, it is not a secure place to work.
+Security is important in any adventure, so it is time to secure our instance with
+real users and authorization policies to avoid security issues in the future.
+What do you want to conquer?
 
 * Authentication with GitHub
 * Authentication with GitLab
 * (You won't break it) Enable authorization for your new users (RBAC)
 
-Here you will integrate a SCM server as Identity Provider of Red Hat Developer Hub allowing authenticate users (developers or platform engineers). You will learn how to integrate one of those SCM in your exercise and define different rules or policies about which kind of activities are allowed for each of them.
+This challenge focuses on adding essential authentication and authorization capabilities to
+your Red Hat Developer Hub deployment. By securing it with robust access control mechanisms,
+you'll not only protect your users but also establish a foundation for maintaining trust and
+mitigating future security risks.
+
+The challenge will be considered successful when:
+
+* The application is integrated with an external identity provider and successfully authenticates users from that provider.
+* Authorization policies are implemented, and different users have distinct access levels. For example, one user may be allowed to perform an action, while another is restricted.
+
+By completing this challenge, you'll enhance the security posture of Red Hat Developer Hub, gaining hands-on
+experience with integrating authentication and authorization mechanisms. These skills are essential for
+developing secure, user-friendly applications in today's interconnected world.
+
+Let's lock it down and secure your Red Hat Developer Hub! 🔒
 
 [#github-auth]
 == 🔑 Authentication with GitHub
 
-TBC
+Here you will integrate GitHub as Identity Provider of Red Hat Developer Hub allowing authenticate users
+(developers or platform engineers).
+
+Use a public organization or your own user in link:https://github.com[GitHub] as external Identity Provider.
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/authentication/authenticating-with-github[Authenticating with GitHub]
+* link:https://backstage.io/docs/auth/github/provider/[GitHub Authentication Provider]
 
 [#github-auth-solution]
 === 🧞🔑 Authentication with GitHub Solution
@@ -25,7 +50,23 @@ Are you struggling about how to resolve it? Don't worry you can check the soluti
 [#gitlab-auth]
 == 🔑 Authentication with GitLab
 
-TBC
+Here you will integrate GitHub as Identity Provider of Red Hat Developer Hub allowing authenticate users
+(developers or platform engineers).
+
+Use a public organization or your own user in link:https://gitlab.com[GitLab] as external Identity Provider.
+Otherwise, the cluster provides a local instance of GitLab available at:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+echo https://gitlab.$basedomain
+----
+
+There is two users created (`user1`, `user2`), using the same credential (`@abc1cde2`).
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://backstage.io/docs/auth/gitlab/provider/[GitLab Authentication Provider]
 
 [#gitlab-auth-solution]
 === 🧞🔑 Authentication with GitLab Solution
@@ -35,7 +76,13 @@ Are you struggling about how to resolve it? Don't worry you can check the soluti
 [#rbac]
 == 🛂 You won't break it
 
-TBC
+Building on the authentication setup, this activity introduces authorization policies to define and enforce
+what authenticated users are allowed to do. You'll create rules within the application to grant or restrict
+access to specific features or actions, ensuring users have the correct permissions based on their roles.
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/authorization/index#enabling-and-giving-access-to-rbac[Enabling and giving access to the RBAC feature]
 
 [#rbac-solution]
 === 🧞🛂 You won't break it Solution

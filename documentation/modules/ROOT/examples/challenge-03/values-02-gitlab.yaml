@@ -1,0 +1,21 @@
+global:
+  clusterRouterBase: "${basedomain}"
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # GitLab Plugins
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+        disabled: false
+upstream:
+  backstage:
+    extraAppConfig:
+      - configMapRef: rhdh-app-config
+        filename: rhdh-app-config.yaml
+    extraEnvVarsSecrets:
+      - rhdh-secrets
+      - git-secrets

@@ -1,0 +1,10 @@
+global:
+  clusterRouterBase: "${basedomain}"
+upstream:
+  backstage:
+    extraAppConfig:
+      - configMapRef: rhdh-app-config
+        filename: rhdh-app-config.yaml
+    extraEnvVarsSecrets:
+      - rhdh-secrets
+      - git-secrets

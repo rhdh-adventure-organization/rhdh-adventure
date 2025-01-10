@@ -1,0 +1,77 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    organization:
+      name: "My Organization"
+    app:
+      title: "My Adventure with Red Hat Developer Hub"
+      branding:
+        theme:
+          light:
+            primaryColor: '#38be8b'
+            headerColor1: 'hsl(204 100% 71%)'
+            headerColor2: 'color(a98-rgb 1 0 0)'
+            navigationIndicatorColor: '#be0000'
+          dark:
+            primaryColor: '#ab75cf'
+            headerColor1: '#0000d0'
+            headerColor2: 'rgb(255 246 140)'
+            navigationIndicatorColor: '#f4eea9'
+
+    # Authorization GitHub
+    signInPage: github
+    dangerouslyAllowSignInWithoutUserInCatalog: true
+    auth:
+      providers:
+        github:
+          development:
+            clientId: ${AUTH_GITHUB_CLIENT_ID}
+            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+
+    # Integrations
+    integrations:
+      github:
+        - host: github.com
+          token: ${AUTH_GITHUB_TOKEN}
+          apps:
+            - appId: ${AUTH_GITHUB_APP_ID}
+              clientId: ${AUTH_GITHUB_CLIENT_ID}
+              clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+              webhookUrl: ${AUTH_GITHUB_WEBHOOK_URL}
+              webhookSecret: ${AUTH_GITHUB_WEBHOOK_SECRET}
+              privateKey: |
+                ${AUTH_GITHUB_PRIVATE_KEY_FILE}
+
+    # Catalog
+    catalog:
+      providers:
+        github:
+          providerId:
+            organization: ${GITHUB_ORGANIZATION}
+            filters:
+              branch: 'main'
+              repository: '.*'
+            schedule:
+              frequency:
+                minutes: 30
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 15
+
+    # RBAC
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/1
+        policies-csv-file: /opt/app-root/src/rbac-policy.csv
+        pluginsWithPermission:
+          - catalog
+          - scaffolder
+          - permission

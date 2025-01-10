@@ -1,0 +1,21 @@
+global:
+  clusterRouterBase: "${basedomain}"
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # GitHub Plugins
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false
+upstream:
+  backstage:
+    extraAppConfig:
+      - configMapRef: rhdh-app-config
+        filename: rhdh-app-config.yaml
+    extraEnvVarsSecrets:
+      - rhdh-secrets
+      - git-secrets
