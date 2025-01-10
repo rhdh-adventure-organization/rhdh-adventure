@@ -163,7 +163,7 @@
 <h2 id="prerequisite"><a class="anchor" href="#prerequisite"></a>Prerequisite CLI tools</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following CLI tools are required for running the exercises in this tutorial.
+<p>The following CLI tools are required for running the exercises in this adventure.
 Please have them installed and configured before you get started with any of the tutorial chapters.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -183,224 +183,13 @@ Please have them installed and configured before you get started with any of the
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Git</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://git-scm.com/download/mac">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://git-scm.com/download/linux">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://git-scm.com/download/win">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Docker</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.docker.com/docker-for-mac/install">Docker for Mac</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>dnf install docker</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.docker.com/docker-for-windows/install">Docker for Windows</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>VirtualBox</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://download.virtualbox.org/virtualbox/6.1.6/VirtualBox-6.1.6-137129-OSX.dmg">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://www.virtualbox.org/wiki/Linux_Downloads">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://download.virtualbox.org/virtualbox/6.1.6/VirtualBox-6.1.6-137129-Win.exe">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://kubernetes.io/docs/tasks/tools/install-minikube">Minikube</a> v1.29.0</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/kubernetes/minikube/releases/download/v1.29.0/minikube-darwin-amd64">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/kubernetes/minikube/releases/download/v1.29.0/minikube-linux-amd64">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/kubernetes/minikube/releases/download/v1.29.0/minikube-windows-amd64.exe">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>kubectl v1.26.1</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://storage.googleapis.com/kubernetes-release/release/v1.26.1/bin/darwin/amd64/kubectl">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://storage.googleapis.com/kubernetes-release/release/v1.26.1/bin/linux/amd64/kubectl">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://storage.googleapis.com/kubernetes-release/release/v1.26.1/bin/windows/amd64/kubectl.exe">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/wercker/stern">stern</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>brew install stern</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/stern/stern/releases/download/v1.22.0/stern_1.22.0_linux_amd64.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/stern/stern/releases/download/v1.22.0/stern_1.22.0_windows_amd64.tar.gz">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Apache Maven 3.9.0</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>oc client 4.16.9</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-mac-4.16.9.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-linux-arm64-4.16.9.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-windows-4.16.9.zip">Download</a></p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>The following CLI tools are optional for running the exercises in this tutorial.
-Although they are used in the tutorial, you could use others without any problem.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-center valign-top"><strong>Tool</strong></th>
-<th class="tableblock halign-center valign-top"><strong>macOS</strong></th>
-<th class="tableblock halign-center valign-top"><strong>Fedora</strong></th>
-<th class="tableblock halign-center valign-top"><strong>windows</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/mikefarah/yq">yq v2.4.1</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/mikefarah/yq/releases/download/2.4.1/yq_darwin_amd64">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/mikefarah/yq/releases/download/2.4.1/yq_linux_amd64">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/mikefarah/yq/releases/download/2.4.1/yq_windows_amd64.exe">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/stedolan/jq">jq v1.6.0</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/stedolan/jq/releases/download/jq-1.6/jq-osx-amd64">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe">Download</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://httpie.org/">httpie</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>brew install httpie</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>dnf install httpie</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://httpie.org/doc#windows-etc" class="bare">https://httpie.org/doc#windows-etc</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">watch</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>brew install watch</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>dnf install procps-ng</code></p></td>
-<td class="tableblock halign-center valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">kubectx and kubens</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>brew install kubectx</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/ahmetb/kubectx" class="bare">https://github.com/ahmetb/kubectx</a></p></td>
-<td class="tableblock halign-center valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/rakyll/hey">hey</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>brew install hey</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://storage.googleapis.com/jblabs/dist/hey_linux_v0.1.2">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://hey-release.s3.us-east-2.amazonaws.com/hey_windows_amd64">Download</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="minikube"><a class="anchor" href="#minikube"></a>Setup Kubernetes</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The profile rhdh-adventure is created to run the tutorial:</p>
-</div>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_minikube"></a>Minikube</p>
-</li>
-<li>
-<p><a id="tabset1_openshift"></a>OpenShift</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_minikube">
-<div class="paragraph">
-<p>Having <code>minikube</code> installed and in your <code>PATH</code>, then run:</p>
-</div>
-<div class="paragraph">
-<p><strong>MacOS</strong></p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=virtualbox -p rhdh-adventure</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Linux</strong></p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=kvm2 -p rhdh-adventure</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Windows:</strong></p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">minikube start --memory=8192 --cpus=3 --kubernetes-version=v1.26.1 --vm-driver=hyperv -p rhdh-adventure</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And the output must be something similar like:</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">😄  [rhdh-adventure] minikube v1.20.0 on Darwin 11.3
-✅  Created a new profile : rhdh-adventure
-✅  minikube profile was successfully set to rhdh-adventure
-😄  [default] minikube v1.29.0 on Darwin 11.3
-✨  Selecting 'virtualbox' driver from user configuration (alternates: [hyperkit])
-🔥  Creating virtualbox VM (CPUs=2, Memory=8192MB, Disk=50000MB) ...
-🐳  Preparing Kubernetes v1.26.1 on Docker '20.10.6' ...
-    ▪ apiserver.enable-admission-plugins=LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook
-🚜  Pulling images ...
-🚀  Launching Kubernetes ...
-⌛  Waiting for cluster to come online ...
-🏄  Done! kubectl is now configured to use "rhdh-adventure"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Finally configure to use minikube internal docker as docker host:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">eval $(minikube docker-env -p rhdh-adventure)</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_openshift">
-<div class="paragraph">
-<p>To run OpenShift4, you need to have one provisioned using <a href="https://try.openshift.com">try.openshift.com</a> or can use any existing OpenShift4 cluster.
-Once you have your cluster, you can download the latest OpenShift client(oc) from <a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/">here</a> and add to your path.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>oc version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can check the OpenShift version using:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The output should show oc version &gt;=4.7:</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: 4.7.0-202102130115.p0-c66c03f
-Kubernetes Version: v1.26.1</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then login into the OpenShift cluster using <code>oc login</code></p>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>And then you are ready for start using Kubernetes:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/kubelogo.png" alt="kubelogo">
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -422,6 +211,278 @@ Kubernetes Version: v1.26.1</code></pre>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd $TUTORIAL_HOME</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ocpsetup"><a class="anchor" href="#ocpsetup"></a>Set up OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This adventure requires a Red Hat OpenShift Container Platform 4.16.9 available and with a set of operators
+installed before starting this adventure.</p>
+</div>
+<div class="paragraph">
+<p>If you do not have a Red Hat OpenShift Container Platform, you can request one at
+<a href="https://catalog.demo.redhat.com/catalog">Red Hat Demo Platform</a> system. From the catalog of options the
+<a href="https://catalog.demo.redhat.com/catalog?search=openshift&amp;item=babylon-catalog-prod%2Fsandboxes-gpte.ocp-wksp.prod">Red Hat OpenShift Container Platform Cluster (AWS)</a> is the most suitable for this.</p>
+</div>
+<div class="paragraph">
+<p>Once you have your Red Hat OpenShift Container Platform instance ready, the following instructions must be done
+with a user with <code>cluster-admin</code> privileges. This is because a set of OpenShift Operators will be installed.</p>
+</div>
+<div class="sect2">
+<h3 id="ocpsetup-certmanager"><a class="anchor" href="#ocpsetup-certmanager"></a>Install Cert Manager</h3>
+<div class="paragraph">
+<p>Before installing the Cert Manager Operator, check it:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get csv -n cert-manager-operator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It the output is similar to, then it is not needed to install it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                            DISPLAY                                       VERSION   REPLACES                        PHASE
+cert-manager-operator.v1.14.1   cert-manager Operator for Red Hat OpenShift   1.14.1    cert-manager-operator.v1.14.0   Succeeded</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To install it:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/setup/cert-manager-operator.yaml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ocpsetup-rhdh-operator"><a class="anchor" href="#ocpsetup-rhdh-operator"></a>Install Red Hat Developer Hub Operator</h3>
+<div class="paragraph">
+<p>This is an adventure about Red Hat Developer Hub and there is a challenge to play with the features
+provided by the Operator. Install the operator is just apply the next manifest:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rhdh-operator
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: Backstage.v1alpha1.rhdh.redhat.com
+  name: rhdh-operator-og
+  namespace: rhdh-operator
+spec:
+  upgradeStrategy: Default
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    operators.coreos.com/rhdh.rhdh-operator: ""
+  name: rhdh
+  namespace: rhdh-operator
+spec:
+  name: rhdh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  channel: fast
+  startingCSV: rhdh-operator.v1.4.0
+  installPlanApproval: Automatic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/setup/rhdh-operator.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator is installed in the <code>rhdh-operator</code> namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">on 🎩 ❯ oc get csv -n rhdh-operator
+NAME                   DISPLAY                          VERSION   REPLACES               PHASE
+rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.1   Succeeded</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ocpsetup-gitlab"><a class="anchor" href="#ocpsetup-gitlab"></a>Install GitLab</h3>
+<div class="paragraph">
+<p>Some challenges require to integrate Red Hat Developer Hub with GitHub or GitLab, you can use public
+instances of those servers, however, there is an option to install a local instance of GitLab in your
+OpenShift cluster.</p>
+</div>
+<div class="paragraph">
+<p>Follow this instructions if you want to have your own instance of GitLab.</p>
+</div>
+<div class="paragraph">
+<p>Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecyle Manager:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-operator.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This operator will be installed in the <code>gitlab-system</code> namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n gitlab-system
+NAME                                DISPLAY    VERSION   REPLACES                            PHASE
+gitlab-operator-kubernetes.v1.8.2   GitLab     1.8.2     gitlab-operator-kubernetes.v1.8.1   Succeeded</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To install a local instance of GitLab this command will create one. It will the base domain of the
+OpenShift cluster to public it externally.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export basedomain=$(oc get ingresscontroller -n openshift-ingress-operator default -o jsonpath='{.status.domain}')
+envsubst &lt; ./documentation/modules/ROOT/examples/setup/gitlab.yaml | oc apply -f -</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>basedomain</code> variable is used later in different challenges. Don&#8217;t forget it!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Deploying GitLab takes some time, so check its status as <code>Running</code> before continuing with next steps:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get gitlabs gitlab -o jsonpath='{.status.phase}' -n gitlab-system</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The GitLab instance is available at</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo <a href="https://gitlab.$basedomain" class="bare">https://gitlab.$basedomain</a></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>GitLab is now accessible with user <code>root/&lt;password in "gitlab-gitlab-initial-root-password" secret&gt;</code>.
+To get the plain value of that password:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get secret gitlab-gitlab-initial-root-password -o jsonpath='{.data.password}' -n gitlab-system | base64 -d</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Setup GitLab with some initial configuration:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./documentation/modules/ROOT/examples/setup/gitlab-setup.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The initial configuration requires to push some content into GitLab, you should use the <code>user1</code> credentials to do it.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If GitLab is deployed using self-signed certificates, you can get the following exception:</p>
+</div>
+<div class="paragraph">
+<p><code>SSL certificate problem: self-signed certificate in certificate chain</code></p>
+</div>
+<div class="paragraph">
+<p>In that case, execute the script with the <code>--ssl_certs_self_signed=y</code> argument.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./documentation/modules/ROOT/examples/setup/gitlab-setup.sh --ssl_certs_self_signed=y</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This script will do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">Create two groups:
+
+- team-a
+- team-b
+
+Create two users/passwords:
+
+- user1/@abc1cde2
+- user2/@abc1cde2
+
+Ensure `user1` belongs to `team-a` and `user2` belongs to `team-b`.
+
+Create a repo called `sample-app` under `team-a` add the `catalog-info.yaml` and `users-groups.yaml` at the root of the repo.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ocpsetup-gitlab-runner"><a class="anchor" href="#ocpsetup-gitlab-runner"></a>Deploy GitLab runner</h3>
+<div class="paragraph">
+<p>GitLab instance can be extended installing a GitLab Runner to enable some automations.
+This section will install the GitLab Runner operator and prepare to be used by the GitLab instance:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-runner-operator.yaml -n gitlab-system</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To test the installation</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n gitlab-system
+NAME                             DISPLAY         VERSION   REPLACES                         PHASE
+gitlab-runner-operator.v1.32.0   GitLab Runner   1.32.0    gitlab-runner-operator.v1.31.0   Succeeded</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The technical docs will be created as part of the CI pipelines of the components, so
+we need to set up the GitLab instance to run pipelines and use some variables to
+identify the new bucket to store the results.</p>
+</div>
+<div class="paragraph">
+<p>Deploy a GitLab runner to run pipelines:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">envsubst &lt; ./documentation/modules/ROOT/examples/setup/gitlab-runner.yaml | oc apply -n gitlab-system -f -</code></pre>
+</div>
 </div>
 </div>
 </div>
