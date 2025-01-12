@@ -4,18 +4,132 @@ include::_attributes.adoc[]
 [#intro-solution]
 == 🧞🧾 Onboard my new app
 
-You have an application skeleton; or scaffold or archetype; for a kind of architecture very common in your organization. However, it is a manual process using it to create new applications.
+Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.
 
-Here you will create a software template using your application skeleton to onboard new applications in Red Hat Developer Hub. This onboarding process will include the creation of the source code repository, and the default dashboard of the application into the catalog with integrations with the documentation, dependencies (if applies) and API (if applies).
-
-TBC
+Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀
 
 [#softwaretemplate-solution]
 == 🧞💀 Software Template
 
-TBC
+Software templates are pre-configured building blocks that help developers jump start their projects.
+These templates provide a standardized starting point for applications, saving developers time and effort
+by eliminating the need to manually configure common elements.
+
+Software templates describe specific architectures or type of applications so they are multiple cases.
+Red Hat Developer Hub provides a set of examples in a repository as starting point, however, there are
+multiple examples or specific use cases not included there.
+
+Templates can be registered from the `Create...` menu. The `Register Existing Component` button opens
+a wizard to register the component from the remote url.
+
+[tabs]
+====
+GitHub::
++
+--
+For example, this is a link:https://github.com/rhdh-adventure-organization/angular-template-gh[software template]
+for an Angular app. Register it by the UI.
+
+Software Template url: `https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml`
+--
+GitLab::
++
+--
+For example, this is a link:https://github.com/rhdh-adventure-organization/node-template-gl[software template]
+for a Node.JS app. Register it by the UI.
+
+Software Template url: `https://github.com/rhdh-adventure-organization/node-template-gl/blob/main/template.yaml/template.yaml`
+--
+====
+
+Another alternative is to configure the location of the templates in the `catalog` definition.
+This is the configuration to add in the `app-config-rhdh` ConfigMap:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+    catalog:
+      locations:
+        - type: url
+          target: https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml
+          rules:
+            - allow: [Template]
+----
+
+This command will help:
+
+[tabs]
+====
+GitHub::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml
+----
+
+The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc rollout restart deployment/rhdh-developer-hub
+----
+--
+GitLab::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml
+----
+
+The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc rollout restart deployment/rhdh-developer-hub
+----
+--
+====
+
+Clicking the `Create...` menu the list of software templates available should appear:
+
+image::challenge-05/rhdh-software-templates.png[Software Templates available to be used]
 
 [#onboard-solution]
 == 🧞🛬 Onboarding
 
-TBC
+Creating a new component from a Software Template is a simple process.
+Here an example of usage for the Angular App Template:
+
+image::challenge-05/rhdh-onboard-template-01.png[Angular App Template]
+
+Identifying the new component:
+
+image::challenge-05/rhdh-onboard-template-02.png[Provide initial information]
+
+Identifying location of the new component:
+
+image::challenge-05/rhdh-onboard-template-03.png[Repository location]
+
+Summary before launching onboard procedure:
+
+image::challenge-05/rhdh-onboard-template-04.png[Summary of new component]
+
+Workflow of onboarding:
+
+image::challenge-05/rhdh-onboard-template-05.png[Results of the onboarding workflow]
+
+New component registered in Red Hat Developer Hub
+
+image::challenge-05/rhdh-onboard-template-06.png[New component overview page]

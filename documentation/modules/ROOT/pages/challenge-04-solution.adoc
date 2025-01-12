@@ -2,20 +2,70 @@
 include::_attributes.adoc[]
 
 [#intro-solution]
-== 🧞🕵🏻‍♂️ Where is my app?
+== 🧞🕵🏻‍♂️ Where is my app? Solution
 
-Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.
+Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.
 
-Here you will prepare your application to be integrated in the catalog, including the main links to your source code repository, documentation, dependencies (if applies) and API (if applies). Once your application is ready, you can import into the catalog and share with other collaborators. You will also learn about how to do it massively using some capabilities of Red Hat Developer Hub.
-
-TBC
+Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀
 
 [#declare-solution]
-== 🧞📝 Declare it
+== 🧞📝 Declare it Solution
 
-TBC
+Any component to be registered into the Red Hat Developer Hub catalog requires a file called
+link:https://backstage.io/docs/features/software-catalog/descriptor-format/[`catalog-info.yaml`] describing it.
+
+Here there is a minimum example describing a sample component, for example a library:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-library
+  description: |
+    This is a sample library.
+  links:
+    - title: Red Hat Developer Hub Documentation
+      url: https://docs.redhat.com/en/documentation/red_hat_developer_hub
+  annotations:
+    backstage.io/kubernetes-id: sample-library
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-adventure-organization/sample-library
+spec:
+  type: library
+  lifecycle: production
+  owner: team-a
+----
+
+Choose a repository in your GitHub or GitLab instance and add a similar file in that repo.
 
 [#import-solution]
 == 🧞📂 Import it
 
-TBC
+The xref:challenge-03.adoc#intro[Lock It Down] challenge included a set of steps to integrate
+Red Hat Developer Hub and your favourite SCM (e.g: GitHub, GitLab). That integration included
+some features to discover organization data, including repositories to add automatically into
+the Red Hat Developer Hub catalog.
+
+If your challenged was completed successfully, after some minutes the repository updated with
+the `catalog-info.yaml` file should be listed in Catalog of Red Hat Developer Hub similar as:
+
+image::challenge-04/rhdh-catalog.png[Catalog of Components registered]
+
+Otherwise, there is another way to import or register a new component into the catalog.
+From the `Create...` menu, there is a button named as `Register Existing Component`:
+
+image::challenge-04/rhdh-register-existing-component.png[Register Existing Component button]
+
+Using a full URL to a repo that includes a `catalog-info.yaml` it can be registered.
+For example, adding the link:https://github.com/backstage/backstage/blob/master/catalog-info.yaml[https://github.com/backstage/backstage/blob/master/catalog-info.yaml]
+in that button, we can register the Backstage application (upstream project of Red Hat Developer Hub).
+
+The definition of the new component in the catalog will be similar to:
+
+image::challenge-04/rhdh-component-overview.png[Component Overview Page]

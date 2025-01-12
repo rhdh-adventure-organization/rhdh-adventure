@@ -2,18 +2,23 @@
 include::_attributes.adoc[]
 
 [#intro]
-== 🕵🏻‍♂️ Where is my app?
+== 🕵🏻‍♂️ Import an Existing App
 
 Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.
 
 Here you will prepare your application to be integrated in the catalog, including the main links to your source code repository, documentation, dependencies (if applies) and API (if applies). Once your application is ready, you can import into the catalog and share with other collaborators. You will also learn about how to do it massively using some capabilities of Red Hat Developer Hub.
 
-TBC
-
 [#declare]
 == 📝 Declare it
 
-TBC
+Do you have a source code repository for a library, application or module? This is the kind of components
+to register into the Red Hat Developer Hub catalog, this is the challenge. How could you declare it?
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://redhatquickcourses.github.io/devhub-intro/devhub-intro/1/features/catalog.html[Introduction to Software Catalog]
+* link:https://redhatquickcourses.github.io/devhub-build/devhub-build/1/chapter1/catalog.html[A deeper dive into Red Hat Developer Hub Software Catalog]
+* link:https://backstage.io/docs/features/software-catalog/[What is a Software Catalog?]
 
 [#declare-solution]
 === 🧞📝 Declare it Solution
@@ -23,7 +28,11 @@ Are you struggling about how to resolve it? Don't worry you can check the soluti
 [#import]
 == 📂 Import it
 
-TBC
+Well, did you declared your repository successfully? Great, not it is time to import to Red Hat Developer Hub Catalog.
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://backstage.io/docs/features/software-catalog/[What is a Software Catalog?]
 
 [#import-solution]
 === 🧞📂 Import it Solution
