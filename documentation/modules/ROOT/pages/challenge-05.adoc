@@ -1,8 +1,6 @@
-= Setup
-include::_attributes.adoc[]
-
 [#intro]
-== 🧾 Streamline Future App Dev
+= 🧾 Streamline Future App Dev
+include::_attributes.adoc[]
 
 You have an application skeleton; or scaffold or archetype; for a kind of architecture very common in your organization. However, it is a manual process using it to create new applications.
 

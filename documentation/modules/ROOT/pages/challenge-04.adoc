@@ -1,8 +1,6 @@
-= Setup
-include::_attributes.adoc[]
-
 [#intro]
-== 🕵🏻‍♂️ Import an Existing App
+= 🕵🏻‍♂️ Import an Existing App
+include::_attributes.adoc[]
 
 Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.
 

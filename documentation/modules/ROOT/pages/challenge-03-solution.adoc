@@ -1,8 +1,6 @@
-= Setup
-include::_attributes.adoc[]
-
 [#intro-solution]
-== 🧞👨‍💻 Lock It Down Solution
+= 🧞👨‍💻 Lock It Down Solution
+include::_attributes.adoc[]
 
 Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
 to the challenge, offering a step-by-step implementation as a reference to guide you.
