@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welcome to Red Hat Developer Hub Adventure :: Red Hat Developer Hub Adventure</title>
-    <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/index.html">
-    <link rel="next" href="challenge-01.html">
+    <title>Untitled :: Red Hat Developer Hub Adventure</title>
+    <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/01-setup-sandbox.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -148,112 +147,153 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="index.html">Welcome to Red Hat Developer Hub Adventure</a></li>
-  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/01-setup-sandbox.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Welcome to Red Hat Developer Hub Adventure</h1>
-<div class="sect1 text-center strong">
-<h2 id="_a_devex_adventure_from_zero_to_hero"><a class="anchor" href="#_a_devex_adventure_from_zero_to_hero"></a>A DevEx adventure from Zero to Hero</h2>
+<div class="sect1">
+<h2 id="sandbox"><a class="anchor" href="#sandbox"></a>Developer Sandbox for Red Hat OpenShift</h2>
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Your team, as platform engineers, is looking to improve the daily basis of many different development teams and create the best developer experience (DevEx) for them. Red Hat Developer Hub is key in that journey providing different features and integration capabilities with multiple tools. However, your team is facing different challenges which should be resolved before providing the Nirvana for Developers.</p>
+<p>The usage of Developer Sandbox for Red Hat OpenShift is suitable only for the following options
+of the adventure:</p>
 </div>
-<div class="paragraph">
-<p>Which challenge do you want to resolve? Here starts your adventure with Red Hat Developer Hub to become a hero, and improve the developer experience.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Developer Hub operated by Helm Chart</p>
+</li>
+<li>
+<p>Unable to install any other operator</p>
+</li>
+<li>
+<p>Unable to install a local GitLab instance</p>
+</li>
+</ul>
 </div>
-</div>
-</div>
-<div class="sect1 tiles browse">
-<h2 id="_the_stages_or_your_quest"><a class="anchor" href="#_the_stages_or_your_quest"></a>The Stages or your Quest</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Your journey to transform the Developer Experience (DevEx) begins with a series of <strong>epic stages</strong>—each designed
-to guide you through Red Hat Developer Hub&#8217;s incredible capabilities while solving key challenges developers
-and platform engineers face daily. The adventure progresses step-by-step, starting with the basics and evolving
-into mastery. The first two stages are essential to lay the foundation of your journey, but after that, the path
-is yours to choose. Every stage is an opportunity to learn, experiment, and conquer!</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/rhdh-adventure-map.jpg" alt="Red Hat Developer Hub Adventure Map"></span></p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-01.html" class="xref page">Stage 1 - 🚀 The Adventure Begins</a></div>
-<p>Start your journey by deploying Red Hat Developer Hub. Learn how to install and set it up effortlessly using
-tools like Helm Charts or Operators. This stage is all about getting Red Hat Developer Hub up and running on
-your platform and preparing the foundation for all the enhancements to come.</p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-02.html" class="xref page">Stage 2 -🎨 Make It Your Own</a></div>
-<p>Customization is the key to success. Extend the deployment by using externalized configuration objects like
-ConfigMaps and Secrets. By doing this, you&#8217;ll make Red Hat Developer Hub more maintainable, flexible, and
-ready to adapt to the needs of your developers and platform engineers.</p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-03.html" class="xref page">Stage 3 - 👨‍💻 Lock It Down</a></div>
-<p>Security is a must in any adventure. Enable authentication and authorization capabilities to safeguard your
-Red Hat Developer Hub instance. By integrating with external identity providers like GitHub or GitLab, and
-setting user access policies, you&#8217;ll ensure your platform is secure for all users.</p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-04.html" class="xref page">Stage 4 - 🕵🏻‍♂️ Import An Existing App</a></div>
-<p>A strong catalog is the backbone of Red Hat Developer Hub. This stage focuses on adding components to the
-catalog, bringing visibility to existing applications and fostering collaboration between developers. Share
-the resources that matter most and make your platform a one-stop shop for developers.</p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-05.html" class="xref page">Stage 5 - 🧾 Streamline Future App Dev</a></div>
-<p>Speed up development by creating and managing software templates. This stage teaches you how to enable developers
-to quickly onboard new applications and standardize the development process. Help developers build faster and
-smarter with guided workflows.</p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-06.html" class="xref page">Stage 6 - 🔌 Unlock New Capabilities</a></div>
-<p>Take your platform to the next level by integrating plugins. Learn how to extend Red Hat Developer Hub using
-its dynamic plugin framework and discover how plugins can enrich your platform with new features, integrations,
-and tools that developers can utilize immediately.</p>
-</div>
-<div class="paragraph tile">
-<div class="title"><a href="challenge-07.html" class="xref page">Stage 7 - 🔬 Put It Under The Microscope</a></div>
-<p>What gets measured gets improved! Enable metrics and monitoring capabilities to track Red Hat Developer Hub&#8217;s
-success and improve operational efficiency. Leverage tools integrated with OpenShift to gain insights into
-usage, performance, and the impact of your platform improvements.</p>
-</div>
-</div>
-</div>
-<div class="sect1 tiles browse">
-<h2 id="_ready_to_begin"><a class="anchor" href="#_ready_to_begin"></a>Ready to Begin?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Your team holds the potential to shape the future of development in your organization. As you move through
-each stage, you&#8217;ll sharpen your skills, foster collaboration, and create an environment where developers thrive.</p>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>The journey won&#8217;t always be easy, but the rewards will be worth it. So, gather your team, ready your tools, and
-step into this adventure with Red Hat Developer Hub. From zero to hero, the Developer Experience transformation
-starts here. The only question is: which challenge will you tackle first?</p>
+<p><a href="https://developers.redhat.com/developer-sandbox" target="_blank" rel="noopener">Developer Sandbox for Red Hat OpenShift</a> is a free Kubernetes cloud environment in a shared, multi-tenant OpenShift cluster that is pre-configured with a set of developer tools. The Developer Sandbox is active for 30 days and renewable once it expires.</p>
 </div>
 <div class="paragraph">
-<p>Let the adventure begin! 🚀</p>
+<p>To create your account, register to <a href="https://developers.redhat.com/developer-sandbox" target="_blank" rel="noopener">Developer Sandbox for Red Hat OpenShift</a>. From there, click on the red button that says <strong>Start your sandbox for free</strong> as shown in the following image.</p>
 </div>
-<div class="sect2 tiles browse">
-<h3 id="_is_openshift_ready"><a class="anchor" href="#_is_openshift_ready"></a>Is OpenShift Ready?</h3>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-signup.png" alt="Developer Sandbox Sign-up Page">
+</div>
+</div>
 <div class="paragraph">
-<p>If you are setting up this adventure, please, follow <a href="01-setup.html" class="xref page">these instructions</a>.</p>
+<p>Use your existing Red Hat account or create a new one, then follow the instructions on the screen. You should then be redirected to the Developer Sandbox page again, but this time, you should see a button labelled <strong>Start using your sandbox</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-start.png" alt="Developer Sandbox Start Page">
+</div>
+</div>
+<div class="paragraph">
+<p>If the following screen is shown select the Red Hat OpenShift option:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-console.png" alt="Developer Sandbox Console">
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking on it opens up the OpenShift login screen where you can log in using the <strong>DevSandbox</strong> button, as seen below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-login.png" alt="Log in the Developer Sandbox">
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking this button opens up your new OpenShift cluster console.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-topology-view.png" alt="Topology View">
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quotas and Limits</div>
+<div class="paragraph">
+<p>Your private OpenShift environment on Developer Sandbox includes quotas and limits of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>7 GB RAM</p>
+</li>
+<li>
+<p>15GB storage</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>which is enough to run this workshop.</p>
+</div>
+<div class="paragraph">
+<p>There are one fixed project (namespace):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;your_username&gt;-dev</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please work in the <code>&lt;your_username&gt;-dev</code> project.</p>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Also, you need to download <code>oc</code> CLI which is a <code>kubectl</code> wrapper for OpenShift.</p>
 </div>
-<nav class="pagination">
-  <span class="next"><a href="challenge-01.html">🚀 The Adventure Begins</a></span>
-</nav>
+<div class="paragraph">
+<p>Click on the question mark <code>?</code> button, select <code>Command Line Tools</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-question.png" alt="Download CLI">
+</div>
+</div>
+<div class="paragraph">
+<p>And finally download the <code>oc</code> CLI for your platform:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-downloadoc.png" alt="Download CLI">
+</div>
+</div>
+<div class="paragraph">
+<p>With <code>oc</code> downloaded and installed, it&#8217;s time to login to the cluster, click on your username select <code>Copy Login command</code>, and paste it to a terminal window:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/main/images/devsandbox-logincp.png" alt="Login To Cluster">
+</div>
+</div>
+<div class="paragraph">
+<p>After that, you can start using the cluster either with <code>oc</code> or <code>kubectl</code> CLI.</p>
+</div>
+</div>
+</div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

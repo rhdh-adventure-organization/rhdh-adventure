@@ -163,13 +163,14 @@
 <h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🧾 Onboard my new app</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You have an application skeleton; or scaffold or archetype; for a kind of architecture very common in your organization. However, it is a manual process using it to create new applications.</p>
+<p>Welcome! Don&#8217;t worry about being here—it&#8217;s absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.</p>
 </div>
 <div class="paragraph">
-<p>Here you will create a software template using your application skeleton to onboard new applications in Red Hat Developer Hub. This onboarding process will include the creation of the source code repository, and the default dashboard of the application into the catalog with integrations with the documentation, dependencies (if applies) and API (if applies).</p>
-</div>
-<div class="paragraph">
-<p>TBC</p>
+<p>Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀</p>
 </div>
 </div>
 </div>
@@ -177,7 +178,121 @@
 <h2 id="softwaretemplate-solution"><a class="anchor" href="#softwaretemplate-solution"></a>🧞💀 Software Template</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Software templates are pre-configured building blocks that help developers jump start their projects.
+These templates provide a standardized starting point for applications, saving developers time and effort
+by eliminating the need to manually configure common elements.</p>
+</div>
+<div class="paragraph">
+<p>Software templates describe specific architectures or type of applications so they are multiple cases.
+Red Hat Developer Hub provides a set of examples in a repository as starting point, however, there are
+multiple examples or specific use cases not included there.</p>
+</div>
+<div class="paragraph">
+<p>Templates can be registered from the <code>Create&#8230;&#8203;</code> menu. The <code>Register Existing Component</code> button opens
+a wizard to register the component from the remote url.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_github"></a>GitHub</p>
+</li>
+<li>
+<p><a id="tabset1_gitlab"></a>GitLab</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_github">
+<div class="paragraph">
+<p>For example, this is a <a href="https://github.com/rhdh-adventure-organization/angular-template-gh">software template</a>
+for an Angular app. Register it by the UI.</p>
+</div>
+<div class="paragraph">
+<p>Software Template url: <code><a href="https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml" class="bare">https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml</a></code></p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_gitlab">
+<div class="paragraph">
+<p>For example, this is a <a href="https://github.com/rhdh-adventure-organization/node-template-gl">software template</a>
+for a Node.JS app. Register it by the UI.</p>
+</div>
+<div class="paragraph">
+<p>Software Template url: <code><a href="https://github.com/rhdh-adventure-organization/node-template-gl/blob/main/template.yaml/template.yaml" class="bare">https://github.com/rhdh-adventure-organization/node-template-gl/blob/main/template.yaml/template.yaml</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Another alternative is to configure the location of the templates in the <code>catalog</code> definition.
+This is the configuration to add in the <code>app-config-rhdh</code> ConfigMap:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    catalog:
+      locations:
+        - type: url
+          target: <a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml" class="bare">https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml</a>
+          rules:
+            - allow: [Template]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command will help:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_github"></a>GitHub</p>
+</li>
+<li>
+<p><a id="tabset2_gitlab"></a>GitLab</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_github">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_gitlab">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking the <code>Create&#8230;&#8203;</code> menu the list of software templates available should appear:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-software-templates.png" alt="Software Templates available to be used">
+</div>
 </div>
 </div>
 </div>
@@ -185,7 +300,53 @@
 <h2 id="onboard-solution"><a class="anchor" href="#onboard-solution"></a>🧞🛬 Onboarding</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Creating a new component from a Software Template is a simple process.
+Here an example of usage for the Angular App Template:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-onboard-template-01.png" alt="Angular App Template">
+</div>
+</div>
+<div class="paragraph">
+<p>Identifying the new component:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-onboard-template-02.png" alt="Provide initial information">
+</div>
+</div>
+<div class="paragraph">
+<p>Identifying location of the new component:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-onboard-template-03.png" alt="Repository location">
+</div>
+</div>
+<div class="paragraph">
+<p>Summary before launching onboard procedure:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-onboard-template-04.png" alt="Summary of new component">
+</div>
+</div>
+<div class="paragraph">
+<p>Workflow of onboarding:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-onboard-template-05.png" alt="Results of the onboarding workflow">
+</div>
+</div>
+<div class="paragraph">
+<p>New component registered in Red Hat Developer Hub</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-onboard-template-06.png" alt="New component overview page">
+</div>
 </div>
 </div>
 </div>

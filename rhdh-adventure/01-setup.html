@@ -228,6 +228,10 @@ installed before starting this adventure.</p>
 <a href="https://catalog.demo.redhat.com/catalog?search=openshift&amp;item=babylon-catalog-prod%2Fsandboxes-gpte.ocp-wksp.prod">Red Hat OpenShift Container Platform Cluster (AWS)</a> is the most suitable for this.</p>
 </div>
 <div class="paragraph">
+<p>Another option is the usage of an instance of Developer Sandbox for Red Hat OpenShift. If you are interested,
+please, follow the instructions described <a href="01-setup-sandbox.html" class="xref page">here</a>.</p>
+</div>
+<div class="paragraph">
 <p>Once you have your Red Hat OpenShift Container Platform instance ready, the following instructions must be done
 with a user with <code>cluster-admin</code> privileges. This is because a set of OpenShift Operators will be installed.</p>
 </div>
@@ -244,7 +248,7 @@ with a user with <code>cluster-admin</code> privileges. This is because a set of
 <div class="paragraph">
 <p>It the output is similar to, then it is not needed to install it.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                            DISPLAY                                       VERSION   REPLACES                        PHASE
 cert-manager-operator.v1.14.1   cert-manager Operator for Red Hat OpenShift   1.14.1    cert-manager-operator.v1.14.0   Succeeded</code></pre>
@@ -310,9 +314,9 @@ spec:
 <div class="paragraph">
 <p>The operator is installed in the <code>rhdh-operator</code> namespace:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">on 🎩 ❯ oc get csv -n rhdh-operator
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n rhdh-operator
 NAME                   DISPLAY                          VERSION   REPLACES               PHASE
 rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.1   Succeeded</code></pre>
 </div>
@@ -339,7 +343,7 @@ OpenShift cluster.</p>
 <div class="paragraph">
 <p>This operator will be installed in the <code>gitlab-system</code> namespace:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n gitlab-system
 NAME                                DISPLAY    VERSION   REPLACES                            PHASE
@@ -432,7 +436,7 @@ To get the plain value of that password:</p>
 <div class="paragraph">
 <p>This script will do the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">Create two groups:
 
@@ -464,7 +468,7 @@ This section will install the GitLab Runner operator and prepare to be used by t
 <div class="paragraph">
 <p>To test the installation</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n gitlab-system
 NAME                             DISPLAY         VERSION   REPLACES                         PHASE

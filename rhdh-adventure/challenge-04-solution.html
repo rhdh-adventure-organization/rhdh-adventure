@@ -160,24 +160,53 @@
 <article class="doc">
 <h1 class="page">Setup</h1>
 <div class="sect1">
-<h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🕵🏻‍♂️ Where is my app?</h2>
+<h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🕵🏻‍♂️ Where is my app? Solution</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.</p>
+<p>Welcome! Don&#8217;t worry about being here—it&#8217;s absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.</p>
 </div>
 <div class="paragraph">
-<p>Here you will prepare your application to be integrated in the catalog, including the main links to your source code repository, documentation, dependencies (if applies) and API (if applies). Once your application is ready, you can import into the catalog and share with other collaborators. You will also learn about how to do it massively using some capabilities of Red Hat Developer Hub.</p>
-</div>
-<div class="paragraph">
-<p>TBC</p>
+<p>Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="declare-solution"><a class="anchor" href="#declare-solution"></a>🧞📝 Declare it</h2>
+<h2 id="declare-solution"><a class="anchor" href="#declare-solution"></a>🧞📝 Declare it Solution</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Any component to be registered into the Red Hat Developer Hub catalog requires a file called
+<a href="https://backstage.io/docs/features/software-catalog/descriptor-format/"><code>catalog-info.yaml</code></a> describing it.</p>
+</div>
+<div class="paragraph">
+<p>Here there is a minimum example describing a sample component, for example a library:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-library
+  description: |
+    This is a sample library.
+  links:
+    - title: Red Hat Developer Hub Documentation
+      url: <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub" class="bare">https://docs.redhat.com/en/documentation/red_hat_developer_hub</a>
+  annotations:
+    backstage.io/kubernetes-id: sample-library
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-adventure-organization/sample-library
+spec:
+  type: library
+  lifecycle: production
+  owner: team-a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Choose a repository in your GitHub or GitLab instance and add a similar file in that repo.</p>
 </div>
 </div>
 </div>
@@ -185,7 +214,41 @@
 <h2 id="import-solution"><a class="anchor" href="#import-solution"></a>🧞📂 Import it</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>The <a href="challenge-03.html#intro" class="xref page">Lock It Down</a> challenge included a set of steps to integrate
+Red Hat Developer Hub and your favourite SCM (e.g: GitHub, GitLab). That integration included
+some features to discover organization data, including repositories to add automatically into
+the Red Hat Developer Hub catalog.</p>
+</div>
+<div class="paragraph">
+<p>If your challenged was completed successfully, after some minutes the repository updated with
+the <code>catalog-info.yaml</code> file should be listed in Catalog of Red Hat Developer Hub similar as:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-04/rhdh-catalog.png" alt="Catalog of Components registered">
+</div>
+</div>
+<div class="paragraph">
+<p>Otherwise, there is another way to import or register a new component into the catalog.
+From the <code>Create&#8230;&#8203;</code> menu, there is a button named as <code>Register Existing Component</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-04/rhdh-register-existing-component.png" alt="Register Existing Component button">
+</div>
+</div>
+<div class="paragraph">
+<p>Using a full URL to a repo that includes a <code>catalog-info.yaml</code> it can be registered.
+For example, adding the <a href="https://github.com/backstage/backstage/blob/master/catalog-info.yaml">https://github.com/backstage/backstage/blob/master/catalog-info.yaml</a>
+in that button, we can register the Backstage application (upstream project of Red Hat Developer Hub).</p>
+</div>
+<div class="paragraph">
+<p>The definition of the new component in the catalog will be similar to:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-04/rhdh-component-overview.png" alt="Component Overview Page">
+</div>
 </div>
 </div>
 </div>

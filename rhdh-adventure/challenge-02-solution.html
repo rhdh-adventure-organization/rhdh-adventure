@@ -360,7 +360,7 @@ spec:
 <div class="paragraph">
 <p>Using the configuration objects created previously add new configuration is easy, just add the new
 configuration there. For example, to define the title of our instance, update the <code>rhdh-app-config</code>
-configmap adding the attribute <code>app.title</code> as:</p>
+ConfigMap adding the attribute <code>app.title</code> as:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -409,13 +409,24 @@ data:
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you are running a Red Hat Developer Hub instance managed by the Operator, every time a configmap
-or secret included in the configuration is updated, the operator will trigger a redeploy of the
-instance. You don&#8217;t need to do anything else.</p>
+<p>If you are running a Red Hat Developer Hub instance managed by the Operator, every time a ConfigMap
+or Secret included in the configuration is updated, the operator will redeploy the instance.
+You don&#8217;t need to do anything else.</p>
 </div>
 <div class="paragraph">
 <p>However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
 with the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-02/values.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or run a restart of the <code>Deployment</code> object of Red Hat Developer Hub</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -514,13 +525,24 @@ data:
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you are running a Red Hat Developer Hub instance managed by the Operator, every time a configmap
-or secret included in the configuration is updated, the operator will trigger a redeploy of the
-instance. You don&#8217;t need to do anything else.</p>
+<p>If you are running a Red Hat Developer Hub instance managed by the Operator, every time a ConfigMap
+or Secret included in the configuration is updated, the operator will redeploy the instance.
+You don&#8217;t need to do anything else.</p>
 </div>
 <div class="paragraph">
 <p>However, if you are using the Helm Chart, then a deployment restart must be done. You can trigger it
 with the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-02/values.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or run a restart of the <code>Deployment</code> object of Red Hat Developer Hub</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">

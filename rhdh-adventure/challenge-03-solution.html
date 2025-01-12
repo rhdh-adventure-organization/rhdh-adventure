@@ -182,6 +182,9 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/authentication/authenticating-with-github#enabling-authentication-with-github">here</a></p>
 </div>
 <div class="paragraph">
+<p>To enable discovery, then you need to use a GitHub organization</p>
+</div>
+<div class="paragraph">
 <p>The following steps will depend of the mechanism used to operate Red Hat Developer Hub:</p>
 </div>
 <div class="tabset is-loading">
@@ -200,10 +203,10 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>GitHub App name: <code>rhdh-adventure</code></p>
+<p><strong>GitHub App name</strong>: <code>rhdh-adventure</code></p>
 </li>
 <li>
-<p>Homepage URL: Copy output of</p>
+<p><strong>Homepage URL</strong>: Copy output of</p>
 </li>
 </ul>
 </div>
@@ -215,7 +218,7 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Authorization Callback URL: Copy output of</p>
+<p><strong>Authorization Callback URL</strong>: Copy output of</p>
 </li>
 </ul>
 </div>
@@ -227,7 +230,7 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Webhook URL: Copy output of</p>
+<p><strong>Webhook URL</strong>: Copy output of</p>
 </li>
 </ul>
 </div>
@@ -239,22 +242,45 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Webhook secret: <code>this is my rhdh adventure</code></p>
+<p><strong>Webhook secret</strong>: <code>this is my rhdh adventure</code></p>
 </li>
 <li>
-<p>Enable Read and Write permissions to: Administration, Commit statutes, contents, dependabot alerts, deployments, pull requests, webhooks,</p>
+<p><strong>Permissions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Repository permissions</strong>: Enable <code>Read-only</code> access to: <code>Administration</code>, <code>Commit statutes</code>, <code>Contents</code>,
+<code>Dependabot alerts</code>, <code>Deployments</code>, <code>Pull Requests</code>, <code>Webhooks</code>.</p>
+</li>
+<li>
+<p><strong>Organization permissions</strong>: Enable <code>Read-Only</code> to <code>members</code> (Read-Only)</p>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use <code>Read and Write</code> permissions to enable operations from Red Hat Developer Hub into GitHub.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_by-operator">
 <div class="ulist">
 <ul>
 <li>
-<p>GitHub App name: <code>rhdh-adventure</code></p>
+<p><strong>GitHub App name</strong>: <code>rhdh-adventure</code></p>
 </li>
 <li>
-<p>Homepage URL: Copy output of</p>
+<p><strong>Homepage URL</strong>: Copy output of</p>
 </li>
 </ul>
 </div>
@@ -266,7 +292,7 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Authorization Callback URL: Copy output of</p>
+<p><strong>Authorization Callback URL</strong>: Copy output of</p>
 </li>
 </ul>
 </div>
@@ -278,7 +304,7 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Webhook URL: Copy output of</p>
+<p><strong>Webhook URL</strong>: Copy output of</p>
 </li>
 </ul>
 </div>
@@ -290,12 +316,35 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Webhook secret: <code>this is my rhdh adventure</code></p>
+<p><strong>Webhook secret</strong>: <code>this is my rhdh adventure</code></p>
 </li>
 <li>
-<p>Enable Read and Write permissions to: Administration, Commit statutes, contents, dependabot alerts, deployments,pull requests, webhooks,</p>
+<p><strong>Permissions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Repository permissions</strong>: Enable <code>Read-only</code> access to: <code>Administration</code>, <code>Commit statutes</code>, <code>Contents</code>,
+<code>Dependabot alerts</code>, <code>Deployments</code>, <code>Pull Requests</code>, <code>Webhooks</code>.</p>
+</li>
+<li>
+<p><strong>Organization permissions</strong>: Enable <code>Read-Only</code> to <code>members</code> (Read-Only)</p>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use <code>Read and Write</code> permissions to enable operations from Red Hat Developer Hub into GitHub.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -334,7 +383,7 @@ Create a PAT of GitHub user profile as:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>From the new application and PAT create a secret to store the different id, secrets, and tokens as:</p>
+<p>Using the values from the new application create a secret to store the different values as:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -370,7 +419,9 @@ type: Opaque</code></pre>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    signInPage: github
+    dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: development
       providers:
         github:
           development:
@@ -487,9 +538,17 @@ upstream:
 <div class="sect2">
 <h3 id="_enable_github_plugin_integration"><a class="anchor" href="#_enable_github_plugin_integration"></a>Enable GitHub plugin integration</h3>
 <div class="paragraph">
-<p>The GitHub integration has a special entity provider for discovering catalog entities from GitHub. The entity provider
-will crawl the GitHub instance and register entities matching the configured paths. This can be useful as an alternative
-to static locations or manually adding things to the catalog.</p>
+<p>To authenticate users, Red Hat Developer Hub requires their presence in the software catalog.
+Consider configuring Red Hat Developer Hub to autodiscovery and provisioning users from GitHub
+to the software catalog on schedule, rather than provisioning the users manually.</p>
+</div>
+<div class="paragraph">
+<p>The Red Hat Developer Hub catalog can be set up to ingest organizational data (users and groups)
+directly from GitHub. The result is a hierarchy of User and Group entities that mirrors your org setup.</p>
+</div>
+<div class="paragraph">
+<p>This feature will crawl the GitHub instance and register entities matching the configured paths.
+This can be useful as an alternative to static locations or manually adding things to the catalog.</p>
 </div>
 <div class="paragraph">
 <p>Add the following integration configuration to the <code>app-config-rhdh</code> ConfigMap:</p>
@@ -510,11 +569,7 @@ to static locations or manually adding things to the catalog.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Once we have integrated GitHub with Red Hat Developer Hub, we need to enable the autodiscovery
-capabilities of this provider. Very useful to load our catalog with repositories already created in our GitHub sever.</p>
-</div>
-<div class="paragraph">
-<p>Add the catalog definition to the <code>app-config-rhdh</code> ConfigMap:</p>
+<p>Enabling member and repository discovery add the catalog definition to the <code>app-config-rhdh</code> ConfigMap:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -545,16 +600,8 @@ catalog:
 </div>
 <div class="paragraph">
 <p>To discover users and groups, it is needed to identify the GitHub organization.
-That variable can be declared in the <code>git-secrets</code>, as the rest of GitHub configuration variables.</p>
-</div>
-<div class="paragraph">
-<p>The Red Hat Developer Hub catalog can be set up to ingest organizational data&#8201;&#8212;&#8201;users and groups&#8201;&#8212;&#8201;directly from GitHub.
-The result is a hierarchy of User and Group entities that mirrors your org setup.</p>
-</div>
-<div class="paragraph">
-<p>Once we have integrated GitHub with Red Hat Developer Hub, we need to enable the autodiscovery
-capabilities of users and groups. That requires to enable the <code>backstage-plugin-catalog-backend-module-gitlab-org-dynamic</code>
-dynamic plugin provided by Red Hat Developer Hub.</p>
+The <code>GITHUB_ORGANIZATION</code> variable can be declared in the <code>git-secrets</code>, as the rest of
+GitHub configuration variables.</p>
 </div>
 <div class="paragraph">
 <p>This example will apply the full configuration described above:</p>
@@ -565,18 +612,19 @@ dynamic plugin provided by Red Hat Developer Hub.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, we need to enable some extra dynamic plugins to setup finally the integration with GitHub:</p>
+<p>The discovery capabilities are provided by a set of dynamic plugins that we need to enable.
+The list of dynamic plugins to enable for this fully integration with GitHub is:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>backstage-plugin-catalog-backend-module-github-dynamic</p>
+<p><code>backstage-plugin-catalog-backend-module-github-dynamic</code></p>
 </li>
 <li>
-<p>backstage-plugin-catalog-backend-module-github-org-dynamic</p>
+<p><code>backstage-plugin-catalog-backend-module-github-org-dynamic</code></p>
 </li>
 <li>
-<p>backstage-plugin-scaffolder-backend-module-github-dynamic</p>
+<p><code>backstage-plugin-scaffolder-backend-module-github-dynamic</code></p>
 </li>
 </ul>
 </div>
@@ -600,8 +648,7 @@ dynamic plugin provided by Red Hat Developer Hub.</p>
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset3_by-helm-chart">
 <div class="paragraph">
-<p>The definition of the dynamic plugins is done in the <code>values.yaml</code> file in the
-<code>dynamic.plugins</code> list:</p>
+<p>The definition of the dynamic plugins is done in the <code>values.yaml</code> file in the <code>dynamic.plugins</code> list:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -1121,93 +1168,79 @@ data:
 The process is easy by adding some extra configuration and describing the RBAC rules per user or group.</p>
 </div>
 <div class="paragraph">
-<p>Create a new <code>rbac-policy.csv</code> RBAC rules file in a new ConfigMap to declare the authorization policies:</p>
+<p>Create a new <code>rbac-policies.csv</code> file in a new ConfigMap to declare the authorization policies:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: rbac-policy
-data:
-  rbac-policy.csv: |
-    # Admin Role
-    # Catalog permissions
-    #p, role:default/admins, catalog.entity.read, read, allow
-    #p, role:default/admins, catalog.entity.create, create, allow
-    #p, role:default/admins, catalog.entity.refresh, update, allow
-    #p, role:default/admins, catalog.entity.delete, delete, allow
-    #p, role:default/admins, catalog.location.read, read, allow
-    #p, role:default/admins, catalog.location.create, create, allow
-    #p, role:default/admins, catalog.location.delete, delete, allow
-    # Import permissions
-    #p, role:default/admins, bulk.import, use, allow
-    # Scaffolder permissions
-    #p, role:default/admins, scaffolder.action.execute, use, allow
-    #p, role:default/admins, scaffolder.template.parameter.read, read, allow
-    #p, role:default/admins, scaffolder.template.step.read, read, allow
-    #p, role:default/admins, scaffolder.task.create, create, allow
-    #p, role:default/admins, scaffolder.task.cancel, use, allow
-    #p, role:default/admins, scaffolder.task.read, read, allow
-    # RBAC permissions
-    #p, role:default/admins, policy.entity.read, read, allow
-    #p, role:default/admins, policy.entity.create, create, allow
-    #p, role:default/admins, policy.entity.update, update, allow
-    #p, role:default/admins, policy.entity.delete, delete, allow
-    # Kubernetes permissions
-    #p, role:default/admins, kubernetes.proxy, use, allow
-    # OCM permissions
-    #p, role:default/admins, ocm.entity.read, read, allow
-    #p, role:default/admins, ocm.cluster.read, read, allow
-    # Topology permissions
-    #p, role:default/admins, topology.view.read, read, allow
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># Catalog permissions
+p, role:default/administrators, catalog-entity, read, allow
+p, role:default/administrators, catalog.entity.read, read, allow
+p, role:default/administrators, catalog.entity.create, create, allow
+p, role:default/administrators, catalog.entity.refresh, update, allow
+p, role:default/administrators, catalog.entity.delete, delete, allow
+p, role:default/administrators, catalog.location.read, read, allow
+p, role:default/administrators, catalog.location.create, create, allow
+p, role:default/administrators, catalog.location.delete, delete, allow
+# Scaffolder permissions
+p, role:default/administrators, scaffolder-action, use, allow
+p, role:default/administrators, scaffolder.action.execute, use, allow
+p, role:default/administrators, scaffolder-template, read, allow
+p, role:default/administrators, scaffolder.template.parameter.read, read, allow
+p, role:default/administrators, scaffolder.template.step.read, read, allow
+p, role:default/administrators, scaffolder.task.create, create, allow
+p, role:default/administrators, scaffolder.task.cancel, use, allow
+p, role:default/administrators, scaffolder.task.read, read, allow
+# RBAC permissions
+p, role:default/administrators, policy.entity.read, read, allow
+p, role:default/administrators, policy.entity.create, create, allow
+p, role:default/administrators, policy.entity.update, update, allow
+p, role:default/administrators, policy.entity.delete, delete, allow
+# Kubernetes permissions
+#p, role:default/administrators, kubernetes.proxy, use, allow
+# OCM permissions
+#p, role:default/administrators, ocm.entity.read, read, allow
+#p, role:default/administrators, ocm.cluster.read, read, allow
+# Topology permissions
+#p, role:default/administrators, topology.view.read, read, allow
 
-    # Admin User
-    # this is not needed now with the new superUser setting
-    ##g, user:default/1, role:default/admins
+# My Own Admin User
+g, user:default/adminID, role:default/administrators
+g, user:default/rmarting, role:default/administrators
 
-    # Team-A Role
-    # Catalog permissions
-    #p, role:default/team-a, catalog.entity.read, read, allow
-    #p, role:default/team-a, catalog.entity.create, create, allow
-    #p, role:default/team-a, catalog.entity.refresh, update, allow
-    #p, role:default/team-a, catalog.entity.delete, delete, allow
-    #p, role:default/team-a, catalog.location.read, read, allow
-    #p, role:default/team-a, catalog.location.create, create, allow
-    #p, role:default/team-a, catalog.location.delete, delete, allow
-    # Import permissions
-    #p, role:default/team-a, bulk.import, use, allow
-    # Scaffolder permissions
-    #p, role:default/team-a, scaffolder.action.execute, use, allow
-    #p, role:default/team-a, scaffolder.template.parameter.read, read, allow
-    #p, role:default/team-a, scaffolder.template.step.read, read, allow
-    #p, role:default/team-a, scaffolder.task.create, create, allow
-    #p, role:default/team-a, scaffolder.task.cancel, use, allow
-    #p, role:default/team-a, scaffolder.task.read, read, allow
-    # RBAC permissions
-    #p, role:default/team-a, policy.entity.read, read, allow
-    #p, role:default/team-a, policy.entity.create, create, allow
-    #p, role:default/team-a, policy.entity.update, update, allow
-    #p, role:default/team-a, policy.entity.delete, delete, allow
-    # Kubernetes permissions
-    #p, role:default/team-a, kubernetes.proxy, use, allow
-    # OCM permissions
-    #p, role:default/team-a, ocm.entity.read, read, allow
-    #p, role:default/team-a, ocm.cluster.read, read, allow
-    # Topology permissions
-    #p, role:default/team-a, topology.view.read, read, allow
+# Team-A Role
+# Catalog permissions
+p, role:default/team-a, catalog.entity.read, read, allow
+p, role:default/team-a, catalog.entity.create, create, allow
+p, role:default/team-a, catalog.entity.refresh, update, allow
+p, role:default/team-a, catalog.entity.delete, delete, allow
+p, role:default/team-a, catalog.location.read, read, allow
+p, role:default/team-a, catalog.location.create, create, allow
+p, role:default/team-a, catalog.location.delete, delete, allow
+# Scaffolder permissions
+p, role:default/team-a, scaffolder.action.execute, use, allow
+p, role:default/team-a, scaffolder.template.parameter.read, read, allow
+p, role:default/team-a, scaffolder.template.step.read, read, allow
+p, role:default/team-a, scaffolder.task.create, create, allow
+p, role:default/team-a, scaffolder.task.cancel, use, allow
+p, role:default/team-a, scaffolder.task.read, read, allow
+# Kubernetes permissions
+#p, role:default/team-a, kubernetes.proxy, use, allow
+# OCM permissions
+#p, role:default/team-a, ocm.entity.read, read, allow
+#p, role:default/team-a, ocm.cluster.read, read, allow
+# Topology permissions
+#p, role:default/team-a, topology.view.read, read, allow
 
-    # Team-B Role
-    #p, role:default/team-b, catalog.entity.read, read, deny
+# Team-B Role
+p, role:default/team-b, catalog.entity.read, read, deny
 
-    # Groups
-    #g, group:default/team-a, role:default/team-a
-    #g, group:default/team-b, role:default/team-b
+# Groups
+g, group:default/team-a, role:default/team-a
+g, group:default/team-b, role:default/team-b
 
-    # Users - Required until the GitLab resolvers match properly the users
-    #g, user:default/2, role:default/team-a
-    #g, user:default/3, role:default/team-b</code></pre>
+# Users
+#g, user:default/&lt;user-team-a&gt;, role:default/team-a
+#g, user:default/&lt;user-team-b&gt;, role:default/team-b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1215,7 +1248,7 @@ data:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rbac-policy-configmap-gitlab.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create configmap rbac-policies --from-file=./documentation/modules/ROOT/examples/challenge-03/rbac-policies.csv</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1228,13 +1261,26 @@ data:
   rbac:
     admin:
       users:
-        - name: user:default/1
-    policies-csv-file: /opt/app-root/src/rbac-policy.csv
+        - name: user:default/adminID
+    policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+    policyFileReload: true
     pluginsWithPermission:
       - catalog
       - scaffolder
       - permission</code></pre>
 </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Declare one user of your organization as the default administrator. Replace <code>&lt;admin-id&gt;</code> with a valid value.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Apply the configuration for the right Git server:</p>
@@ -1314,11 +1360,18 @@ it must to enable it.</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">upstream:
   backstage:
-    extraAppConfig:
-      - configMapRef: rhdh-app-config
-        filename: rhdh-app-config.yaml
-      - configMapRef: rbac-policy
-        filename: rbac-policy.csv</code></pre>
+    # Other Configuration
+    extraVolumeMounts:
+      - mountPath: /opt/app-root/src/dynamic-plugins-root
+        name: dynamic-plugins-root
+      - mountPath: /opt/app-root/src/rbac # Mounting point for RBAC policies
+        name: rbac-policies
+    extraVolumes:
+      # Other volumes created by the Helm Chart
+      - configMap:
+          defaultMode: 420
+          name: rbac-policies
+        name: rbac-policies</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1389,28 +1442,14 @@ data:
 </div>
 </div>
 <div class="paragraph">
-<p>Test and verify with different users the privileges created</p>
+<p>Logout and login again using the declared policy administrator account. If RBAC is enabled, the
+administrator will have the <code>RBAC</code> option inside the <code>Administration</code> menu:</p>
 </div>
 <div class="paragraph">
-<p>There is a dynamic plugin to allow manage the RBAC rules directly in the UI. This plugin is added in the list of the dynamic plugins
-to add into Red Hat Developer Hub.</p>
+<p>This menu allows to manage the RBAC rules directly in the UI.</p>
 </div>
 <div class="paragraph">
-<p>Open an incognito window, or just logout, and login with <code>user2</code> (password: <code>@abc1cde2</code>) to confirm
-that the component <code>sample-service</code> is not accessible on the <code>Catalog</code> page. You can check that
-the <code>user1</code> can still access to that component successfully.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you login with the <code>root</code> user, you will be able to edit the RBAC policies from the <code>Administration</code> page.
-</td>
-</tr>
-</table>
+<p>Login with different users to verify the rules applied per user or group.</p>
 </div>
 </div>
 </div>
