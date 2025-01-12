@@ -1,6 +1,5 @@
 = Welcome to Red Hat Developer Hub Adventure
 :page-layout: home
-:!sectids:
 
 [.text-center.strong]
 == A DevEx adventure from Zero to Hero

@@ -34,6 +34,9 @@ If you do not have a Red Hat OpenShift Container Platform, you can request one a
 link:https://catalog.demo.redhat.com/catalog[Red Hat Demo Platform] system. From the catalog of options the
 link:https://catalog.demo.redhat.com/catalog?search=openshift&item=babylon-catalog-prod%2Fsandboxes-gpte.ocp-wksp.prod[Red Hat OpenShift Container Platform Cluster (AWS)] is the most suitable for this.
 
+Another option is the usage of an instance of Developer Sandbox for Red Hat OpenShift. If you are interested,
+please, follow the instructions described xref:01-setup-sandbox.adoc[here].
+
 Once you have your Red Hat OpenShift Container Platform instance ready, the following instructions must be done
 with a user with `cluster-admin` privileges. This is because a set of OpenShift Operators will be installed.
 
@@ -50,6 +53,7 @@ oc get csv -n cert-manager-operator
 
 It the output is similar to, then it is not needed to install it.
 
+[.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
 NAME                            DISPLAY                                       VERSION   REPLACES                        PHASE
@@ -86,11 +90,14 @@ oc apply -f ./documentation/modules/ROOT/examples/setup/rhdh-operator.yaml
 
 The operator is installed in the `rhdh-operator` namespace:
 
-```sh
+[.console-output]
+[source, bash, subs="+macros,+attributes"]
+----
 on 🎩 ❯ oc get csv -n rhdh-operator
 NAME                   DISPLAY                          VERSION   REPLACES               PHASE
 rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.1   Succeeded
-```
+----
+
 [#ocpsetup-gitlab]
 === Install GitLab
 
@@ -110,6 +117,7 @@ oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-operator.yaml
 
 This operator will be installed in the `gitlab-system` namespace:
 
+[.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
 on 🎩 ❯ oc get csv -n gitlab-system
@@ -181,6 +189,7 @@ In that case, execute the script with the `--ssl_certs_self_signed=y` argument.
 
 This script will do the following:
 
+[.console-output]
 [source, text, subs="+macros,+attributes"]
 ----
 Create two groups:
@@ -212,6 +221,7 @@ oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-runner-operator.y
 
 To test the installation
 
+[.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
 on 🎩 ❯ oc get csv -n gitlab-system

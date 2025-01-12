@@ -1,0 +1,15 @@
+include::_attributes.adoc[]
+
+[#sandbox]
+== Developer Sandbox for Red Hat OpenShift
+[WARNING]
+====
+The usage of Developer Sandbox for Red Hat OpenShift is suitable only for the following options
+of the adventure:
+
+* Red Hat Developer Hub operated by Helm Chart
+* Unable to install any other operator
+* Unable to install a local GitLab instance
+====
+
+include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/refs/heads/main/sandbox.adoc[]
