@@ -1,0 +1,69 @@
+# Catalog permissions
+p, role:default/administrators, catalog-entity, read, allow
+p, role:default/administrators, catalog.entity.read, read, allow
+p, role:default/administrators, catalog.entity.create, create, allow
+p, role:default/administrators, catalog.entity.refresh, update, allow
+p, role:default/administrators, catalog.entity.delete, delete, allow
+p, role:default/administrators, catalog.location.read, read, allow
+p, role:default/administrators, catalog.location.create, create, allow
+p, role:default/administrators, catalog.location.delete, delete, allow
+# Scaffolder permissions
+p, role:default/administrators, scaffolder-action, use, allow
+p, role:default/administrators, scaffolder.action.execute, use, allow
+p, role:default/administrators, scaffolder-template, read, allow
+p, role:default/administrators, scaffolder.template.parameter.read, read, allow
+p, role:default/administrators, scaffolder.template.step.read, read, allow
+p, role:default/administrators, scaffolder.task.create, create, allow
+p, role:default/administrators, scaffolder.task.cancel, use, allow
+p, role:default/administrators, scaffolder.task.read, read, allow
+# RBAC permissions
+p, role:default/administrators, policy.entity.read, read, allow
+p, role:default/administrators, policy.entity.create, create, allow
+p, role:default/administrators, policy.entity.update, update, allow
+p, role:default/administrators, policy.entity.delete, delete, allow
+# Kubernetes permissions
+#p, role:default/administrators, kubernetes.proxy, use, allow
+# OCM permissions
+#p, role:default/administrators, ocm.entity.read, read, allow
+#p, role:default/administrators, ocm.cluster.read, read, allow
+# Topology permissions
+#p, role:default/administrators, topology.view.read, read, allow
+
+# My Own Admin User
+g, user:default/adminID, role:default/administrators
+g, user:default/rmarting, role:default/administrators
+
+# Team-A Role
+# Catalog permissions
+p, role:default/team-a, catalog.entity.read, read, allow
+p, role:default/team-a, catalog.entity.create, create, allow
+p, role:default/team-a, catalog.entity.refresh, update, allow
+p, role:default/team-a, catalog.entity.delete, delete, allow
+p, role:default/team-a, catalog.location.read, read, allow
+p, role:default/team-a, catalog.location.create, create, allow
+p, role:default/team-a, catalog.location.delete, delete, allow
+# Scaffolder permissions
+p, role:default/team-a, scaffolder.action.execute, use, allow
+p, role:default/team-a, scaffolder.template.parameter.read, read, allow
+p, role:default/team-a, scaffolder.template.step.read, read, allow
+p, role:default/team-a, scaffolder.task.create, create, allow
+p, role:default/team-a, scaffolder.task.cancel, use, allow
+p, role:default/team-a, scaffolder.task.read, read, allow
+# Kubernetes permissions
+#p, role:default/team-a, kubernetes.proxy, use, allow
+# OCM permissions
+#p, role:default/team-a, ocm.entity.read, read, allow
+#p, role:default/team-a, ocm.cluster.read, read, allow
+# Topology permissions
+#p, role:default/team-a, topology.view.read, read, allow
+
+# Team-B Role
+p, role:default/team-b, catalog.entity.read, read, deny
+
+# Groups
+g, group:default/team-a, role:default/team-a
+g, group:default/team-b, role:default/team-b
+
+# Users
+#g, user:default/<user-team-a>, role:default/team-a
+#g, user:default/<user-team-b>, role:default/team-b

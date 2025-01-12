@@ -24,8 +24,9 @@ data:
 
     # Authorization GitHub
     signInPage: github
-    dangerouslyAllowSignInWithoutUserInCatalog: true
+    dangerouslyAllowSignInWithoutUserInCatalog: false
     auth:
+      environment: development
       providers:
         github:
           development:
@@ -52,9 +53,6 @@ data:
         github:
           providerId:
             organization: ${GITHUB_ORGANIZATION}
-            filters:
-              branch: 'main'
-              repository: '.*'
             schedule:
               frequency:
                 minutes: 30

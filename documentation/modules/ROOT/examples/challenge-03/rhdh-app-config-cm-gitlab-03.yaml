@@ -26,6 +26,7 @@ data:
     signInPage: gitlab
     dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: development
       providers:
         gitlab:
           development:
@@ -70,8 +71,9 @@ data:
       rbac:
         admin:
           users:
-            - name: user:default/1
-        policies-csv-file: /opt/app-root/src/rbac-policy.csv
+            - name: user:default/adminID
+            - name: user:default/rmarting
+        policies-csv-file: /opt/app-root/src/rbac/rbac-policy.csv
         pluginsWithPermission:
           - catalog
           - scaffolder

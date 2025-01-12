@@ -18,6 +18,8 @@ in the future. Let' 's dive in together! 🧞🚀
 Enabling GitHub authentication requires to create a GitHub application. This process  is described
 link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/authentication/authenticating-with-github#enabling-authentication-with-github[here]
 
+To enable discovery, then you need to use a GitHub organization
+
 The following steps will depend of the mechanism used to operate Red Hat Developer Hub:
 
 [tabs]
@@ -25,52 +27,62 @@ The following steps will depend of the mechanism used to operate Red Hat Develop
 By Helm Chart::
 +
 --
-- GitHub App name: `rhdh-adventure`
-- Homepage URL: Copy output of
+- **GitHub App name**: `rhdh-adventure`
+- **Homepage URL**: Copy output of
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://$(oc get route rhdh-developer-hub -o jsonpath='{.spec.host}')
 ----
-- Authorization Callback URL: Copy output of
+- **Authorization Callback URL**: Copy output of
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://rhdh-developer-hub-$(oc project -q).${basedomain}/api/auth/github/handler/frame
 ----
-- Webhook URL: Copy output of
+- **Webhook URL**: Copy output of
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://$(oc get route rhdh-developer-hub -o jsonpath='{.spec.host}')
 ----
-- Webhook secret: `this is my rhdh adventure`
-- Enable Read and Write permissions to: Administration, Commit statutes, contents, dependabot alerts, deployments, pull requests, webhooks,
+- **Webhook secret**: `this is my rhdh adventure`
+- **Permissions**:
+    * **Repository permissions**: Enable `Read-only` access to: `Administration`, `Commit statutes`, `Contents`,
+    `Dependabot alerts`, `Deployments`, `Pull Requests`, `Webhooks`.
+    * **Organization permissions**: Enable `Read-Only` to `members` (Read-Only)
+
+TIP: Use `Read and Write` permissions to enable operations from Red Hat Developer Hub into GitHub.
 --
 By Operator::
 +
 --
-- GitHub App name: `rhdh-adventure`
-- Homepage URL: Copy output of
+- **GitHub App name**: `rhdh-adventure`
+- **Homepage URL**: Copy output of
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://$(oc get route backstage-rhdh -o jsonpath='{.spec.host}')
 ----
-- Authorization Callback URL: Copy output of
+- **Authorization Callback URL**: Copy output of
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://backstage-rhdh-$(oc project -q).${basedomain}/api/auth/github/handler/frame
 ----
-- Webhook URL: Copy output of
+- **Webhook URL**: Copy output of
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 echo https://$(oc get route backstage-rhdh -o jsonpath='{.spec.host}')
 ----
-- Webhook secret: `this is my rhdh adventure`
-- Enable Read and Write permissions to: Administration, Commit statutes, contents, dependabot alerts, deployments,pull requests, webhooks,
+- **Webhook secret**: `this is my rhdh adventure`
+- **Permissions**:
+    * **Repository permissions**: Enable `Read-only` access to: `Administration`, `Commit statutes`, `Contents`,
+    `Dependabot alerts`, `Deployments`, `Pull Requests`, `Webhooks`.
+    * **Organization permissions**: Enable `Read-Only` to `members` (Read-Only)
+
+TIP: Use `Read and Write` permissions to enable operations from Red Hat Developer Hub into GitHub.
 --
 ====
 
@@ -85,7 +97,7 @@ Create a PAT of GitHub user profile as:
     * Publishing software templates: `repo`
     * `workflow` (if templates include GitHub workflows)
 
-From the new application and PAT create a secret to store the different id, secrets, and tokens as:
+Using the values from the new application create a secret to store the different values as:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
@@ -107,7 +119,9 @@ Modify `rhdh-app-config` section of the `rhdh-app-config` ConfigMap with environ
 [source, yaml, subs="+macros,+attributes"]
 ----
     signInPage: github
+    dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: development
       providers:
         github:
           development:
@@ -193,9 +207,15 @@ Verify that you can log in with a GitHub user.
 
 === Enable GitHub plugin integration
 
-The GitHub integration has a special entity provider for discovering catalog entities from GitHub. The entity provider
-will crawl the GitHub instance and register entities matching the configured paths. This can be useful as an alternative
-to static locations or manually adding things to the catalog.
+To authenticate users, Red Hat Developer Hub requires their presence in the software catalog.
+Consider configuring Red Hat Developer Hub to autodiscovery and provisioning users from GitHub
+to the software catalog on schedule, rather than provisioning the users manually.
+
+The Red Hat Developer Hub catalog can be set up to ingest organizational data (users and groups)
+directly from GitHub. The result is a hierarchy of User and Group entities that mirrors your org setup.
+
+This feature will crawl the GitHub instance and register entities matching the configured paths.
+This can be useful as an alternative to static locations or manually adding things to the catalog.
 
 Add the following integration configuration to the `app-config-rhdh` ConfigMap:
 
@@ -215,10 +235,7 @@ Add the following integration configuration to the `app-config-rhdh` ConfigMap:
                 ${AUTH_GITHUB_PRIVATE_KEY_FILE}
 ----
 
-Once we have integrated GitHub with Red Hat Developer Hub, we need to enable the autodiscovery
-capabilities of this provider. Very useful to load our catalog with repositories already created in our GitHub sever.
-
-Add the catalog definition to the `app-config-rhdh` ConfigMap:
+Enabling member and repository discovery add the catalog definition to the `app-config-rhdh` ConfigMap:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
@@ -249,14 +266,8 @@ catalog:
 ----
 
 To discover users and groups, it is needed to identify the GitHub organization.
-That variable can be declared in the `git-secrets`, as the rest of GitHub configuration variables.
-
-The Red Hat Developer Hub catalog can be set up to ingest organizational data -- users and groups -- directly from GitHub.
-The result is a hierarchy of User and Group entities that mirrors your org setup.
-
-Once we have integrated GitHub with Red Hat Developer Hub, we need to enable the autodiscovery
-capabilities of users and groups. That requires to enable the `backstage-plugin-catalog-backend-module-gitlab-org-dynamic`
-dynamic plugin provided by Red Hat Developer Hub.
+The `GITHUB_ORGANIZATION` variable can be declared in the `git-secrets`, as the rest of
+GitHub configuration variables.
 
 This example will apply the full configuration described above:
 
@@ -266,11 +277,12 @@ This example will apply the full configuration described above:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-02.yaml
 ----
 
-Finally, we need to enable some extra dynamic plugins to setup finally the integration with GitHub:
+The discovery capabilities are provided by a set of dynamic plugins that we need to enable.
+The list of dynamic plugins to enable for this fully integration with GitHub is:
 
-* backstage-plugin-catalog-backend-module-github-dynamic
-* backstage-plugin-catalog-backend-module-github-org-dynamic
-* backstage-plugin-scaffolder-backend-module-github-dynamic
+* `backstage-plugin-catalog-backend-module-github-dynamic`
+* `backstage-plugin-catalog-backend-module-github-org-dynamic`
+* `backstage-plugin-scaffolder-backend-module-github-dynamic`
 
 More information about Dynamic Plugins link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/introduction_to_plugins/index[here].
 
@@ -281,8 +293,7 @@ The following steps will depend of the mechanism used to operate Red Hat Develop
 By Helm Chart::
 +
 --
-The definition of the dynamic plugins is done in the `values.yaml` file in the
-`dynamic.plugins` list:
+The definition of the dynamic plugins is done in the `values.yaml` file in the `dynamic.plugins` list:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
@@ -668,12 +679,12 @@ Red Hat Developer Hub is fully integrated with GitLab for authentication and dis
 After authentication is working, we can enable authorization policies using the RBAC capabilities of Red Hat Developer Hub.
 The process is easy by adding some extra configuration and describing the RBAC rules per user or group.
 
-Create a new `rbac-policy.csv` RBAC rules file in a new ConfigMap to declare the authorization policies:
+Create a new `rbac-policies.csv` file in a new ConfigMap to declare the authorization policies:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-include::example$challenge-03/rbac-policy-configmap-gitlab.yaml[]
+include::example$challenge-03/rbac-policies.csv[]
 ----
 
 This command will create the example:
@@ -681,7 +692,7 @@ This command will create the example:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rbac-policy-configmap-gitlab.yaml
+oc create configmap rbac-policies --from-file=./documentation/modules/ROOT/examples/challenge-03/rbac-policies.csv
 ----
 
 Declare the policies file as part of the configuration inside the `app-config-rhdh` ConfigMap:
@@ -694,13 +705,16 @@ permission:
   rbac:
     admin:
       users:
-        - name: user:default/1
-    policies-csv-file: /opt/app-root/src/rbac-policy.csv
+        - name: user:default/adminID
+    policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+    policyFileReload: true
     pluginsWithPermission:
       - catalog
       - scaffolder
       - permission
 ----
+
+TIP: Declare one user of your organization as the default administrator. Replace `<admin-id>` with a valid value.
 
 Apply the configuration for the right Git server:
 
@@ -765,11 +779,18 @@ Mount the policies file in the Helm Chart configuration as another extra configu
 ----
 upstream:
   backstage:
-    extraAppConfig:
-      - configMapRef: rhdh-app-config
-        filename: rhdh-app-config.yaml
-      - configMapRef: rbac-policy
-        filename: rbac-policy.csv
+    # Other Configuration
+    extraVolumeMounts:
+      - mountPath: /opt/app-root/src/dynamic-plugins-root
+        name: dynamic-plugins-root
+      - mountPath: /opt/app-root/src/rbac # Mounting point for RBAC policies
+        name: rbac-policies
+    extraVolumes:
+      # Other volumes created by the Helm Chart
+      - configMap:
+          defaultMode: 420
+          name: rbac-policies
+        name: rbac-policies
 ----
 
 To apply this configuration for GitHub use this command:
@@ -839,13 +860,10 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-03.
 --
 ====
 
-Test and verify with different users the privileges created
+Logout and login again using the declared policy administrator account. If RBAC is enabled, the
+administrator will have the `RBAC` option inside the `Administration` menu:
 
-There is a dynamic plugin to allow manage the RBAC rules directly in the UI. This plugin is added in the list of the dynamic plugins
-to add into Red Hat Developer Hub.
 
-Open an incognito window, or just logout, and login with `user2` (password: `@abc1cde2`) to confirm
-that the component `sample-service` is not accessible on the `Catalog` page. You can check that
-the `user1` can still access to that component successfully.
+This menu allows to manage the RBAC rules directly in the UI.
 
-TIP: If you login with the `root` user, you will be able to edit the RBAC policies from the `Administration` page.
+Login with different users to verify the rules applied per user or group.

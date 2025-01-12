@@ -24,8 +24,9 @@ data:
 
     # Authorization GitHub
     signInPage: github
-    dangerouslyAllowSignInWithoutUserInCatalog: true
+    dangerouslyAllowSignInWithoutUserInCatalog: false
     auth:
+      environment: development
       providers:
         github:
           development:
@@ -52,9 +53,6 @@ data:
         github:
           providerId:
             organization: ${GITHUB_ORGANIZATION}
-            filters:
-              branch: 'main'
-              repository: '.*'
             schedule:
               frequency:
                 minutes: 30
@@ -62,6 +60,16 @@ data:
                 seconds: 15
               timeout:
                 minutes: 15
+        githubOrg:
+          githubUrl: "https://github.com"
+          orgs: [ "${GITHUB_ORGANIZATION}" ]
+          schedule:
+            frequency:
+              minutes: 30
+            initialDelay:
+              seconds: 15
+            timeout:
+              minutes: 15
 
     # RBAC
     permission:
@@ -69,8 +77,10 @@ data:
       rbac:
         admin:
           users:
-            - name: user:default/1
-        policies-csv-file: /opt/app-root/src/rbac-policy.csv
+            - name: user:default/adminID
+            - name: user:default/rmarting
+        policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        policyFileReload: true
         pluginsWithPermission:
           - catalog
           - scaffolder

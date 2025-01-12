@@ -26,6 +26,7 @@ data:
     signInPage: github
     dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: development
       providers:
         github:
           development:

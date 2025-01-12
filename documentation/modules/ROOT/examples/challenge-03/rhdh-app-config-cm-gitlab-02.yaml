@@ -26,6 +26,7 @@ data:
     signInPage: gitlab
     dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: development
       providers:
         gitlab:
           development:
