@@ -252,7 +252,7 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <code>Dependabot alerts</code>, <code>Deployments</code>, <code>Pull Requests</code>, <code>Webhooks</code>.</p>
 </li>
 <li>
-<p><strong>Organization permissions</strong>: Enable <code>Read-Only</code> to <code>members</code> (Read-Only)</p>
+<p><strong>Organization permissions</strong>: Enable <code>Read-Only</code> to <code>members</code></p>
 </li>
 </ul>
 </div>
@@ -326,7 +326,7 @@ Use <code>Read and Write</code> permissions to enable operations from Red Hat De
 <code>Dependabot alerts</code>, <code>Deployments</code>, <code>Pull Requests</code>, <code>Webhooks</code>.</p>
 </li>
 <li>
-<p><strong>Organization permissions</strong>: Enable <code>Read-Only</code> to <code>members</code> (Read-Only)</p>
+<p><strong>Organization permissions</strong>: Enable <code>Read-Only</code> to <code>members</code></p>
 </li>
 </ul>
 </div>
@@ -433,7 +433,9 @@ type: Opaque</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-01.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-01.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -607,7 +609,9 @@ GitHub configuration variables.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-02.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-02.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -683,7 +687,22 @@ The list of dynamic plugins to enable for this fully integration with GitHub is:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">Unresolved include directive in modules/ROOT/pages/challenge-03-solution.adoc - include::example$challenge-03/rhdh-dynamic-plugins-cm-gitub-01.yaml[]</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-dynamic-plugins
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -846,7 +865,9 @@ type: Opaque</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-01.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-01.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1028,7 +1049,9 @@ dynamic plugin provided by Red Hat Developer Hub.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-02.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-02.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1276,7 +1299,7 @@ g, group:default/team-b, role:default/team-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Declare one user of your organization as the default administrator. Replace <code>&lt;admin-id&gt;</code> with a valid value.
+Declare one user of your organization as the default administrator. Replace <code>adminID</code> with a valid value.
 </td>
 </tr>
 </table>
@@ -1299,14 +1322,18 @@ Declare one user of your organization as the default administrator. Replace <cod
 <div class="tab-pane" aria-labelledby="tabset7_github">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-03.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-03.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset7_gitlab">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-03.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-03.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 </div>
@@ -1418,19 +1445,27 @@ data:
 </div>
 </div>
 <div class="paragraph">
+<p>Apply the new list of dynamic plugins:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-dynamic-plugins-cm-github-02.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Mount the policies file in the <code>Backstage</code> manifests as:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    extraFiles:
-      mountPath: /opt/app-root/src
+      mountPath: /opt/app-root/src/rbac
       configMaps:
-        - name: rbac-policy
-          key: rbac-policy.csv</code></pre>
+        - name: rbac-policies
+          key: rbac-policies.csv</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This command will update the Backstage definition</p>
+<p>This command will update the Backstage definition:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -1443,6 +1478,11 @@ data:
 <div class="paragraph">
 <p>Logout and login again using the declared policy administrator account. If RBAC is enabled, the
 administrator will have the <code>RBAC</code> option inside the <code>Administration</code> menu:</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="challenge-03/rhdh-rbac.png" alt="RBAC management from UI">
+</div>
 </div>
 <div class="paragraph">
 <p>This menu allows to manage the RBAC rules directly in the UI.</p>

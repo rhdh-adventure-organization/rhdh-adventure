@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>🧞🧾 Onboard my new app :: Red Hat Developer Hub Adventure</title>
+    <title>🧞🧾 Onboard my new app Solution :: Red Hat Developer Hub Adventure</title>
     <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/challenge-05-solution.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -151,14 +151,14 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="challenge-05-solution.html">🧞🧾 Onboard my new app</a></li>
+    <li><a href="challenge-05-solution.html">🧞🧾 Onboard my new app Solution</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-05-solution.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">🧞🧾 Onboard my new app</h1>
+<h1 class="page">🧞🧾 Onboard my new app Solution</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -254,7 +254,9 @@ This is the configuration to add in the <code>app-config-rhdh</code> ConfigMap:<
 <div class="tab-pane" aria-labelledby="tabset2_github">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -270,7 +272,9 @@ to rollout the deployment.</p>
 <div class="tab-pane" aria-labelledby="tabset2_gitlab">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">

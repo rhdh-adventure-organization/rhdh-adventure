@@ -183,6 +183,68 @@ such as <code>ConfigMaps</code> and <code>Secrets</code>. Those resources can be
 the instance completely.</p>
 </div>
 <div class="paragraph">
+<p>There are multiple values to customize Red Hat Developer Hub, such as the base URL. The base URL
+of Red Hat Developer Hub is important to allow external connections and integrations (e.g: GitHub, or GitLab).
+We will create two environment variables to identify the full url to our Red Hat Developer Hub:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>basedomain</code> - Represents the base url of our Red Hat OpenShift cluster.</p>
+</li>
+<li>
+<p><code>rhdhname</code> - Represent the name of Red Hat Developer Hub exposed on Red Hat OpenShift cluster.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To get the <code>basedomain</code> execute this command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export basedomain=$(oc whoami --show-console | sed -E 's~https?://console-openshift-console\.apps\.(.*)~apps.\1~')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Getting the <code>rhdh-name</code> depends of the type of installation:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset1_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_by-helm-chart">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export rhdhname=rhdh-developer-hub-$(oc project -q)</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_by-operator">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export rhdhname=backstage-rhdh-$(oc project -q)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The base URL of Red Hat Developer Hub will be similar to:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a></code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>This solution will use a <code>ConfigMap</code> identified as <code>rhdh-app-config</code> to extend the default configuration
 applied during the installation. Here a simple use case:</p>
 </div>
@@ -195,8 +257,14 @@ metadata:
   name: rhdh-app-config
 data:
   rhdh-app-config.yaml: |
+    backend:
+      baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
+      cors:
+        origin: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
     organization:
-      name: "My Organization"</code></pre>
+      name: "My Organization"
+    app:
+      baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -222,7 +290,7 @@ stringData:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">envsubst &lt; ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml | oc apply -f -
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-secrets-secret.yaml</code></pre>
 </div>
 </div>
@@ -264,15 +332,15 @@ and <code>rhdh-by-operator</code> namespace for an instance managed by the Opera
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset1_by-helm-chart"></a>By Helm Chart</p>
+<p><a id="tabset2_by-helm-chart"></a>By Helm Chart</p>
 </li>
 <li>
-<p><a id="tabset1_by-operator"></a>By Operator</p>
+<p><a id="tabset2_by-operator"></a>By Operator</p>
 </li>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_by-helm-chart">
+<div class="tab-pane" aria-labelledby="tabset2_by-helm-chart">
 <div class="paragraph">
 <p>Red Hat Developer Hub Helm Chart provides an extension to declare extra configuration by ConfigMap and Secrets.
 The definition of the resources described above will be applying the next configuration into the <code>values.yaml</code> file.
@@ -303,7 +371,7 @@ upstream:
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset1_by-operator">
+<div class="tab-pane" aria-labelledby="tabset2_by-operator">
 <div class="paragraph">
 <p>The Backstage CRD provides an extension to declare extra configuration by ConfigMap and Secrets.
 Here an example of that configuration:</p>
@@ -386,9 +454,14 @@ metadata:
   name: rhdh-app-config
 data:
   rhdh-app-config.yaml: |
+    backend:
+      baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
+      cors:
+        origin: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
     organization:
       name: "My Organization"
     app:
+      baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
       title: "My Adventure with Red Hat Developer Hub"</code></pre>
 </div>
 </div>
@@ -397,7 +470,7 @@ data:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">envsubst &lt; ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="admonitionblock important">
@@ -490,9 +563,14 @@ metadata:
   name: rhdh-app-config
 data:
   rhdh-app-config.yaml: |
+    backend:
+      baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
+      cors:
+        origin: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
     organization:
       name: "My Organization"
     app:
+      baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a>
       title: "My Adventure with Red Hat Developer Hub"
       branding:
         theme:
@@ -513,7 +591,7 @@ data:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">envsubst &lt; ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="admonitionblock important">
