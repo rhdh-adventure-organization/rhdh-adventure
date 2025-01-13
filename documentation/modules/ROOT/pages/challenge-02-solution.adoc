@@ -18,6 +18,53 @@ and extended making hard its maintenance. There is a proper way to customize it 
 such as `ConfigMaps` and `Secrets`. Those resources can be added to the default configuration to set up
 the instance completely.
 
+There are multiple values to customize Red Hat Developer Hub, such as the base URL. The base URL
+of Red Hat Developer Hub is important to allow external connections and integrations (e.g: GitHub, or GitLab).
+We will create two environment variables to identify the full url to our Red Hat Developer Hub:
+
+* `basedomain` - Represents the base url of our Red Hat OpenShift cluster.
+* `rhdhname` - Represent the name of Red Hat Developer Hub exposed on Red Hat OpenShift cluster.
+
+To get the `basedomain` execute this command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+export basedomain=$(oc whoami --show-console | sed -E 's~https?://console-openshift-console\.apps\.(.*)~apps.\1~')
+----
+
+Getting the `rhdh-name` depends of the type of installation:
+
+[tabs]
+====
+By Helm Chart::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+export rhdhname=rhdh-developer-hub-$(oc project -q)
+----
+--
+By Operator::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+export rhdhname=backstage-rhdh-$(oc project -q)
+----
+--
+====
+
+The base URL of Red Hat Developer Hub will be similar to:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+echo https://$rhdhname.$basedomain
+----
+
 This solution will use a `ConfigMap` identified as `rhdh-app-config` to extend the default configuration
 applied during the installation. Here a simple use case:
 
@@ -43,7 +90,7 @@ We can apply it using the `oc` command as:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml
+envsubst < ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-01.yaml | oc apply -f -
 oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-secrets-secret.yaml
 ----
 
@@ -145,7 +192,7 @@ Applying the new configuration by updating the ConfigMap:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml
+envsubst < ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-02.yaml | oc apply -f -
 ----
 
 [IMPORTANT]
@@ -224,7 +271,7 @@ Applying the new configuration by updating the ConfigMap:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml
+envsubst < ./documentation/modules/ROOT/examples/challenge-02/rhdh-app-config-cm-03.yaml | oc apply -f -
 ----
 
 [IMPORTANT]

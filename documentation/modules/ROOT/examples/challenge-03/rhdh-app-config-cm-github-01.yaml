@@ -5,9 +5,14 @@ metadata:
   name: rhdh-app-config
 data:
   rhdh-app-config.yaml: |
+    backend:
+      baseUrl: https://$rhdhname.$basedomain
+      cors:
+        origin: https://$rhdhname.$basedomain
     organization:
       name: "My Organization"
     app:
+      baseUrl: https://$rhdhname.$basedomain
       title: "My Adventure with Red Hat Developer Hub"
       branding:
         theme:
@@ -26,9 +31,9 @@ data:
     signInPage: github
     dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
-      environment: development
+      environment: production
       providers:
         github:
-          development:
+          production:
             clientId: ${AUTH_GITHUB_CLIENT_ID}
             clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}

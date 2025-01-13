@@ -48,7 +48,7 @@ echo https://$(oc get route rhdh-developer-hub -o jsonpath='{.spec.host}')
 - **Permissions**:
     * **Repository permissions**: Enable `Read-only` access to: `Administration`, `Commit statutes`, `Contents`,
     `Dependabot alerts`, `Deployments`, `Pull Requests`, `Webhooks`.
-    * **Organization permissions**: Enable `Read-Only` to `members` (Read-Only)
+    * **Organization permissions**: Enable `Read-Only` to `members`
 
 TIP: Use `Read and Write` permissions to enable operations from Red Hat Developer Hub into GitHub.
 --
@@ -78,7 +78,7 @@ echo https://$(oc get route backstage-rhdh -o jsonpath='{.spec.host}')
 - **Permissions**:
     * **Repository permissions**: Enable `Read-only` access to: `Administration`, `Commit statutes`, `Contents`,
     `Dependabot alerts`, `Deployments`, `Pull Requests`, `Webhooks`.
-    * **Organization permissions**: Enable `Read-Only` to `members` (Read-Only)
+    * **Organization permissions**: Enable `Read-Only` to `members`
 
 TIP: Use `Read and Write` permissions to enable operations from Red Hat Developer Hub into GitHub.
 --
@@ -132,7 +132,9 @@ This sample configuration can help:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-01.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-01.yaml | oc apply -f -
 ----
 
 NOTE: Notice that we set the `signInPage` to `github`, the default is `github`.
@@ -272,7 +274,9 @@ This example will apply the full configuration described above:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-02.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-02.yaml | oc apply -f -
 ----
 
 The discovery capabilities are provided by a set of dynamic plugins that we need to enable.
@@ -329,7 +333,7 @@ To facilitate the management of the different dynamic plugins, we create the `rh
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-include::example$challenge-03/rhdh-dynamic-plugins-cm-gitub-01.yaml[]
+include::example$challenge-03/rhdh-dynamic-plugins-cm-github-01.yaml[]
 ----
 
 This command will apply this sample configuration:
@@ -433,7 +437,9 @@ This sample configuration can help:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-01.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-01.yaml | oc apply -f -
 ----
 
 NOTE: Notice that we set the `signInPage` to `gitlab`, the default is `github`.
@@ -581,7 +587,9 @@ This example will apply the full configuration described above:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-02.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-02.yaml | oc apply -f -
 ----
 
 Finally, we need to enable some extra dynamic plugins to setup finally the integration with GitLab:
@@ -712,7 +720,7 @@ permission:
       - permission
 ----
 
-TIP: Declare one user of your organization as the default administrator. Replace `<admin-id>` with a valid value.
+TIP: Declare one user of your organization as the default administrator. Replace `adminID` with a valid value.
 
 Apply the configuration for the right Git server:
 
@@ -724,7 +732,9 @@ GitHub::
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-03.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-github-03.yaml | oc apply -f -
 ----
 --
 GitLab::
@@ -733,7 +743,9 @@ GitLab::
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-03.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-03/rhdh-app-config-cm-gitlab-03.yaml | oc apply -f -
 ----
 --
 ====
@@ -836,19 +848,27 @@ data:
         disabled: false
 ----
 
+Apply the new list of dynamic plugins:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-dynamic-plugins-cm-github-02.yaml
+----
+
 Mount the policies file in the `Backstage` manifests as:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
     extraFiles:
-      mountPath: /opt/app-root/src
+      mountPath: /opt/app-root/src/rbac
       configMaps:
-        - name: rbac-policy
-          key: rbac-policy.csv
+        - name: rbac-policies
+          key: rbac-policies.csv
 ----
 
-This command will update the Backstage definition
+This command will update the Backstage definition:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
@@ -861,6 +881,7 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-03.
 Logout and login again using the declared policy administrator account. If RBAC is enabled, the
 administrator will have the `RBAC` option inside the `Administration` menu:
 
+image::challenge-03/rhdh-rbac.png[RBAC management from UI]
 
 This menu allows to manage the RBAC rules directly in the UI.
 

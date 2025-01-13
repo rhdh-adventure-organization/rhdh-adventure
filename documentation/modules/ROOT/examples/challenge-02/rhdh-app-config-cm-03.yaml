@@ -5,9 +5,14 @@ metadata:
   name: rhdh-app-config
 data:
   rhdh-app-config.yaml: |
+    backend:
+      baseUrl: https://$rhdhname.$basedomain
+      cors:
+        origin: https://$rhdhname.$basedomain
     organization:
       name: "My Organization"
     app:
+      baseUrl: https://$rhdhname.$basedomain
       title: "My Adventure with Red Hat Developer Hub"
       branding:
         theme:
@@ -21,3 +26,4 @@ data:
             headerColor1: '#0000d0'
             headerColor2: 'rgb(255 246 140)'
             navigationIndicatorColor: '#f4eea9'
+            

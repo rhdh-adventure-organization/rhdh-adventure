@@ -1,5 +1,5 @@
 [#intro-solution]
-= 🧞🧾 Onboard my new app
+= 🧞🧾 Onboard my new app Solution
 include::_attributes.adoc[]
 
 Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
@@ -68,7 +68,9 @@ GitHub::
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml | oc apply -f -
 ----
 
 The operator will redeploy the instance to apply the new changes. For a Helm release, we need
@@ -86,7 +88,9 @@ GitLab::
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml | oc apply -f -
 ----
 
 The operator will redeploy the instance to apply the new changes. For a Helm release, we need

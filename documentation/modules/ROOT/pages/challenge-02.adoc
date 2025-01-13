@@ -2,7 +2,6 @@
 = 🎨 Make It Your Own!
 include::_attributes.adoc[]
 
-
 Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and
 prepare it for adding more configurations in the future, and facilitate the maintenance and operation.
 Here the adventure will give the opportunity to customize the following features:
@@ -37,6 +36,7 @@ modifying the application's deployment manifests directly, showcasing the flexib
 To resolve this challenge you can start checking the following references:
 
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/configuring/provisioning-and-using-your-custom-configuration[Provisioning and using your custom Red Hat Developer Hub configuration]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/customizing/index#customizing-your-product-se-url[Customizing your Red Hat Developer Hub base URL]
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/customizing/customizing-the-backend-secret[Customizing Red Hat Developer Hub backend secret]
 
 [#configuration-solution]
