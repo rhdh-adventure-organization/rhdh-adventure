@@ -14,8 +14,13 @@ Please have them installed and configured before you get started with any of the
 
 | `oc client {ocp-version}`
 | https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-mac-{ocp-version}.tar.gz[Download]
-| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-linux-arm64-{ocp-version}.tar.gz[Download]
+| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-linux-{ocp-version}.tar.gz[Download]
 | https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-windows-{ocp-version}.zip[Download]
+
+| `helm client {helm-version}`
+| https://get.helm.sh/helm-v{helm-version}-darwin-amd64.tar.gz[Download]
+| https://get.helm.sh/helm-v{helm-version}-linux-386.tar.gz[Download]
+| https://get.helm.sh/helm-v{helm-version}-windows-amd64.zip[Download]
 
 |===
 

@@ -5,3 +5,4 @@
 :folder: rhdh-adventure
 
 :ocp-version: 4.16.9
+:helm-version: 3.16.4
