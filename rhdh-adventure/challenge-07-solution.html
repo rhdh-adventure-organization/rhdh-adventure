@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Setup :: Red Hat Developer Hub Adventure</title>
+    <title>🧞🔬 Put It Under The Microscope :: Red Hat Developer Hub Adventure</title>
     <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/challenge-07-solution.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -154,22 +154,25 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="challenge-07-solution.html">Setup</a></li>
+    <li><a href="challenge-07-solution.html">🧞🔬 Put It Under The Microscope</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-07-solution.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Setup</h1>
-<div class="sect1">
-<h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🔬 What is happening?</h2>
+<h1 class="page">🧞🔬 Put It Under The Microscope</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>We are near to the end of our adventure, with an incredible Red Hat Developer Hub fully functional, but we are missing something. How is it working? Which data or metrics are there? It is important to measure the usage of our instance, so the adventure will finish after we can check and measure the performance and behavior of the instance.</p>
+<p>Welcome! Don&#8217;t worry about being here—it&#8217;s absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.</p>
 </div>
 <div class="paragraph">
-<p>TBC Here you will … . You will learn how to …</p>
+<p>Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀</p>
 </div>
 </div>
 </div>
@@ -177,7 +180,64 @@
 <h2 id="tools-solution"><a class="anchor" href="#tools-solution"></a>🧞🧰 Tools</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>OpenShift provides a robust suite of monitoring tools designed to give you deep insights into the health, performance,
+and behavior of your applications and infrastructure. At the core, OpenShift leverages Prometheus for metrics collection,
+which provides a powerful and scalable solution for gathering real-time performance data from your clusters and workloads.
+Paired with AlertManager, it ensures that critical events are surfaced promptly, helping you take swift action when needed.</p>
+</div>
+<div class="paragraph">
+<p>For visualization and analysis, OpenShift integrates some dashboards to track metrics and trends effectively.
+Additionally, OpenShift provides a logging stack, enabling centralized log management, analysis, and troubleshooting.
+Together, these tools empower developers and operators to monitor, debug, and optimize their environments seamlessly.</p>
+</div>
+<div class="paragraph">
+<p>One of the features includes in the OpenShift Monitoring stack, is a way to have a separate stack to monitor user-defined projects
+without impact the monitoring stack for the OpenShift. This capability is called monitoring for user-defined projects and it
+was enabled by the cluster-admin as part of the setup of the cluster. For a detailed information of the steps, review
+this <a href="01-setup.html#ocpsetup-monitoring" class="xref page">step</a> of the setup.</p>
+</div>
+<div class="paragraph">
+<p>Additionally Red Hat Developer Hub provides and integrates some functionalities to monitor the status of the application.
+These capabilities are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Metrics for gather insights and monitor performance of the instance. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/monitoring_and_logging/index">here</a></p>
+</li>
+<li>
+<p>Audit logs to register user activities, system events, and data changes. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/audit_log/assembly-audit-log">here</a>.</p>
+</li>
+<li>
+<p>Telemetry data for collecting and analyzing to improve the experience. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/telemetry_data_collection/index">here</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally, Red Hat Developer Hub can be extended to integrate some plugins of the community to gather more information
+and insights. Some of those plugins are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/backstage/community-plugins/blob/main/workspaces/analytics/plugins/analytics-module-matomo/README.md">Analytics Module: Matomo Analytics</a></p>
+</li>
+<li>
+<p><a href="https://backstage.io/docs/plugins/analytics/">Plugin Analytics</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Those plugins could be installed using the dynamic plugin framework.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -185,7 +245,145 @@
 <h2 id="metrics-solution"><a class="anchor" href="#metrics-solution"></a>🧞👨‍🔬 Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>Let&#8217;s enable or integrate some of those tools in our Red Hat Developer Hub and check the metrics and values
+we can get.</p>
+</div>
+<div class="paragraph">
+<p>First we will enable the metrics endpoint and integrate the metrics into the OpenShift Monitoring stack.
+The metrics are exposed through an HTTP service endpoint under the <code>/metrics</code> canonical name. It is needed
+to create a <code>ServiceMonitor</code> object to scrape metrics from that service endpoint in a user-defined project.</p>
+</div>
+<div class="paragraph">
+<p>The ServiceMonitor will depend of the mechanism of operation of Red Hat Developer Hub:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset1_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_by-helm-chart">
+<div class="paragraph">
+<p>The Helm Chart provides a configuration to create automatically the ServiceMonitor during the Helm release
+life cycle. That configuration is similar to:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">upstream:
+  metrics:
+    serviceMonitor:
+      enabled: true
+      path: /metrics</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run this command for your installation integrated with GitHub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-github.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or this command for your installation integrated with GitLab:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_by-operator">
+<div class="paragraph">
+<p>Currently, the Red Hat Developer Hub Operator does not support creating a ServiceMonitor by default.
+You must complete the following steps to create a ServiceMonitor to scrape metrics from the endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Here, there is an example of the ServiceMonitor to scrape metrics:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rhdh
+  labels:
+    app.kubernetes.io/instance: rhdh
+    app.kubernetes.io/name: backstage
+spec:
+  namespaceSelector:
+    matchNames:
+      - rhdh-by-operator
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rhdh
+      app.kubernetes.io/name: backstage
+  endpoints:
+    - port: http-metrics
+      path: '/metrics'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command will create it:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-07/service-monitor.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the ServiceMonitor is created, after some minutes to scrape some metrics, the user can visualize
+them from the <strong>Developer</strong> perspective in OpenShift in the menu <strong>Observe &#8594; Metrics</strong>.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following metrics can be reviewed: <code>catalog_relations_count</code>, <code>catalog_entities_count</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-07/rhdh-metrics-dashboard.png" alt="rhdh metrics dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>Regarding the logs generated (audit-log), those logs are collected by the OpenShift Logging stack of OpenShift.
+We can filter audit logs from the OpenShift UI by using the <code>isAuditLog</code> field.</p>
+</div>
+<div class="paragraph">
+<p>This procedure is similar to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the <strong>Developer</strong> perspective of the OpenShift web console, click the <strong>Topology</strong> tab.</p>
+</li>
+<li>
+<p>From the <strong>Topology</strong> view, click the pod that you want to view audit log data for.</p>
+</li>
+<li>
+<p>From the pod panel, click the <strong>Resources</strong> tab.</p>
+</li>
+<li>
+<p>From the Pods section of the Resources tab, click <strong>View logs</strong>.</p>
+</li>
+<li>
+<p>From the <strong>Logs view</strong>, enter <code>isAuditLog</code> into the Search field to filter audit logs from other log types. You can use the arrows to browse the logs containing the <code>isAuditLog</code> field.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
