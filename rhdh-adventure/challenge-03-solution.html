@@ -774,10 +774,19 @@ execute the actions in your GitLab instance:</p>
 <p>name: <code>rhdh-adventure</code></p>
 </li>
 <li>
-<p>Redirect URI: copy output <code>echo <a href="https://rhdh-developer-hub-$(oc" class="bare">https://rhdh-developer-hub-$(oc</a> project -q).${basedomain}/api/auth/gitlab/handler/frame</code></p>
+<p>Redirect URI: Copy output of</p>
 </li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>echo https://rhdh-developer-hub-$(oc project -q).${basedomain}/api/auth/gitlab/handler/frame</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>set the correct permissions: <code>api</code>, <code>read_user</code>, <code>read_repository</code>, <code>write_repository</code>, <code>openid</code>, <code>profile</code>, <code>email</code></p>
+<p>Set the correct permissions: <code>api</code>, <code>read_user</code>, <code>read_repository</code>, <code>write_repository</code>, <code>openid</code>, <code>profile</code>, <code>email</code></p>
 </li>
 </ul>
 </div>
@@ -862,6 +871,18 @@ type: Opaque</code></pre>
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
             audience: <a href="https://gitlab.${basedomain}" class="bare">https://gitlab.${basedomain}</a></code></pre>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you are using the public GitLab instance, don&#8217;t add the <code>audience</code> property.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>This sample configuration can help:</p>
