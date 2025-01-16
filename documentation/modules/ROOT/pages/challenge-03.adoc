@@ -27,6 +27,8 @@ developing secure, user-friendly applications in today's interconnected world.
 
 Let's lock it down and secure your Red Hat Developer Hub! 🔒
 
+IMPORTANT: This challenge requires the successful completion of the previous challenge.
+
 [#github-auth]
 == 🔑 Authentication with GitHub
 
@@ -60,7 +62,7 @@ Otherwise, the cluster provides a local instance of GitLab available at:
 echo https://gitlab.$basedomain
 ----
 
-There is two users created (`user1`, `user2`), using the same credential (`@abc1cde2`).
+There are different users created (`user1`, `user2`, `userX`...), using the same credentials (`@abc1cde2`).
 
 To resolve this challenge you can start checking the following references:
 

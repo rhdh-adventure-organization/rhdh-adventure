@@ -245,3 +245,26 @@ Deploy a GitLab runner to run pipelines:
 ----
 envsubst < ./documentation/modules/ROOT/examples/setup/gitlab-runner.yaml | oc apply -n gitlab-system -f -
 ----
+
+
+
+Matomo
+
+oc new-project matomo
+
+helm install my-matomo
+
+helm upgrade --install my-matomo \
+    --set matomoUsername=admin,matomoPassword=password \
+    --set ingress.enabled=true \
+    --set ingress.hostname=matomo.apps.cluster-fsnjt.fsnjt.sandbox506.opentlc.com \
+    oci://registry-1.docker.io/bitnamicharts/matomo
+
+
+
+oc expose svc my-matomo
+
+
+helm repo add petbattle https://petbattle.github.io/helm-charts
+helm upgrade --install pb-matomo \
+    https://petbattle.github.io/helm-charts/matomo --version=4.1.1+01

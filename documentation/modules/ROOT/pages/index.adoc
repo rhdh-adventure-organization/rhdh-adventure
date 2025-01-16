@@ -9,7 +9,7 @@ Your team, as platform engineers, is looking to improve the daily basis of many 
 Which challenge do you want to resolve? Here starts your adventure with Red Hat Developer Hub to become a hero, and improve the developer experience.
 
 [.tiles.browse]
-== The Stages or your Quest
+== The Stages of your Quest
 
 Your journey to transform the Developer Experience (DevEx) begins with a series of **epic stages**—each designed
 to guide you through Red Hat Developer Hub's incredible capabilities while solving key challenges developers

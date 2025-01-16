@@ -1,17 +1,36 @@
-= Setup
+[#intro]
+= 🔬 Put It Under The Microscope
 include::_attributes.adoc[]
 
-[#intro]
-== 🔬 What is happening?
+We've reached the final stage of our adventure! Your Red Hat Developer Hub is nearly complete, a fully functional
+and streamlined platform. But there's one critical question left unanswered: How is it performing?
+To unlock the full potential of your instance, you must measure its usage, monitor its health, and capture key
+performance data. After all, a platform is only as effective as the insights you can gain from it.
 
-We are near to the end of our adventure, with an incredible Red Hat Developer Hub fully functional, but we are missing something. How is it working? Which data or metrics are there? It is important to measure the usage of our instance, so the adventure will finish after we can check and measure the performance and behavior of the instance.
+In this stage, you'll dive into monitoring and observability—essential tools for understanding how your platform
+behaves and ensuring it runs smoothly.
 
-TBC Here you will … . You will learn how to …
+This stage is complete when:
+
+* Metrics from the product are exposed and available for analysis.
+* Logs and events are reviewed and understood.
+* Performance and behavior of the platform are captured, providing actionable insights for future improvements.
+
+With this stage, you'll ensure your Red Hat Developer Hub is not just operational but optimized.
+By integrating monitoring and observability tools, you gain the power to proactively manage your platform,
+maintain its health, and continuously improve its performance. This is your moment to master the art of insight
+and complete your adventure in style. Ready to unlock the final piece? Let's go!
 
 [#tools]
 == 🧰 Tools
 
-TBC
+Which tools can be used? What is provided by Red Hat Developer Hub or Red Hat OpenShift in this space?
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.openshift.com/container-platform/4.16/observability/monitoring/monitoring-overview.html[OpenShift Monitoring overview]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/monitoring_and_logging/index[Monitoring and Logging]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/audit_log/index[Audit Log]
 
 [#tools-solution]
 === 🧞🧰 Tools Solution
@@ -21,7 +40,12 @@ Are you struggling about how to resolve it? Don't worry you can check the soluti
 [#metrics]
 == 👨‍🔬 Metrics
 
-TBC
+Which metrics are exposed? How are they integrated in OpenShift? How could I get them?
+
+To resolve this challenge you can start checking the following references:
+
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/monitoring_and_logging/index[Monitoring and Logging]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/telemetry_data_collection/index[Telemetry data collection]
 
 [#metrics-solution]
 === 🧞👨‍🔬 Metrics Solution

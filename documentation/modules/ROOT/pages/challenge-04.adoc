@@ -2,14 +2,31 @@
 = 🕵🏻‍♂️ Import an Existing App
 include::_attributes.adoc[]
 
-Your application is alive in your systems, but it is not integrated in the catalog of Red Hat Developer Hub, so, you want to continue here.
+Your application is running and operational, but it's not yet part of the Red Hat Developer Hub catalog.
+To truly unlock its potential, it needs to be discoverable and shareable with your entire team.
+This challenge invites you to prepare your application for seamless integration into the catalog.
 
-Here you will prepare your application to be integrated in the catalog, including the main links to your source code repository, documentation, dependencies (if applies) and API (if applies). Once your application is ready, you can import into the catalog and share with other collaborators. You will also learn about how to do it massively using some capabilities of Red Hat Developer Hub.
+In this stage, you will:
+
+* Add key metadata to your application, including links to the source code repository, documentation,
+dependencies (if applicable), and APIs (if applicable).
+* Learn how to register components manually and, for larger projects, discover how to do this at scale
+using the Red Hat Developer Hub's automation capabilities.
+
+The challenge is complete when your component is:
+
+* Successfully registered in the catalog.
+* Includes all relevant links and resources to ensure collaboration and transparency.
+* Accessible to your team and ready to be leveraged by developers across your organization.
+
+Get ready to explore, collaborate, and elevate your application to the next level by integrating it
+into the Red Hat Developer Hub catalog. Once complete, your application will no longer just
+"exist"—it will become a **centralized, shareable asset** for your organization.
 
 [#declare]
 == 📝 Declare it
 
-Do you have a source code repository for a library, application or module? This is the kind of components
+Do you have a source code repository for a library, application or module? This is the kind of component
 to register into the Red Hat Developer Hub catalog, this is the challenge. How could you declare it?
 
 To resolve this challenge you can start checking the following references:
