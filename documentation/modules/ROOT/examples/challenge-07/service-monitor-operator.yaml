@@ -1,0 +1,19 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rhdh
+  labels:
+    app.kubernetes.io/instance: rhdh
+    app.kubernetes.io/name: backstage
+spec:
+  namespaceSelector:
+    matchNames:
+      - rhdh-by-operator
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rhdh
+      app.kubernetes.io/name: backstage
+  endpoints:
+    - port: http-metrics
+      path: '/metrics'
