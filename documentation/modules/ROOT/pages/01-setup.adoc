@@ -202,12 +202,14 @@ Create two groups:
 - team-a
 - team-b
 
-Create two users/passwords:
+Create users/passwords as:
 
 - user1/@abc1cde2
-- user2/@abc1cde2
+- ...
+- userX/@abc1cde2
 
-Ensure `user1` belongs to `team-a` and `user2` belongs to `team-b`.
+TODO Users odd Ensure `user1` belongs to `team-a` and `user2` belongs to `team-b`.
+user even to team-b
 
 Create a repo called `sample-app` under `team-a` add the `catalog-info.yaml` and `users-groups.yaml` at the root of the repo.
 ----
@@ -246,25 +248,66 @@ Deploy a GitLab runner to run pipelines:
 envsubst < ./documentation/modules/ROOT/examples/setup/gitlab-runner.yaml | oc apply -n gitlab-system -f -
 ----
 
+[#ocpsetup-monitoring]
+### Enable monitoring for user-defined projects
 
+OpenShift can monitor user-defined projects in addition to the default platform monitoring.
+This feature allows monitoring your own projects in OpenShift without the need for an additional monitoring solution.
+Using this feature centralizes monitoring for core platform components and user-defined projects.
 
-Matomo
+For detailed information, check the link:https://docs.openshift.com/container-platform/4.17/observability/monitoring/enabling-monitoring-for-user-defined-projects.html[official documentation].
 
-oc new-project matomo
+Enabling this feature requires add the `enableUserWorkload` variable in the configuration of the
+OpenShift Monitoring. This configuration is described in the `cluster-monitoring-config` ConfigMap
+of the `openshift-monitoring` namespace:
 
-helm install my-matomo
+The configuration is similar to:
 
-helm upgrade --install my-matomo \
-    --set matomoUsername=admin,matomoPassword=password \
-    --set ingress.enabled=true \
-    --set ingress.hostname=matomo.apps.cluster-fsnjt.fsnjt.sandbox506.opentlc.com \
-    oci://registry-1.docker.io/bitnamicharts/matomo
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$/setup/cluster-monitoring-config.yaml[]
+----
 
+This command will apply that configuration:
 
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/setup/cluster-monitoring-config.yaml -n openshift-monitoring
+----
 
-oc expose svc my-matomo
+This new configuration will create the `openshift-user-workload-monitoring` namespace and a set of new components
+will be deployed to capture the metrics of the user-defined projects.
 
+This command can check the status of those deployments:
 
-helm repo add petbattle https://petbattle.github.io/helm-charts
-helm upgrade --install pb-matomo \
-    https://petbattle.github.io/helm-charts/matomo --version=4.1.1+01
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get pod -n openshift-user-workload-monitoring
+----
+
+The output of this command should be similar to:
+
+[.console-output]
+[source, bash, subs="+macros,+attributes"]
+----
+NAME                                  READY   STATUS    RESTARTS   AGE
+prometheus-operator-5846fb7dd-75xg2   2/2     Running   2          21h
+prometheus-user-workload-0            6/6     Running   6          21h
+prometheus-user-workload-1            6/6     Running   6          21h
+thanos-ruler-user-workload-0          4/4     Running   4          21h
+thanos-ruler-user-workload-1          4/4     Running   4          21h
+----
+
+As `cluster-admin` we can enable permissions to users to edit or view those objects.
+
+For example, we can provide cluster roles to view and edit them as:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc adm policy add-cluster-role-to-user monitoring-rules-view <user> -n <namespace>
+oc adm policy add-cluster-role-to-user monitoring-edit <user> -n <namespace>
+----
