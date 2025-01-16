@@ -494,6 +494,30 @@ identify the new bucket to store the results.</p>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">envsubst &lt; ./documentation/modules/ROOT/examples/setup/gitlab-runner.yaml | oc apply -n gitlab-system -f -</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Matomo</p>
+</div>
+<div class="paragraph">
+<p>oc new-project matomo</p>
+</div>
+<div class="paragraph">
+<p>helm install my-matomo</p>
+</div>
+<div class="paragraph">
+<p>helm upgrade --install my-matomo \
+    --set matomoUsername=admin,matomoPassword=password \
+    --set ingress.enabled=true \
+    --set ingress.hostname=matomo.apps.cluster-fsnjt.fsnjt.sandbox506.opentlc.com \
+    oci://registry-1.docker.io/bitnamicharts/matomo</p>
+</div>
+<div class="paragraph">
+<p>oc expose svc my-matomo</p>
+</div>
+<div class="paragraph">
+<p>helm repo add petbattle <a href="https://petbattle.github.io/helm-charts" class="bare">https://petbattle.github.io/helm-charts</a>
+helm upgrade --install pb-matomo \
+    <a href="https://petbattle.github.io/helm-charts/matomo" class="bare">https://petbattle.github.io/helm-charts/matomo</a> --version=4.1.1+01</p>
+</div>
 </div>
 </div>
 </div>
