@@ -40,7 +40,7 @@ GitLab::
 For example, this is a link:https://github.com/rhdh-adventure-organization/node-template-gl[software template]
 for a Node.JS app. Register it by the UI.
 
-Software Template url: `https://github.com/rhdh-adventure-organization/node-template-gl/blob/main/template.yaml/template.yaml`
+Software Template url: `https://github.com/rhdh-adventure-organization/node-template-gl/blob/main/template.yaml`
 --
 ====
 

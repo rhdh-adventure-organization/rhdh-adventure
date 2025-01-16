@@ -379,8 +379,13 @@ By Helm Chart::
 --
 - GitLab UI navigation: Edit `Profile` -> `Applications` -> `Add new application`
 - name: `rhdh-adventure`
-- Redirect URI: copy output `echo https://rhdh-developer-hub-$(oc project -q).${basedomain}/api/auth/gitlab/handler/frame`
-- set the correct permissions: `api`, `read_user`, `read_repository`, `write_repository`, `openid`, `profile`, `email`
+- Redirect URI: Copy output of
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+echo https://rhdh-developer-hub-$(oc project -q).${basedomain}/api/auth/gitlab/handler/frame
+----
+- Set the correct permissions: `api`, `read_user`, `read_repository`, `write_repository`, `openid`, `profile`, `email`
 --
 By Operator::
 +
@@ -431,6 +436,8 @@ Modify `rhdh-app-config` section of the `rhdh-app-config` ConfigMap with environ
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
             audience: https://gitlab.${basedomain}
 ----
+
+WARNING: If you are using the public GitLab instance, don't add the `audience` property.
 
 This sample configuration can help:
 
