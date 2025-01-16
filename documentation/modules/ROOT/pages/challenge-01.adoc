@@ -1,6 +1,7 @@
 [#intro]
 = 🚀 The Adventure Begins
 include::_attributes.adoc[]
+:page-toclevels: 1
 
 Any journey starts with a first step... and here we have the first one: install Red Hat Developer Hub.
 It is easy, but you should choose which model is the most suitable for you:

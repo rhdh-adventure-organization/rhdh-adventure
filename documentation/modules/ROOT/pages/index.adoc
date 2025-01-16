@@ -1,5 +1,6 @@
 = Welcome to Red Hat Developer Hub Adventure
 :page-layout: home
+:page-toclevels: 1
 
 [.text-center.strong]
 == A DevEx adventure from Zero to Hero

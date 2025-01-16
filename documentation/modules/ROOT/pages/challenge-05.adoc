@@ -1,6 +1,7 @@
 [#intro]
 = 🧾 Streamline Future App Dev
 include::_attributes.adoc[]
+:page-toclevels: 1
 
 Your team has a valuable **application skeleton**, scaffold, or archetype that aligns with a common architecture
 in your organization. However, manually replicating this skeleton for every new application slows you down and

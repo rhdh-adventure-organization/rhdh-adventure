@@ -1,6 +1,7 @@
 [#intro]
 = 👨‍💻 Lock It Down
 include::_attributes.adoc[]
+:page-toclevels: 1
 
 Your Red Hat Developer Hub looks great... However, it is not a secure place to work.
 Security is important in any adventure, so it is time to secure our instance with

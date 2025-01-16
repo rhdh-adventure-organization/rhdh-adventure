@@ -1,6 +1,7 @@
 [#intro]
 = 🎨 Make It Your Own!
 include::_attributes.adoc[]
+:page-toclevels: 1
 
 Do you have your Red Hat Developer Hub instance ready? Great!, now it is time to customize it for you and
 prepare it for adding more configurations in the future, and facilitate the maintenance and operation.
