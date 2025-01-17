@@ -84,16 +84,11 @@ TIP: Use `Read and Write` permissions to enable operations from Red Hat Develope
 --
 ====
 
-Additionally, we need to create a Personal Access Token (aka PAT) to enable the full integration with GitHub.
-Create a PAT of GitHub user profile as:
+The private key can be generated from the settings page of the new GitHub application.
+The `generate a private key` button will generate and download one.
 
-- Name: `pat-rhdh-adventure`
-- Expiration date: Disabled it or just one in the future
-- Set the scopes:
-    * Reading software components: `repo`
-    * Reading organization data: `read:org`, `read:user`, `user:email`
-    * Publishing software templates: `repo`
-    * `workflow` (if templates include GitHub workflows)
+After the new GitHub application was created, must be installed in the current account. Just
+follow the instructions from the `Install App` menu.
 
 Using the values from the new application create a secret to store the different values as:
 

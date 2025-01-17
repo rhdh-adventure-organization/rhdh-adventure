@@ -113,7 +113,7 @@ This command will create it:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-07/service-monitor.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-07/service-monitor-operator.yaml
 ----
 --
 ====
