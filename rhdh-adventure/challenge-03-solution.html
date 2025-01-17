@@ -352,37 +352,12 @@ Use <code>Read and Write</code> permissions to enable operations from Red Hat De
 </div>
 </div>
 <div class="paragraph">
-<p>Additionally, we need to create a Personal Access Token (aka PAT) to enable the full integration with GitHub.
-Create a PAT of GitHub user profile as:</p>
+<p>The private key can be generated from the settings page of the new GitHub application.
+The <code>generate a private key</code> button will generate and download one.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Name: <code>pat-rhdh-adventure</code></p>
-</li>
-<li>
-<p>Expiration date: Disabled it or just one in the future</p>
-</li>
-<li>
-<p>Set the scopes:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Reading software components: <code>repo</code></p>
-</li>
-<li>
-<p>Reading organization data: <code>read:org</code>, <code>read:user</code>, <code>user:email</code></p>
-</li>
-<li>
-<p>Publishing software templates: <code>repo</code></p>
-</li>
-<li>
-<p><code>workflow</code> (if templates include GitHub workflows)</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p>After the new GitHub application was created, must be installed in the current account. Just
+follow the instructions from the <code>Install App</code> menu.</p>
 </div>
 <div class="paragraph">
 <p>Using the values from the new application create a secret to store the different values as:</p>
@@ -402,7 +377,6 @@ stringData:
   AUTH_GITHUB_WEBHOOK_SECRET: REPLACE_WITH_YOUR_GITHUB_WEBHOOK_SECRET
   AUTH_GITHUB_PRIVATE_KEY_FILE: |
     REPLACE_WITH_YOUR_GITHUB_PRIVATE_KEY_FILE
-  AUTH_GITHUB_TOKEN: REPLACE_WITH_YOUR_GITHUB_TOKEN
   GITHUB_ORGANIZATION: REPLACE_WITH_YOUR_GITHUB_ORGANIZATION
 type: Opaque</code></pre>
 </div>
