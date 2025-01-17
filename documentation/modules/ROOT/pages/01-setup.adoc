@@ -93,14 +93,21 @@ This is the command:
 oc apply -f ./documentation/modules/ROOT/examples/setup/rhdh-operator.yaml
 ----
 
-The operator is installed in the `rhdh-operator` namespace:
+The operator is installed in the `rhdh-operator` namespace. This command checks it:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get csv -n rhdh-operator
+----
+
+The output is similar to:
 
 [.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
-on 🎩 ❯ oc get csv -n rhdh-operator
 NAME                   DISPLAY                          VERSION   REPLACES               PHASE
-rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.1   Succeeded
+rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.3   Succeeded
 ----
 
 [#ocpsetup-gitlab]
@@ -120,14 +127,21 @@ Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecyle Man
 oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-operator.yaml
 ----
 
-This operator will be installed in the `gitlab-system` namespace:
+This operator will be installed in the `gitlab-system` namespace. This command checks it:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get csv -n gitlab-system
+----
+
+The output is similar to:
 
 [.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
-on 🎩 ❯ oc get csv -n gitlab-system
 NAME                                DISPLAY    VERSION   REPLACES                            PHASE
-gitlab-operator-kubernetes.v1.8.2   GitLab     1.8.2     gitlab-operator-kubernetes.v1.8.1   Succeeded
+gitlab-operator-kubernetes.v1.9.0   GitLab     1.9.0     gitlab-operator-kubernetes.v1.8.3   Succeeded
 ----
 
 To install a local instance of GitLab this command will create one. It will the base domain of the
@@ -175,8 +189,6 @@ Setup GitLab with some initial configuration:
 ./documentation/modules/ROOT/examples/setup/gitlab-setup.sh
 ----
 
-The initial configuration requires to push some content into GitLab, you should use the `user1` credentials to do it.
-
 [CAUTION]
 ====
 If GitLab is deployed using self-signed certificates, you can get the following exception:
@@ -208,10 +220,8 @@ Create users/passwords as:
 - ...
 - userX/@abc1cde2
 
-TODO Users odd Ensure `user1` belongs to `team-a` and `user2` belongs to `team-b`.
-user even to team-b
-
-Create a repo called `sample-app` under `team-a` add the `catalog-info.yaml` and `users-groups.yaml` at the root of the repo.
+The users with odd numbers (e.g: `user1`, `user3`...) belong to `team-a` and the users
+with even numbers (e.g: `user2`, `user4`...) belong to `team-b`.
 ----
 
 [#ocpsetup-gitlab-runner]
@@ -226,19 +236,22 @@ This section will install the GitLab Runner operator and prepare to be used by t
 oc apply -f ./documentation/modules/ROOT/examples/setup/gitlab-runner-operator.yaml -n gitlab-system
 ----
 
-To test the installation
+To check the installation:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get csv -n gitlab-system
+----
+
+With an output similar to:
 
 [.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
-on 🎩 ❯ oc get csv -n gitlab-system
 NAME                             DISPLAY         VERSION   REPLACES                         PHASE
 gitlab-runner-operator.v1.32.0   GitLab Runner   1.32.0    gitlab-runner-operator.v1.31.0   Succeeded
 ----
-
-The technical docs will be created as part of the CI pipelines of the components, so
-we need to set up the GitLab instance to run pipelines and use some variables to
-identify the new bucket to store the results.
 
 Deploy a GitLab runner to run pipelines:
 

@@ -24,5 +24,5 @@ spec:
   source: certified-operators
   sourceNamespace: openshift-marketplace
   channel: stable
-  startingCSV: gitlab-operator-kubernetes.v1.7.2
+  startingCSV: gitlab-operator-kubernetes.v1.9.0
   installPlanApproval: Automatic

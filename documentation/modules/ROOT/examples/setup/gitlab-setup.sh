@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Configuration variables
+TOTAL_USERS=20 # Change this to the desired number of users
+
 # Running from same folder
 cd $(dirname $0)
 
@@ -67,50 +70,41 @@ TEAM_A_ID=$(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB
 TEAM_B_ID=$(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/groups?search=team-b" | jq -r '(.|first).id')
 
 # Create Users
-if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/users?search=user1" | jq length) ]; then
-    curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data '{"email": "user1@redhat.com", "password": "@abc1cde2","name": "user1","username": "user1", "skip_confirmation": "true" }' \
-        "${GITLAB_URL}/api/v4/users" &> /dev/null
-fi
+for i in $(seq 1 $TOTAL_USERS); do
+    USERNAME="user$i"
+    EMAIL="$USERNAME@redhat.com"
+    PASSWORD="@abc1cde2"
 
-if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/users?search=user2" | jq length) ]; then
-    curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data '{"email": "user2@redhat.com", "password": "@abc1cde2","name": "user2","username": "user2", "skip_confirmation": "true" }' \
-        "${GITLAB_URL}/api/v4/users" &> /dev/null
-fi
+    if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/users?search=$USERNAME" | jq length) ]; then
+        echo "Creating user $USERNAME..."
+        curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data "{\"email\": \"$EMAIL\", \"password\": \"$PASSWORD\", \"name\": \"$USERNAME\", \"username\": \"$USERNAME\", \"skip_confirmation\": \"true\" }" \
+            "${GITLAB_URL}/api/v4/users" &> /dev/null
+    fi
 
-USER1_ID=$(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/users?search=user1" | jq -r '(.|first).id')
-USER2_ID=$(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/users?search=user2" | jq -r '(.|first).id')
+    # Get the user ID
+    USER_ID=$(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/users?search=$USERNAME" | jq -r '(.|first).id')
 
-# Add users to groups
-if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/groups/$TEAM_A_ID/members?user_ids=$USER1_ID" | jq length) ]; then
-    curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data "{\"user_id\": \"$USER1_ID\", \"access_level\": 50 }" \
-        "${GITLAB_URL}/api/v4/groups/$TEAM_A_ID/members" &> /dev/null
-fi
+    # Check and add the user to the appropriate group
+    if (( i % 2 == 1 )); then
+        # Odd users -> Team A
+        echo "Assigning $USERNAME to Team A..."
+        GROUP_ID=$TEAM_A_ID
+    else
+        # Even users -> Team B
+        echo "Assigning $USERNAME to Team B..."
+        GROUP_ID=$TEAM_B_ID
+    fi
 
-if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/groups/$TEAM_B_ID/members?user_ids=$USER2_ID" | jq length) ]; then
-    curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data "{\"user_id\": \"$USER2_ID\", \"access_level\": 50 }" \
-        "${GITLAB_URL}/api/v4/groups/$TEAM_B_ID/members" &> /dev/null
-fi
+    # Add users to groups
+    if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/groups/$GROUP_ID/members?user_ids=$USER_ID" | jq length) ]; then
+        curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data "{\"user_id\": \"$USER_ID\", \"access_level\": 50 }" \
+            "${GITLAB_URL}/api/v4/groups/$GROUP_ID/members" &> /dev/null
+    fi
+done
 
-# Create Projects
-#if [ "0" == $(curl $CURL_DISABLE_SSL_VERIFICATION --header "PRIVATE-TOKEN: $GITLAB_TOKEN" -s "${GITLAB_URL}/api/v4/projects?search=sample-app" | jq length) ]; then
-#    curl $CURL_DISABLE_SSL_VERIFICATION --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-#        --header "Content-Type: application/json" \
-#        --data "{\"namespace_id\": \"$TEAM_A_ID\", \"name\": \"sample-app\", \"visibility\": \"public\" }" \
-#        "${GITLAB_URL}/api/v4/projects" &> /dev/null
-#fi
+echo "GitLab setup completed successfully."
 
-# Add some content to the repo
-#git $GIT_DISABLE_SSL_VERIFICATION clone ${GITLAB_URL}/team-a/sample-app.git /tmp/sample-app
-#cp catalog-info.yaml users-groups.yaml /tmp/sample-app/
-#git $GIT_DISABLE_SSL_VERIFICATION -C /tmp/sample-app/ add .
-#git $GIT_DISABLE_SSL_VERIFICATION -C /tmp/sample-app commit -m "initial commit" --author="user1 <user1@redhat.com>"
-#echo enter user1/@abc1cde2
-#git $GIT_DISABLE_SSL_VERIFICATION -C /tmp/sample-app push
