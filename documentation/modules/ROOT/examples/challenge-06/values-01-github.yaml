@@ -1,0 +1,89 @@
+global:
+  clusterRouterBase: "${basedomain}"
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # GitHub Plugins
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false
+      # RBAC Plugins
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+        disabled: false
+      # DevQuotes
+      - package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              parsifal-m.plugin-dev-quotes-homepage:
+                mountPoints:
+                  - mountPoint: entity.page.overview/cards
+                    importName: DevQuote
+                    config:
+                      layout:
+                        gridColumnEnd:
+                          lg: span 4
+                          md: span 6
+                          xs: span 12
+                dynamicRoutes:
+                  - importName: DevQuote
+                    menuItem:
+                      text: Quote
+                    path: /devquote
+      # TODO Plugin
+      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              backstage-community.plugin-todo:
+                mountPoints:
+                  - mountPoint: entity.page.todo/cards
+                    importName: EntityTodoContent
+                entityTabs:
+                  - path: /todo
+                    title: Todo
+                    mountPoint: entity.page.todo
+      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+        disabled: false
+upstream:
+  backstage:
+    extraAppConfig:
+      - configMapRef: rhdh-app-config
+        filename: rhdh-app-config.yaml
+    extraEnvVarsSecrets:
+      - rhdh-secrets
+      - git-secrets
+    extraVolumeMounts:
+      - mountPath: /opt/app-root/src/dynamic-plugins-root
+        name: dynamic-plugins-root
+      - mountPath: /opt/app-root/src/rbac
+        name: rbac-policies
+    extraVolumes:
+      - name: dynamic-plugins-root
+        persistentVolumeClaim:
+          claimName: 'rhdh-dynamic-plugins-root'
+      - configMap:
+          defaultMode: 420
+          name: 'rhdh-dynamic-plugins'
+          optional: true
+        name: dynamic-plugins
+      - name: dynamic-plugins-npmrc
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: 'rhdh-dynamic-plugins-npmrc'
+      - name: dynamic-plugins-registry-auth
+        secret:
+          defaultMode: 416
+          optional: true
+          secretName: 'rhdh-dynamic-plugins-registry-auth'
+      - name: npmcacache
+      - configMap:
+          defaultMode: 420
+          name: rbac-policies
+        name: rbac-policies

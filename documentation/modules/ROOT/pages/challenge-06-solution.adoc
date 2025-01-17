@@ -1,16 +1,338 @@
-= Setup
+[#intro-solution]
+= 🧞🔌 And beyond! Solution
 include::_attributes.adoc[]
 
-[#intro-solution]
-== 🧞🔌 And beyond!
+Welcome! Don't worry about being here—it's absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.
 
-Red Hat Developer Hub is very modular and it is easy to install and integrate multiple different plugins to improve the developer experience. There is a long list of different plugins allowed to be deployed on top of Red Hat Developer Hub, which one do you want to install? Choose one, configure it and deploy it in your instance. It will be fun!!!
-
-Here you will practice adding dynamic plugins to extend the capabilities of Red Hat Developer Hub and provide more value to the final users . You will learn how to choose a dynamic plugin of Red Hat Developer Hub or Backstage, set up and deploy as part of the life cycle of the product.
-
-TBC
+Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀
 
 [#dynamicplugins-solution]
 == 🧞🦄 Dynamic Plugins
 
-TBC
+In the xref:challenge-03.adoc[challenge], you played a bit with some dynamic plugins provided for authentication
+and authorization provided by Red Hat Developer Hub. However, you could not bit completely the goal of the
+dynamic plugins.
+
+Red Hat Developer Hub as a platform consists of a small modular core and an extensive set of plugins that provide most of
+the functionality. In the upstream **Backstage.io** platform, enabling a plugin means modifying the platform's source code
+to load a bunch of TypeScript/JavaScript, and other static files (HTML, CSS, images etc.).
+You then have to stop and restart the runtime to enable the plugin.
+
+This approach of changing source code and restarting for enabling plugins will not work for Red Hat Developer Hub,
+because you need to recompile the source code, build a new container image and then re-deploy the new container image.
+
+Red Hat has introduced the concept of a **dynamic plugin** to overcome this hurdle. A set of curated plugins are pre-baked into
+the container image, but not enabled by default. The **dynamic plugin framework** is based on the
+link:https://github.com/scalprum/scaffolding[Node.js Scalprum library]. To enable or disable a plugin, you edit the **app-config.yaml**
+or the Red Hat Developer Hub Helm chart YAML values and turn plugins on or off.
+In this manner, Red Hat Developer Hub allows you to control plugin lifecycle and configuration without recompiling
+or rebuilding container images.
+
+Red Hat Developer Hub is pre-loaded with a selection of dynamic plugins. Most of these dynamic plugins are disabled by default due
+to the need for mandatory configuration. For a complete list of dynamic plugins that are included, see the
+link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins[dynamic plugins matrix]
+section of Red Hat Developer Hub.
+
+NOTE: Red Hat fully supports certain plugins (Topology, Tekton, Quay), while others are community-supported projects.
+
+Enabling or disabling dynamic plugins is based in the link:https://github.com/backstage/backstage/tree/master/packages/backend-dynamic-feature-service[backend plugin manger]
+package, which is a service that scans a configured root directory (`dynamicPlugins.rootDirectory` in the `app-config.yaml`)
+for dynamic plugin packages, and loads them dynamically.
+
+The configuration of the dynamic plugins depends of the mechanism used to operate Red Hat Developer Hub:
+
+[tabs]
+====
+By Helm Chart::
++
+--
+The definition of the dynamic plugins is done in the `values.yaml` file in the `global.dynamic.plugins` list:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+global:
+  # Other configurations
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false
+----
+--
+By Operator::
++
+--
+The operator creates the `dynamic-plugins-rhdh-local` ConfigMap with the list of dynamic plugins. We can
+create another additional ConfigMap to manage it.
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$challenge-03/rhdh-dynamic-plugins-cm-github-01.yaml[]
+----
+
+Update the Red Hat Developer Hub manifest to use the new ConfigMap for plugins:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+spec:
+  application:
+    # Other configurations
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+----
+--
+====
+
+[WARNING]
+====
+Simply enabling a dynamic plugin in the helm chart may not provide the required functionality. You may need to
+edit your `app-config.yaml` files to add plugin-specific configuration (for example, set different environment variables)
+to make the plugin work correctly. Consult the corresponding plugin documentation for the required configuration.
+====
+
+However, there is a way to include other dynamic plugins not included in Red Hat Developer Hub. This is a process based
+on exporting third-party plugins using:
+
+* The link:https://www.npmjs.com/package/@janus-idp/cli[@janus-idp/cli] package is installed.
+* Node.js and NPM is installed and configured.
+* The third-party plugin is compatible with your Red Hat Developer Hub version.
+For more information, see link:https://github.com/redhat-developer/rhdh/blob/main/docs/dynamic-plugins/versions.md[Version compatibility matrix].
+* The third-party plugin must have a valid `package.json` file in its root directory, containing all required metadata and dependencies.
+
+The following resources includes a full list of the current plugins in the Backstage space:
+
+* link:https://backstage.io/plugins[Backstage Plugin Directory]
+* link:https://github.com/backstage/community-plugins[Backstage Community Plugins]
+
+A detailed guide to install third-party plugins is available
+link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh[here].
+
+We will do the exercise to install some plugins using the dynamic plugin framework of Red Hat Developer Hub.
+
+=== TODO Plugin (Backstage Community Plugin)
+
+This plugin lists `// TODO` comments in source code. It currently exports a single component extension for use on entity pages.
+
+The main steps:
+
+1. Clone and install locally
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+git clone https://github.com/backstage/community-plugins
+cd community-plugins/workspaces/todo
+yarn install
+yarn tsc
+----
+
+2. Export as dynamic plugin each module (backend, frontent):
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+cd plugins/todo-backend
+npx @janus-idp/cli@latest package export-dynamic-plugin
+cd ../todo
+npx @janus-idp/cli@latest package export-dynamic-plugin
+----
+
+3. Export as container image:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+cd ../..
+npx @janus-idp/cli@latest package package-dynamic-plugins \
+    --tag quay.io/rmarting/backstage-community-plugin-todo:v0.1.2
+----
+
+This process will output the default configuration of the dynamic plugin to add into Red Hat Developer Hub:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+plugins:
+ - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+   pluginConfig:
+     dynamicPlugins:
+       frontend:
+         backstage-community.plugin-todo:
+           mountPoints:
+             - mountPoint: entity.page.todo/cards
+               importName: EntityTodoContent
+           entityTabs:
+             - path: /todo
+               title: Todo
+               mountPoint: entity.page.todo
+ - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+   disabled: false
+----
+
+4. Push the image into a Container Image Registry:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+podman push quay.io/rmarting/backstage-community-plugin-todo:v0.1.2
+----
+
+WARNING: Don't forget to make public the repository.
+
+=== Dev Quotes Plugin
+
+Display some random coding/programming related quotes on the Backstage homepage.
+
+1. Clone and install locally
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+git clone https://github.com/Parsifal-M/backstage-dev-quotes
+cd backstage-dev-quotes/
+yarn install
+yarn tsc
+yarn build
+----
+
+2. Export as dynamic plugin each module (backend, frontent):
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+npx @janus-idp/cli@latest package export-dynamic-plugin
+----
+
+3. Export as container image:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+npx @janus-idp/cli@latest package package-dynamic-plugins \
+    --tag quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1
+----
+
+This command generates the default configuration to apply:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+      - package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              parsifal-m.plugin-dev-quotes-homepage:
+                mountPoints:
+                  - mountPoint: entity.page.overview/cards
+                    importName: DevQuote
+                    config:
+                      layout:
+                        gridColumnEnd:
+                          lg: span 4
+                          md: span 6
+                          xs: span 12
+                dynamicRoutes:
+                  - importName: DevQuote
+                    menuItem:
+                      text: Quote
+                    path: /devquote
+----
+
+4. Push the image into a Container Image Registry:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+podman push quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1
+----
+
+WARNING: Don't forget to make public the repository.
+
+=== Dev Friend Days
+
+https://github.com/piatkiewicz/backstage-plugins/tree/main/dev-friends-days
+
+Not it is time to install:
+
+By Operator:
+
+add the definition into the rhdh-dynamics-pluigin - github|gitlab
+
+- package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+    disabled: false
+
+=== Enabling the new plugins
+
+Once we have the configuration for each plugin, we can apply as:
+
+[tabs]
+====
+By Helm Chart::
++
+--
+Extend the `values.yaml` file to add the list of plugins to use and upgrade the Helm release:
+
+For GitHub:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-01-github.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+
+For GitLab:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-01-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+--
+By Operator::
++
+--
+For GitHub:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml
+----
+
+For GitLab:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml
+----
+--
+====
+
+The Dev Quote is available as another menu of Red Hat Developer Hub:
+
+image::challenge-06/rhdh-dev-quote-plugin.png[]
+
+And each component includes a new tab for the TODO plugin.
+
+image::challenge-06/rhdh-todo-plugin.png[]
+
+Congratulations! Your Red Hat Developer Hub is fully modular.

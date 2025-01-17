@@ -346,12 +346,14 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-dynamic-plug
 
 Update the Red Hat Developer Hub manifest to use the new ConfigMap for plugins:
 
-```yaml
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
 spec:
   application:
     # Other configurations
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
-```
+----
 
 This command will apply the changes:
 
