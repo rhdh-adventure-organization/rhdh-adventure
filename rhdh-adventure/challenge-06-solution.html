@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Setup :: Red Hat Developer Hub Adventure</title>
+    <title>🧞🔌 And beyond! Solution :: Red Hat Developer Hub Adventure</title>
     <link rel="canonical" href="https://blog.jromanmartin.io/rhdh-adventure/rhdh-adventure/index.html/rhdh-adventure/challenge-06-solution.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -154,25 +154,25 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Developer Hub Adventure</a></li>
-    <li><a href="challenge-06-solution.html">Setup</a></li>
+    <li><a href="challenge-06-solution.html">🧞🔌 And beyond! Solution</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rmarting/rhdh-adventure/edit/master/documentation/modules/ROOT/pages/challenge-06-solution.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Setup</h1>
-<div class="sect1">
-<h2 id="intro-solution"><a class="anchor" href="#intro-solution"></a>🧞🔌 And beyond!</h2>
+<h1 class="page">🧞🔌 And beyond! Solution</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat Developer Hub is very modular and it is easy to install and integrate multiple different plugins to improve the developer experience. There is a long list of different plugins allowed to be deployed on top of Red Hat Developer Hub, which one do you want to install? Choose one, configure it and deploy it in your instance. It will be fun!!!</p>
+<p>Welcome! Don&#8217;t worry about being here—it&#8217;s absolutely okay! This section provides an example solution
+to the challenge, offering a step-by-step implementation as a reference to guide you.</p>
 </div>
 <div class="paragraph">
-<p>Here you will practice adding dynamic plugins to extend the capabilities of Red Hat Developer Hub and provide more value to the final users . You will learn how to choose a dynamic plugin of Red Hat Developer Hub or Backstage, set up and deploy as part of the life cycle of the product.</p>
-</div>
-<div class="paragraph">
-<p>TBC</p>
+<p>Remember, this is just one way to solve the challenge, and your approach might differ depending on
+your creativity or specific requirements. Feel free to explore and adapt the solution to make it your own.
+The goal is to help you understand the process and give you the confidence to tackle similar challenges
+in the future. Let' 's dive in together! 🧞🚀</p>
 </div>
 </div>
 </div>
@@ -180,7 +180,486 @@
 <h2 id="dynamicplugins-solution"><a class="anchor" href="#dynamicplugins-solution"></a>🧞🦄 Dynamic Plugins</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBC</p>
+<p>In the <a href="challenge-03.html" class="xref page">challenge</a>, you played a bit with some dynamic plugins provided for authentication
+and authorization provided by Red Hat Developer Hub. However, you could not bit completely the goal of the
+dynamic plugins.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat Developer Hub as a platform consists of a small modular core and an extensive set of plugins that provide most of
+the functionality. In the upstream <strong>Backstage.io</strong> platform, enabling a plugin means modifying the platform&#8217;s source code
+to load a bunch of TypeScript/JavaScript, and other static files (HTML, CSS, images etc.).
+You then have to stop and restart the runtime to enable the plugin.</p>
+</div>
+<div class="paragraph">
+<p>This approach of changing source code and restarting for enabling plugins will not work for Red Hat Developer Hub,
+because you need to recompile the source code, build a new container image and then re-deploy the new container image.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat has introduced the concept of a <strong>dynamic plugin</strong> to overcome this hurdle. A set of curated plugins are pre-baked into
+the container image, but not enabled by default. The <strong>dynamic plugin framework</strong> is based on the
+<a href="https://github.com/scalprum/scaffolding">Node.js Scalprum library</a>. To enable or disable a plugin, you edit the <strong>app-config.yaml</strong>
+or the Red Hat Developer Hub Helm chart YAML values and turn plugins on or off.
+In this manner, Red Hat Developer Hub allows you to control plugin lifecycle and configuration without recompiling
+or rebuilding container images.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat Developer Hub is pre-loaded with a selection of dynamic plugins. Most of these dynamic plugins are disabled by default due
+to the need for mandatory configuration. For a complete list of dynamic plugins that are included, see the
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins">dynamic plugins matrix</a>
+section of Red Hat Developer Hub.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Red Hat fully supports certain plugins (Topology, Tekton, Quay), while others are community-supported projects.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Enabling or disabling dynamic plugins is based in the <a href="https://github.com/backstage/backstage/tree/master/packages/backend-dynamic-feature-service">backend plugin manger</a>
+package, which is a service that scans a configured root directory (<code>dynamicPlugins.rootDirectory</code> in the <code>app-config.yaml</code>)
+for dynamic plugin packages, and loads them dynamically.</p>
+</div>
+<div class="paragraph">
+<p>The configuration of the dynamic plugins depends of the mechanism used to operate Red Hat Developer Hub:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset1_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_by-helm-chart">
+<div class="paragraph">
+<p>The definition of the dynamic plugins is done in the <code>values.yaml</code> file in the <code>global.dynamic.plugins</code> list:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
+  # Other configurations
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_by-operator">
+<div class="paragraph">
+<p>The operator creates the <code>dynamic-plugins-rhdh-local</code> ConfigMap with the list of dynamic plugins. We can
+create another additional ConfigMap to manage it.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-dynamic-plugins
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Update the Red Hat Developer Hub manifest to use the new ConfigMap for plugins:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  application:
+    # Other configurations
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Simply enabling a dynamic plugin in the helm chart may not provide the required functionality. You may need to
+edit your <code>app-config.yaml</code> files to add plugin-specific configuration (for example, set different environment variables)
+to make the plugin work correctly. Consult the corresponding plugin documentation for the required configuration.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However, there is a way to include other dynamic plugins not included in Red Hat Developer Hub. This is a process based
+on exporting third-party plugins using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://www.npmjs.com/package/@janus-idp/cli">@janus-idp/cli</a> package is installed.</p>
+</li>
+<li>
+<p>Node.js and NPM is installed and configured.</p>
+</li>
+<li>
+<p>The third-party plugin is compatible with your Red Hat Developer Hub version.
+For more information, see <a href="https://github.com/redhat-developer/rhdh/blob/main/docs/dynamic-plugins/versions.md">Version compatibility matrix</a>.</p>
+</li>
+<li>
+<p>The third-party plugin must have a valid <code>package.json</code> file in its root directory, containing all required metadata and dependencies.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following resources includes a full list of the current plugins in the Backstage space:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://backstage.io/plugins">Backstage Plugin Directory</a></p>
+</li>
+<li>
+<p><a href="https://github.com/backstage/community-plugins">Backstage Community Plugins</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A detailed guide to install third-party plugins is available
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>We will do the exercise to install some plugins using the dynamic plugin framework of Red Hat Developer Hub.</p>
+</div>
+<div class="sect2">
+<h3 id="_todo_plugin_backstage_community_plugin"><a class="anchor" href="#_todo_plugin_backstage_community_plugin"></a>TODO Plugin (Backstage Community Plugin)</h3>
+<div class="paragraph">
+<p>This plugin lists <code>// TODO</code> comments in source code. It currently exports a single component extension for use on entity pages.</p>
+</div>
+<div class="paragraph">
+<p>The main steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone and install locally</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/backstage/community-plugins" class="bare">https://github.com/backstage/community-plugins</a>
+cd community-plugins/workspaces/todo
+yarn install
+yarn tsc</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Export as dynamic plugin each module (backend, frontent):</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd plugins/todo-backend
+npx @janus-idp/cli@latest package export-dynamic-plugin
+cd ../todo
+npx @janus-idp/cli@latest package export-dynamic-plugin</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Export as container image:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ../..
+npx @janus-idp/cli@latest package package-dynamic-plugins \
+    --tag quay.io/rmarting/backstage-community-plugin-todo:v0.1.2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This process will output the default configuration of the dynamic plugin to add into Red Hat Developer Hub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">plugins:
+ - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+   pluginConfig:
+     dynamicPlugins:
+       frontend:
+         backstage-community.plugin-todo:
+           mountPoints:
+             - mountPoint: entity.page.todo/cards
+               importName: EntityTodoContent
+           entityTabs:
+             - path: /todo
+               title: Todo
+               mountPoint: entity.page.todo
+ - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+   disabled: false</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Push the image into a Container Image Registry:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rmarting/backstage-community-plugin-todo:v0.1.2</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to make public the repository.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dev_quotes_plugin"><a class="anchor" href="#_dev_quotes_plugin"></a>Dev Quotes Plugin</h3>
+<div class="paragraph">
+<p>Display some random coding/programming related quotes on the Backstage homepage.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone and install locally</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/Parsifal-M/backstage-dev-quotes" class="bare">https://github.com/Parsifal-M/backstage-dev-quotes</a>
+cd backstage-dev-quotes/
+yarn install
+yarn tsc
+yarn build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Export as dynamic plugin each module (backend, frontent):</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">npx @janus-idp/cli@latest package export-dynamic-plugin</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Export as container image:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">npx @janus-idp/cli@latest package package-dynamic-plugins \
+    --tag quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command generates the default configuration to apply:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              parsifal-m.plugin-dev-quotes-homepage:
+                mountPoints:
+                  - mountPoint: entity.page.overview/cards
+                    importName: DevQuote
+                    config:
+                      layout:
+                        gridColumnEnd:
+                          lg: span 4
+                          md: span 6
+                          xs: span 12
+                dynamicRoutes:
+                  - importName: DevQuote
+                    menuItem:
+                      text: Quote
+                    path: /devquote</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Push the image into a Container Image Registry:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to make public the repository.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dev_friend_days"><a class="anchor" href="#_dev_friend_days"></a>Dev Friend Days</h3>
+<div class="paragraph">
+<p><a href="https://github.com/piatkiewicz/backstage-plugins/tree/main/dev-friends-days" class="bare">https://github.com/piatkiewicz/backstage-plugins/tree/main/dev-friends-days</a></p>
+</div>
+<div class="paragraph">
+<p>Not it is time to install:</p>
+</div>
+<div class="paragraph">
+<p>By Operator:</p>
+</div>
+<div class="paragraph">
+<p>add the definition into the rhdh-dynamics-pluigin - github|gitlab</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+disabled: false</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enabling_the_new_plugins"><a class="anchor" href="#_enabling_the_new_plugins"></a>Enabling the new plugins</h3>
+<div class="paragraph">
+<p>Once we have the configuration for each plugin, we can apply as:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset2_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_by-helm-chart">
+<div class="paragraph">
+<p>Extend the <code>values.yaml</code> file to add the list of plugins to use and upgrade the Helm release:</p>
+</div>
+<div class="paragraph">
+<p>For GitHub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-01-github.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For GitLab:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-01-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_by-operator">
+<div class="paragraph">
+<p>For GitHub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For GitLab:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The Dev Quote is available as another menu of Red Hat Developer Hub:</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="challenge-06/rhdh-dev-quote-plugin.png" alt="rhdh dev quote plugin">
+</div>
+</div>
+<div class="paragraph">
+<p>And each component includes a new tab for the TODO plugin.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="challenge-06/rhdh-todo-plugin.png" alt="rhdh todo plugin">
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations! Your Red Hat Developer Hub is fully modular.</p>
+</div>
 </div>
 </div>
 </div>
