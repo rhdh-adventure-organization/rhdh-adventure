@@ -321,13 +321,20 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>The operator is installed in the <code>rhdh-operator</code> namespace:</p>
+<p>The operator is installed in the <code>rhdh-operator</code> namespace. This command checks it:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get csv -n rhdh-operator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output is similar to:</p>
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n rhdh-operator
-NAME                   DISPLAY                          VERSION   REPLACES               PHASE
-rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.1   Succeeded</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                   DISPLAY                          VERSION   REPLACES               PHASE
+rhdh-operator.v1.4.0   Red Hat Developer Hub Operator   1.4.0     rhdh-operator.v1.3.3   Succeeded</code></pre>
 </div>
 </div>
 </div>
@@ -350,13 +357,20 @@ OpenShift cluster.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This operator will be installed in the <code>gitlab-system</code> namespace:</p>
+<p>This operator will be installed in the <code>gitlab-system</code> namespace. This command checks it:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get csv -n gitlab-system</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output is similar to:</p>
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n gitlab-system
-NAME                                DISPLAY    VERSION   REPLACES                            PHASE
-gitlab-operator-kubernetes.v1.8.2   GitLab     1.8.2     gitlab-operator-kubernetes.v1.8.1   Succeeded</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                                DISPLAY    VERSION   REPLACES                            PHASE
+gitlab-operator-kubernetes.v1.9.0   GitLab     1.9.0     gitlab-operator-kubernetes.v1.8.3   Succeeded</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -414,9 +428,6 @@ To get the plain value of that password:</p>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./documentation/modules/ROOT/examples/setup/gitlab-setup.sh</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The initial configuration requires to push some content into GitLab, you should use the <code>user1</code> credentials to do it.</p>
-</div>
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -458,10 +469,8 @@ Create users/passwords as:
 - ...
 - userX/@abc1cde2
 
-TODO Users odd Ensure `user1` belongs to `team-a` and `user2` belongs to `team-b`.
-user even to team-b
-
-Create a repo called `sample-app` under `team-a` add the `catalog-info.yaml` and `users-groups.yaml` at the root of the repo.</code></pre>
+The users with odd numbers (e.g: `user1`, `user3`...) belong to `team-a` and the users
+with even numbers (e.g: `user2`, `user4`...) belong to `team-b`.</code></pre>
 </div>
 </div>
 </div>
@@ -477,19 +486,21 @@ This section will install the GitLab Runner operator and prepare to be used by t
 </div>
 </div>
 <div class="paragraph">
-<p>To test the installation</p>
+<p>To check the installation:</p>
 </div>
-<div class="listingblock console-output">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">on 🎩 ❯ oc get csv -n gitlab-system
-NAME                             DISPLAY         VERSION   REPLACES                         PHASE
-gitlab-runner-operator.v1.32.0   GitLab Runner   1.32.0    gitlab-runner-operator.v1.31.0   Succeeded</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get csv -n gitlab-system</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The technical docs will be created as part of the CI pipelines of the components, so
-we need to set up the GitLab instance to run pipelines and use some variables to
-identify the new bucket to store the results.</p>
+<p>With an output similar to:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                             DISPLAY         VERSION   REPLACES                         PHASE
+gitlab-runner-operator.v1.32.0   GitLab Runner   1.32.0    gitlab-runner-operator.v1.31.0   Succeeded</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Deploy a GitLab runner to run pipelines:</p>
