@@ -13,8 +13,21 @@ in the future. Let' 's dive in together! 🧞🚀
 [#declare-solution]
 == 🧞📝 Declare it Solution
 
-Any component to be registered into the Red Hat Developer Hub catalog requires a file called
-link:https://backstage.io/docs/features/software-catalog/descriptor-format/[`catalog-info.yaml`] describing it.
+Any component must be registered into the Red Hat Developer Hub catalog.
+
+The Software Catalog as its name implies, is a catalog of software components. It is designed to replace
+ad-hoc, informal systems that do not scale to handle the sprawl of modern cloud-native application ecosystems.
+Maintaining a software catalog massively simplifies the Onboarding Process for new developers joining the
+organization, or a new project. The catalog lets you discover all registered components in the catalog,
+as well as explore the APIs, the teams that own and operate them, issues, CI/CD pipeline status, and
+technical documentation in a single easily accessible place. The component information is kept up to date
+by the respective teams (in their corresponding Git repositories), and Red Hat Developer Hub periodically pulls
+the latest metadata to maintain the information in near realtime.
+
+Adding items to the catalog is done using YAML files, typically stored in source control systems like Git.
+These YAML files live alongside, and in the same source code repository as the source code of the software
+components. The way to declare a component to be loaded into the catalog is by the
+link:https://backstage.io/docs/features/software-catalog/descriptor-format/[`catalog-info.yaml`] file.
 
 Here there is a minimum example describing a sample component, for example a library:
 

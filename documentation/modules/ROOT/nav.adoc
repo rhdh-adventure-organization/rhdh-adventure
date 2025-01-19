@@ -1,4 +1,4 @@
-* xref:index.adoc[The Stages]
+* xref:index.adoc[A DevEx Adventure]
 * xref:challenge-01.adoc[🚀 The Adventure Begins]
 ** xref:challenge-01.adoc#helmchart[📦 Helm Chart]
 ** xref:challenge-01.adoc#operator[👷 Operator]
