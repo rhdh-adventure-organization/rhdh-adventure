@@ -50,7 +50,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="index.html">The Stages</a>
+    <a class="nav-link" href="index.html">A DevEx Adventure</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -190,6 +190,80 @@ Red Hat Developer Hub provides a set of examples in a repository as starting poi
 multiple examples or specific use cases not included there.</p>
 </div>
 <div class="paragraph">
+<p>Templates are defined in a YAML file with the <code>kind: Template</code> attribute. The template refers to a Git
+repository that contains files (with optional placeholders) that are processed during scaffolding.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: quarkus-web-template
+  title: Quarkus Service with ArgoCD and a Tekton Pipeline
+  description: Create a simple microservice using Quarkus with ArgoCD and a Tekton Pipeline
+  tags:
+    - recommended
+    - java
+    - quarkus
+    - maven
+spec:
+  owner: rhdh
+  type: service
+  parameters:
+    - title: Provide Information for Application
+      required:
+        - component_id
+        - java_package_name</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The template YAML file describes the metadata, the source code repositories where stubbed code and configuration
+is stored, and a series of steps that describes the things that Red Hat Developer Hub will perform to create
+a fully functional and deployable application or service from the template.</p>
+</div>
+<div class="paragraph">
+<p>These YAML files are then parsed and displayed in the Software Catalog screen of Red Hat Developer Hub.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">steps:
+    - id: template
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender:
+          - .github/workflows/*
+        values:
+          component_id: ${{ parameters.component_id }}
+          description: ${{ parameters.description }}
+          namespace: ${{ parameters.component_id }}-dev
+          group_id: ${{ parameters.group_id }}
+          artifact_id: ${{ parameters.artifact_id }}
+          java_package_name: ${{ parameters.java_package_name }}
+          owner: ${{ user.entity.metadata.name }}
+          cluster: .apps.cluster-h7z82.sandbox483.opentlc.com
+          host: ${{ parameters.repo.host }}
+          destination: ${{ parameters.repo.owner }}/${{ parameters.component_id }}
+          quay_destination: ${{ parameters.image_organization}}/${{ parameters.component_id }}
+          port: 8080
+
+    - id: publish
+      name: Publish
+      action: publish:gitlab
+      input:
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&amp;repo=${{parameters.component_id}}"
+        repoVisibility: public
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Templates can be registered from the <code>Create&#8230;&#8203;</code> menu. The <code>Register Existing Component</code> button opens
 a wizard to register the component from the remote url.</p>
 </div>
@@ -306,8 +380,17 @@ to rollout the deployment.</p>
 <h2 id="onboard-solution"><a class="anchor" href="#onboard-solution"></a>🧞🛬 Onboarding</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Creating a new component from a Software Template is a simple process.
-Here an example of usage for the Angular App Template:</p>
+<p>Developers see a list of Templates in the Software Catalog screen of Red Hat Developer Hub.
+The developer chooses a template from which to instantiate the application or service, and
+Red Hat Developer Hub will ask him a series of questions based on the template configuration.</p>
+</div>
+<div class="paragraph">
+<p>For example, assume you want to create a Angular Application using a template. You will be prompted
+for the name of the application, some basic metadata about the application, and the Git repository
+where the new application source code will be scaffolded.</p>
+</div>
+<div class="paragraph">
+<p>Here an example of usage for the Angular App Template:</p>
 </div>
 <div class="imageblock">
 <div class="content">
