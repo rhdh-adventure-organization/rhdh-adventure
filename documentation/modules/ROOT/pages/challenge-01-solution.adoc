@@ -77,6 +77,12 @@ helm upgrade --install rhdh \
     --set global.clusterRouterBase=$basedomain
 ----
 
+[WARNING]
+====
+The name used for the Helm release is `rhdh`. If you choose a different name, the commands
+included in the solution must be adapted for your Helm release name.
+====
+
 The Helm Chart will expose the Red Hat Developer Hub instance by an OpenShift router. This command
 shows the full url to the new instance deployed:
 
@@ -124,6 +130,12 @@ Applying that definition in the namespace, the operator will deploy that instanc
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-01/rhdh-instance.yaml
 ----
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+the Backstage CR manifest must be updated to the right one
+====
 
 Once the deployment is finished, the status is identified as `Deployed`. This command shows that status:
 

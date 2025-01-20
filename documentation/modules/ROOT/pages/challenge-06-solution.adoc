@@ -260,19 +260,6 @@ podman push quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1
 
 WARNING: Don't forget to make public the repository.
 
-=== Dev Friend Days
-
-https://github.com/piatkiewicz/backstage-plugins/tree/main/dev-friends-days
-
-Not it is time to install:
-
-By Operator:
-
-add the definition into the rhdh-dynamics-pluigin - github|gitlab
-
-- package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
-    disabled: false
-
 === Enabling the new plugins
 
 Once we have the configuration for each plugin, we can apply as:
@@ -305,6 +292,8 @@ helm upgrade --install rhdh \
     -f ./documentation/modules/ROOT/examples/challenge-06/values-01-gitlab.yaml \
     --set global.clusterRouterBase=$basedomain
 ----
+
+WARNING: The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name, please replace that pattern in the command with the name of your instance.
 --
 By Operator::
 +

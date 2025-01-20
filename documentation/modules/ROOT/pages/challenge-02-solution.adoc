@@ -57,6 +57,12 @@ export rhdhname=backstage-rhdh-$(oc project -q)
 --
 ====
 
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
+====
+
 The base URL of Red Hat Developer Hub will be similar to:
 
 [.console-input]
@@ -158,6 +164,12 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-02/rhdh-instance.yam
 --
 ====
 
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
+====
+
 [#title-solution]
 == 🧞©️ Title it Solution
 
@@ -220,6 +232,12 @@ Or run a restart of the `Deployment` object of Red Hat Developer Hub
 ----
 oc rollout restart deployment/rhdh-developer-hub
 ----
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 We can verify that our landing page is similar to:
@@ -299,6 +317,12 @@ Or run a restart of the `Deployment` object of Red Hat Developer Hub
 ----
 oc rollout restart deployment/rhdh-developer-hub
 ----
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 We can verify that our landing page is similar to:

@@ -29,7 +29,7 @@ data:
 
     # Authorization GitLab
     signInPage: gitlab
-    dangerouslyAllowSignInWithoutUserInCatalog: true
+    dangerouslyAllowSignInWithoutUserInCatalog: false
     auth:
       environment: production
       providers:

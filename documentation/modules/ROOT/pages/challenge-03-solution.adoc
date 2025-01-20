@@ -84,6 +84,12 @@ TIP: Use `Read and Write` permissions to enable operations from Red Hat Develope
 --
 ====
 
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
+====
+
 The private key can be generated from the settings page of the new GitHub application.
 The `generate a private key` button will generate and download one.
 
@@ -196,6 +202,12 @@ This sample configuration can be applied by:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-01.yaml
 ----
 --
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 Verify that you can log in with a GitHub user.
@@ -360,6 +372,12 @@ oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-02.
 --
 ====
 
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
+====
+
 Red Hat Developer Hub is fully integrated with GitHub for authentication and discovery.
 
 [#gitlab-auth-solution]
@@ -392,6 +410,12 @@ By Operator::
 - Redirect URI: copy output `echo https://backstage-rhdh-$(oc project -q).${basedomain}/api/auth/gitlab/handler/frame`
 - set the correct permissions: `api`, `read_user`, `read_repository`, `write_repository`, `openid`, `profile`, `email`
 --
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 Additionally, we need to create a Personal Access Token (aka PAT) to enable the full integration with GitLab.
@@ -510,6 +534,12 @@ This sample configuration can be applied by:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-01.yaml
 ----
 --
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 Verify that you can login with GitLab.
@@ -679,6 +709,12 @@ This command will apply the changes:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-02.yaml
 ----
 --
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 Red Hat Developer Hub is fully integrated with GitLab for authentication and discovery.
@@ -880,6 +916,12 @@ This command will update the Backstage definition:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-instance-03.yaml
 ----
 --
+====
+
+[WARNING]
+====
+The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name,
+please replace that pattern in the command with the name of your instance.
 ====
 
 Logout and login again using the declared policy administrator account. If RBAC is enabled, the
