@@ -728,7 +728,7 @@ data:
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
   application:
     # Other configurations
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh</code></pre>
+    dynamicPluginsConfigMapName: rhdh-dynamic-plugins</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -898,13 +898,38 @@ type: Opaque</code></pre>
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    signInPage: gitlab
     dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: production
       providers:
         gitlab:
-          development:
+          production:
             clientId: ${AUTH_GITLAB_CLIENT_ID}
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
             audience: <a href="https://gitlab.${basedomain}" class="bare">https://gitlab.${basedomain}</a></code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Notice that we set the <code>signInPage</code> to <code>gitlab</code>, the default is <code>github</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To disable guest login set the <code>environment</code> to <code>production</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1085,9 +1110,9 @@ our GitLab server.</p>
             projectPattern: '[\s\S]*' # Optional. Filters found projects based on provided patter. Defaults to `[\s\S]*`, which means to not filter anything
             schedule: # optional; same options as in TaskScheduleDefinition
               # supports cron, ISO duration, "human duration" as used in code
-              frequency: { minutes: 1 }
+              frequency: { minutes: 30 }
               # supports ISO duration, "human duration" as used in code
-              timeout: { minutes: 3 }</code></pre>
+              timeout: { minutes: 15 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1235,7 +1260,7 @@ data:
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
   application:
     # Other configurations
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh</code></pre>
+    dynamicPluginsConfigMapName: rhdh-dynamic-plugins</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1366,18 +1391,18 @@ g, group:default/team-b, role:default/team-b
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">permission:
-  enabled: true
-  rbac:
-    admin:
-      users:
-        - name: user:default/adminID
-    policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
-    policyFileReload: true
-    pluginsWithPermission:
-      - catalog
-      - scaffolder
-      - permission</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    # RBAC
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/adminID
+        policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        pluginsWithPermission:
+          - catalog
+          - scaffolder
+          - permission</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -1545,7 +1570,12 @@ data:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    extraFiles:
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">  application:
+    appConfig:
+      mountPath: /opt/app-root/src
+      configMaps:
+        - name: rhdh-app-config
+    extraFiles:
       mountPath: /opt/app-root/src/rbac
       configMaps:
         - name: rbac-policies

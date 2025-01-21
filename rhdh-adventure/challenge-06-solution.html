@@ -294,7 +294,7 @@ data:
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
   application:
     # Other configurations
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh</code></pre>
+    dynamicPluginsConfigMapName: rhdh-dynamic-plugins</code></pre>
 </div>
 </div>
 </div>
@@ -414,21 +414,21 @@ npx @janus-idp/cli@latest package package-dynamic-plugins \
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">plugins:
- - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
-   pluginConfig:
-     dynamicPlugins:
-       frontend:
-         backstage-community.plugin-todo:
-           mountPoints:
-             - mountPoint: entity.page.todo/cards
-               importName: EntityTodoContent
-           entityTabs:
-             - path: /todo
-               title: Todo
-               mountPoint: entity.page.todo
- - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
-   disabled: false</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    plugins:
+      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              backstage-community.plugin-todo:
+                mountPoints:
+                  - mountPoint: entity.page.todo/cards
+                    importName: EntityTodoContent
+                entityTabs:
+                  - path: /todo
+                    title: Todo
+                    mountPoint: entity.page.todo
+      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+        disabled: false</code></pre>
 </div>
 </div>
 <div class="olist arabic">
