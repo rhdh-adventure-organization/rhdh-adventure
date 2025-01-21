@@ -359,7 +359,7 @@ Update the Red Hat Developer Hub manifest to use the new ConfigMap for plugins:
 spec:
   application:
     # Other configurations
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+    dynamicPluginsConfigMapName: rhdh-dynamic-plugins
 ----
 
 This command will apply the changes:
@@ -450,13 +450,18 @@ Modify `rhdh-app-config` section of the `rhdh-app-config` ConfigMap with environ
     signInPage: gitlab
     dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
+      environment: production
       providers:
         gitlab:
-          development:
+          production:
             clientId: ${AUTH_GITLAB_CLIENT_ID}
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
             audience: https://gitlab.${basedomain}
 ----
+
+NOTE: Notice that we set the `signInPage` to `gitlab`, the default is `github`.
+
+TIP: To disable guest login set the `environment` to `production`.
 
 WARNING: If you are using the public GitLab instance, don't add the `audience` property.
 
@@ -586,9 +591,9 @@ Add the catalog definition to the `app-config-rhdh` ConfigMap:
             projectPattern: '[\s\S]*' # Optional. Filters found projects based on provided patter. Defaults to `[\s\S]*`, which means to not filter anything
             schedule: # optional; same options as in TaskScheduleDefinition
               # supports cron, ISO duration, "human duration" as used in code
-              frequency: { minutes: 1 }
+              frequency: { minutes: 30 }
               # supports ISO duration, "human duration" as used in code
-              timeout: { minutes: 3 }
+              timeout: { minutes: 15 }
 ----
 
 The Red Hat Developer Hub catalog can be set up to ingest organizational data -- users and groups -- directly from GitLab.
@@ -698,7 +703,7 @@ Update the Red Hat Developer Hub manifest to use the new ConfigMap for plugins:
 spec:
   application:
     # Other configurations
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+    dynamicPluginsConfigMapName: rhdh-dynamic-plugins
 ```
 
 This command will apply the changes:
@@ -746,18 +751,18 @@ Declare the policies file as part of the configuration inside the `app-config-rh
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-permission:
-  enabled: true
-  rbac:
-    admin:
-      users:
-        - name: user:default/adminID
-    policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
-    policyFileReload: true
-    pluginsWithPermission:
-      - catalog
-      - scaffolder
-      - permission
+    # RBAC
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/adminID
+        policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        pluginsWithPermission:
+          - catalog
+          - scaffolder
+          - permission
 ----
 
 TIP: Declare one user of your organization as the default administrator. Replace `adminID` with a valid value.
@@ -901,6 +906,11 @@ Mount the policies file in the `Backstage` manifests as:
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
+  application:
+    appConfig:
+      mountPath: /opt/app-root/src
+      configMaps:
+        - name: rhdh-app-config
     extraFiles:
       mountPath: /opt/app-root/src/rbac
       configMaps:

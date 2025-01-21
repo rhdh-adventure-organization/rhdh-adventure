@@ -89,7 +89,7 @@ Update the Red Hat Developer Hub manifest to use the new ConfigMap for plugins:
 spec:
   application:
     # Other configurations
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+    dynamicPluginsConfigMapName: rhdh-dynamic-plugins
 ----
 --
 ====
@@ -163,21 +163,21 @@ This process will output the default configuration of the dynamic plugin to add 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-plugins:
- - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
-   pluginConfig:
-     dynamicPlugins:
-       frontend:
-         backstage-community.plugin-todo:
-           mountPoints:
-             - mountPoint: entity.page.todo/cards
-               importName: EntityTodoContent
-           entityTabs:
-             - path: /todo
-               title: Todo
-               mountPoint: entity.page.todo
- - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
-   disabled: false
+    plugins:
+      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              backstage-community.plugin-todo:
+                mountPoints:
+                  - mountPoint: entity.page.todo/cards
+                    importName: EntityTodoContent
+                entityTabs:
+                  - path: /todo
+                    title: Todo
+                    mountPoint: entity.page.todo
+      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+        disabled: false
 ----
 
 4. Push the image into a Container Image Registry:
