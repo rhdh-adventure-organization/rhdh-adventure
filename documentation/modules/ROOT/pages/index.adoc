@@ -76,7 +76,7 @@ starts here. The only question is: which challenge will you tackle first?
 Let the adventure begin! 🚀
 
 [#downloadtutorial]
-== Get tutorial sources
+=== Get tutorial sources
 
 The OpenShift cluster includes a web terminal UI with a set of tools installed, such as: `oc`, or `git` commands.
 The web terminal is available from the button located in the top navigation bar of the OpenShift Web Console:
