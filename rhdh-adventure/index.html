@@ -246,6 +246,42 @@ starts here. The only question is: which challenge will you tackle first?</p>
 <div class="paragraph">
 <p>Let the adventure begin! 🚀</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="downloadtutorial"><a class="anchor" href="#downloadtutorial"></a>Get tutorial sources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift cluster includes a web terminal UI with a set of tools installed, such as: <code>oc</code>, or <code>git</code> commands.
+The web terminal is available from the button located in the top navigation bar of the OpenShift Web Console:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/setup/ocp-terminal-ui-button.png" alt="Web Terminal UI button"></span></p>
+</div>
+<div class="paragraph">
+<p>Clicking it the web terminal is launched and allowing you interact with OpenShift directly. The OpenShift Web Console looks like this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/setup/ocp-terminal-ui-dashboard.png" alt="Web Terminal UI opened"></span></p>
+</div>
+<div class="paragraph">
+<p>Before we start setting up the environment, let’s clone the tutorial sources and set the <code>TUTORIAL_HOME</code> environment variable to point to the root directory of the tutorial:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/rmarting/rhdh-adventure.git" class="bare">https://github.com/rmarting/rhdh-adventure.git</a> rhdh-adventure</code></pre>
+</div>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export TUTORIAL_HOME="$(pwd)/rhdh-adventure"</code></pre>
+</div>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd $TUTORIAL_HOME</code></pre>
+</div>
+</div>
 <div class="sect2 tiles browse">
 <h3 id="_is_openshift_ready"><a class="anchor" href="#_is_openshift_ready"></a>Is OpenShift Ready?</h3>
 <div class="paragraph">
@@ -258,7 +294,7 @@ starts here. The only question is: which challenge will you tackle first?</p>
   <span class="next"><a href="challenge-01.html">🚀 The Adventure Begins</a></span>
 </nav>
 </article>
-<aside class="toc sidebar" data-title="Contents" data-levels="1">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
   </div>
