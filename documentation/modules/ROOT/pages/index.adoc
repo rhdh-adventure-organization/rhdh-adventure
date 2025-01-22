@@ -1,4 +1,5 @@
 = Welcome to Red Hat Developer Hub Adventure
+include::_attributes.adoc[]
 :page-layout: home
 :page-toclevels: 1
 
@@ -73,6 +74,20 @@ step into this adventure with Red Hat Developer Hub. From zero to hero, the Deve
 starts here. The only question is: which challenge will you tackle first?
 
 Let the adventure begin! 🚀
+
+[#downloadtutorial]
+== Get tutorial sources
+
+The OpenShift cluster includes a web terminal UI with a set of tools installed, such as: `oc`, or `git` commands.
+The web terminal is available from the button located in the top navigation bar of the OpenShift Web Console:
+
+image:setup/ocp-terminal-ui-button.png[Web Terminal UI button]
+
+Clicking it the web terminal is launched and allowing you interact with OpenShift directly. The OpenShift Web Console looks like this:
+
+image:setup/ocp-terminal-ui-dashboard.png[Web Terminal UI opened]
+
+include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/download-sources.adoc[]
 
 [.tiles.browse]
 === Is OpenShift Ready?

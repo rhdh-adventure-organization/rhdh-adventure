@@ -24,11 +24,6 @@ Please have them installed and configured before you get started with any of the
 
 |===
 
-[#downloadtutorial]
-== Get tutorial sources
-
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/download-sources.adoc[]
-
 [#ocpsetup]
 == Set up OpenShift
 
@@ -323,4 +318,41 @@ For example, we can provide cluster roles to view and edit them as:
 ----
 oc adm policy add-cluster-role-to-user monitoring-rules-view <user> -n <namespace>
 oc adm policy add-cluster-role-to-user monitoring-edit <user> -n <namespace>
+----
+
+[#ocpsetup-webterminal]
+### Install Web Terminal Operator
+
+This is an adventure about Red Hat Developer Hub and there is a challenge to play with the features
+provided by the Operator. Install the operator is just apply the next manifest:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$/setup/web-terminal-operator.yaml[]
+----
+
+This is the command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/setup/web-terminal-operator.yaml
+----
+
+The operator is installed in the `rhdh-operator` namespace. This command checks it:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc get csv -n openshift-operators
+----
+
+The output is similar to:
+
+[.console-output]
+[source, bash, subs="+macros,+attributes"]
+----
+NAME                   DISPLAY          VERSION   REPLACES               PHASE
+web-terminal.v1.11.0   Web Terminal     1.11.0    web-terminal.v1.10.1   Succeeded
 ----
