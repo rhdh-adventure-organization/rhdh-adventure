@@ -34,6 +34,7 @@ To resolve this challenge you can start checking the following references:
 * link:https://redhatquickcourses.github.io/devhub-intro/devhub-intro/1/features/catalog.html[Introduction to Software Catalog]
 * link:https://redhatquickcourses.github.io/devhub-build/devhub-build/1/chapter1/catalog.html[A deeper dive into Red Hat Developer Hub Software Catalog]
 * link:https://backstage.io/docs/features/software-catalog/[What is a Software Catalog?]
+* link:https://developers.redhat.com/learn/streamline-development-github-integration-and-software-templates-red-hat-developer-hub[Streamline Development: GitHub Integration and Software Templates in Red Hat Developer Hub]
 
 [#declare-solution]
 === 🧞📝 Declare it Solution

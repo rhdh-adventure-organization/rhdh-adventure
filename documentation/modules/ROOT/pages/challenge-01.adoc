@@ -36,6 +36,7 @@ To resolve this challenge you can start checking the following references:
 
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/installing_red_hat_developer_hub_on_openshift_container_platform/assembly-install-rhdh-ocp-helm[Installing Red Hat Developer Hub on OpenShift with the Helm Chart]
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/upgrading_red_hat_developer_hub/proc-upgrade-rhdh-helm_title-upgrade-rhdh[Upgrading the Red Hat Developer Hub Helm Chart]
+* link:https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide[Deploying and Troubleshooting Red Hat Developer Hub on OpenShift: A Practical Guide]
 
 [#helm-solution]
 === 🧞📦 Helm Chart Solution
@@ -60,6 +61,7 @@ To resolve this challenge you can start checking the following references:
 
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/installing_red_hat_developer_hub_on_openshift_container_platform/assembly-install-rhdh-ocp-operator[Installing Red Hat Developer Hub on OpenShift with the Operator]
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/upgrading_red_hat_developer_hub/proc-upgrade-rhdh-operator_title-upgrade-rhdh[Upgrading the Red Hat Developer Hub]
+* link:https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide[Deploying and Troubleshooting Red Hat Developer Hub on OpenShift: A Practical Guide]
 
 [#operator-solution]
 === 🧞👷 Operator Solution

@@ -42,6 +42,7 @@ To resolve this challenge you can start checking the following references:
 
 * link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/authentication/authenticating-with-github[Authenticating with GitHub]
 * link:https://backstage.io/docs/auth/github/provider/[GitHub Authentication Provider]
+* link:https://developers.redhat.com/learn/streamline-development-github-integration-and-software-templates-red-hat-developer-hub[Streamline Development: GitHub Integration and Software Templates in Red Hat Developer Hub]
 
 [#github-auth-solution]
 === 🧞🔑 Authentication with GitHub Solution
