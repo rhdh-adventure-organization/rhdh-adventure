@@ -55,6 +55,8 @@ spec:
 
 Choose a repository in your GitHub or GitLab instance and add a similar file in that repo.
 
+CAUTION: The repository must be public to be accessible (public visibility) to be added into the catalog.
+
 [#import-solution]
 == 🧞📂 Import it
 
