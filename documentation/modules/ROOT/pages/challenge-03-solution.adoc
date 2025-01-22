@@ -112,7 +112,7 @@ You can apply your changes with this command:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/git-secrets-github.yaml
 ----
 
-Modify `rhdh-app-config` section of the `rhdh-app-config` ConfigMap with environment variables from the new secret:
+Modify `rhdh-app-config` ConfigMap to add the authentication block (as the same level of the `app` block) as:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
@@ -442,7 +442,7 @@ You can apply your changes with this command:
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/git-secrets-gitlab.yaml
 ----
 
-Modify `rhdh-app-config` section of the `rhdh-app-config` ConfigMap with environment variables from the new secret:
+Modify `rhdh-app-config` ConfigMap to add the authentication block (as the same level of the `app` block) as:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
