@@ -563,7 +563,7 @@ Add the following integration configuration to the `app-config-rhdh` ConfigMap:
     integrations:
       gitlab:
         - host: gitlab.${basedomain}
-          token: ${GITLAB_TOKEN}
+          token: ${AUTH_GITLAB_TOKEN}
           apiBaseUrl: https://gitlab.${basedomain}/api/v4
           baseUrl: https://gitlab.${basedomain} # or your gitlab instance url
 ----
