@@ -29,7 +29,13 @@ It's time to unlock new capabilities and let your Red Hat Developer Hub reach it
 Red Hat Developer Hub is very modular and it is easy to install and integrate multiple different plugins
 to improve the developer experience. There is a long list of different plugins allowed to be deployed on top
 of Red Hat Developer Hub, which one do you want to install?
-Choose one, configure it and deploy it in your instance. It will be fun!!!
+
+Choose one, configure it and deploy it in your instance. For example:
+
+* link:https://github.com/backstage/community-plugins/tree/main/workspaces/todo[Backstage Community TODO Plugin]
+* link:https://github.com/Parsifal-M/backstage-dev-quotes[Dev Quotes Plugin]
+
+It will be fun!!!
 
 To resolve this challenge you can start checking the following references:
 

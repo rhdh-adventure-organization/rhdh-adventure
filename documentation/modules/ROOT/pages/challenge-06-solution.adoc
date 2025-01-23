@@ -39,7 +39,7 @@ section of Red Hat Developer Hub.
 
 NOTE: Red Hat fully supports certain plugins (Topology, Tekton, Quay), while others are community-supported projects.
 
-Enabling or disabling dynamic plugins is based in the link:https://github.com/backstage/backstage/tree/master/packages/backend-dynamic-feature-service[backend plugin manger]
+Enabling or disabling dynamic plugins is based in the link:https://github.com/backstage/backstage/tree/master/packages/backend-dynamic-feature-service[backend plugin manager]
 package, which is a service that scans a configured root directory (`dynamicPlugins.rootDirectory` in the `app-config.yaml`)
 for dynamic plugin packages, and loads them dynamically.
 
