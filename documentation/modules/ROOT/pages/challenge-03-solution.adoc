@@ -893,12 +893,20 @@ data:
         disabled: false
 ----
 
-Apply the new list of dynamic plugins:
+To apply this configuration for GitHub use this command:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
 oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-dynamic-plugins-cm-github-02.yaml
+----
+
+In the case of GitLab use this command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-03/rhdh-dynamic-plugins-cm-gitlab-02.yaml
 ----
 
 Mount the policies file in the `Backstage` manifests as:
