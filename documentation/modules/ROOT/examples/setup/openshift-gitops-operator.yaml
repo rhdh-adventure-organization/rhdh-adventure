@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-gitops-operator
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: AnalysisRun.v1alpha1.argoproj.io,AnalysisTemplate.v1alpha1.argoproj.io,AppProject.v1alpha1.argoproj.io,Application.v1alpha1.argoproj.io,ApplicationSet.v1alpha1.argoproj.io,ArgoCD.v1alpha1.argoproj.io,ArgoCD.v1beta1.argoproj.io,ClusterAnalysisTemplate.v1alpha1.argoproj.io,Experiment.v1alpha1.argoproj.io,GitopsService.v1alpha1.pipelines.openshift.io,NotificationsConfiguration.v1alpha1.argoproj.io,Rollout.v1alpha1.argoproj.io,RolloutManager.v1alpha1.argoproj.io
+  name: openshift-gitops-operator-og
+  namespace: openshift-gitops-operator
+spec:
+  upgradeStrategy: Default
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    operators.coreos.com/openshift-gitops-operator.openshift-gitops-operator: ""
+  name: openshift-gitops-operator
+  namespace: openshift-gitops-operator
+spec:
+  name: openshift-gitops-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  channel: latest
+  startingCSV: openshift-gitops-operator.v1.15.0
+  installPlanApproval: Automatic

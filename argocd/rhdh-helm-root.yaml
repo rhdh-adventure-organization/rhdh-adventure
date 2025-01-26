@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rhdh-root
+  name: rhdh-helm-root
   namespace: openshift-gitops
 spec:
   project: rhdh-adventure
