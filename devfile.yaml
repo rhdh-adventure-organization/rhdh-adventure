@@ -1,20 +1,42 @@
 schemaVersion: 2.2.0
 metadata:
   name: rhdh-the-adventure-dev
+  version: 1.0.0
+  description: Devfile for developing this repository
+  tags:
+    - Asciidoc
+    - Antora
+projects:
+  - name: rhdh-the-adventure
+    source:
+      type: git
+      location: "./" # Clones the current repository
+      branch: main
 components:
-  - name: git-source
-    type: git
-    attributes:
-      remotes:
-        origin: "./" # Clones the current repository
-  - name: vscode-editor
-    type: cheEditor
-    attributes:
-      ide: vscode
-      extensions:
-        - redhat.vscode-yaml
-        #- davidanson.vscode-markdownlint
-        #- streetsidesoftware.code-spell-checker
+  - name: dev-container
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 512Mi
+      #mountSources: true
+      #command: ["npm"]
+      #args: ["start"]
+      #volumeMounts:
+      #  - name: node-modules
+      #    path: "/projects/node_modules"
+      #endpoints:
+      #  - name: "app"
+      #    targetPort: 3000
+      #    exposure: public
+      #    protocol: http
+
+  #- name: vscode-editor
+  #  type: cheEditor
+  #  attributes:
+  #    ide: vscode
+  #    extensions:
+  #      - redhat.vscode-yaml
+  #      #- davidanson.vscode-markdownlint
+  #      #- streetsidesoftware.code-spell-checker
 #commands:
 #  - id: open-vscode
 #    exec:
