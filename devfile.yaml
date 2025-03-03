@@ -10,7 +10,7 @@ projects:
   - name: rhdh-the-adventure
     git:
       remotes:
-        origin: "./" # Clones the current repository
+        origin: "https://github.com/rmarting/rhdh-adventure.git"
       checkoutFrom:
         revision: main
 components:
