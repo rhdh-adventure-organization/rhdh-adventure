@@ -1,0 +1,26 @@
+schemaVersion: 2.2.0
+metadata:
+  name: rhdh-the-adventure-dev
+components:
+  - name: git-source
+    type: git
+    attributes:
+      remotes:
+        origin: "./" # Clones the current repository
+  - name: vscode-editor
+    type: cheEditor
+    attributes:
+      ide: vscode
+      extensions:
+        - redhat.vscode-yaml
+        #- davidanson.vscode-markdownlint
+        #- streetsidesoftware.code-spell-checker
+#commands:
+#  - id: open-vscode
+#    exec:
+#      component: vscode-editor
+#      commandLine: "code ."
+#      workingDir: "${CHE_PROJECTS_ROOT}" # Use the root project directory
+#      group:
+#        kind: devDefault
+#        isDefault: true
