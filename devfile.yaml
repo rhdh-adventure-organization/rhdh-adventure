@@ -18,10 +18,10 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 512Mi
-      mountSources: true
-      volumeMounts:
-        - name: node-modules
-          path: "/projects/rhdh-adventure/node_modules"
+      #mountSources: true
+      #volumeMounts:
+      #  - name: node-modules
+      #    path: "/projects/rhdh-adventure/node_modules"
       endpoints:
         - name: "site"
           targetPort: 3000
@@ -69,6 +69,6 @@ events:
   #    exec:
   #      component: nodejs
   #      commandLine: "npm run clean"
-volumes:
-  - name: node-modules
-    size: 1Gi
+#volumes:
+#  - name: node-modules
+#    size: 1Gi
