@@ -7,7 +7,7 @@ metadata:
     - Asciidoc
     - Antora
 projects:
-  - name: rhdh-the-adventure
+  - name: rhdh-adventure
     git:
       remotes:
         origin: "https://github.com/rmarting/rhdh-adventure.git"
@@ -39,7 +39,7 @@ commands:
   - id: install-gulp
     exec:
       component: dev-container
-      commandLine: "npm install"
+      commandLine: "npm install -g gulp-cli"
       workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
       group:
         kind: build
