@@ -14,16 +14,16 @@ projects:
       checkoutFrom:
         revision: master
 components:
-  - name: dev-container
+  - name: devtools
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 512Mi
-      #mountSources: true
+      mountSources: true
       #volumeMounts:
       #  - name: node-modules
       #    path: "/projects/rhdh-adventure/node_modules"
       endpoints:
-        - name: "site"
+        - name: devtools
           targetPort: 3000
           exposure: public
           protocol: http
@@ -38,23 +38,23 @@ components:
 commands:
   - id: install-gulp
     exec:
-      component: dev-container
+      component: devtools
       commandLine: "npm install -g gulp-cli"
-      workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
+      workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
   - id: install-npm
     exec:
-      component: dev-container
+      component: devtools
       commandLine: "npm install"
-      workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
+      workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
   - id: run-dev-site
     exec:
-      component: dev-container
+      component: devtools
       commandLine: "gulp"
-      workingDir: "/projects/rhdh-adventure"
+      workingDir: ${PROJECT_SOURCE}
       group:
         kind: run
         isDefault: true
