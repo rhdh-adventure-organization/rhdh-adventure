@@ -58,15 +58,15 @@ commands:
       group:
         kind: run
         isDefault: true
-events:
-  preStart:
-    - install-gulp
-    - install-npm
-  #postStop:
-  #  - id: cleanup
-  #    exec:
-  #      component: nodejs
-  #      commandLine: "npm run clean"
+#events:
+#  preStart:
+#    - install-gulp
+#    - install-npm
+#  #postStop:
+#  #  - id: cleanup
+#  #    exec:
+#  #      component: nodejs
+#  #      commandLine: "npm run clean"
 #volumes:
 #  - name: node-modules
 #    size: 1Gi
