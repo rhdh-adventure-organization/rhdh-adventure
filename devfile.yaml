@@ -43,7 +43,6 @@ commands:
       workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
       group:
         kind: build
-        isDefault: true
   - id: install-npm
     exec:
       component: dev-container
@@ -51,7 +50,6 @@ commands:
       workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
       group:
         kind: build
-        isDefault: true
   - id: run-dev-site
     exec:
       component: dev-container
@@ -63,7 +61,7 @@ commands:
 events:
   preStart:
     - install-gulp
-    - install
+    - install-npm
   #postStop:
   #  - id: cleanup
   #    exec:
