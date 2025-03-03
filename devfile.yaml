@@ -12,24 +12,21 @@ projects:
       remotes:
         origin: "https://github.com/rmarting/rhdh-adventure.git"
       checkoutFrom:
-        revision: main
+        revision: master
 components:
   - name: dev-container
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 512Mi
-      #mountSources: true
-      #command: ["npm"]
-      #args: ["start"]
-      #volumeMounts:
-      #  - name: node-modules
-      #    path: "/projects/node_modules"
-      #endpoints:
-      #  - name: "app"
-      #    targetPort: 3000
-      #    exposure: public
-      #    protocol: http
-
+      mountSources: true
+      volumeMounts:
+        - name: node-modules
+          path: "/projects/rhdh-adventure/node_modules"
+      endpoints:
+        - name: "site"
+          targetPort: 3000
+          exposure: public
+          protocol: http
   #- name: vscode-editor
   #  type: cheEditor
   #  attributes:
@@ -38,12 +35,40 @@ components:
   #      - redhat.vscode-yaml
   #      #- davidanson.vscode-markdownlint
   #      #- streetsidesoftware.code-spell-checker
-#commands:
-#  - id: open-vscode
-#    exec:
-#      component: vscode-editor
-#      commandLine: "code ."
-#      workingDir: "${CHE_PROJECTS_ROOT}" # Use the root project directory
-#      group:
-#        kind: devDefault
-#        isDefault: true
+commands:
+  - id: install-gulp
+    exec:
+      component: dev-container
+      commandLine: "npm install"
+      workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
+      group:
+        kind: build
+        isDefault: true
+  - id: install-npm
+    exec:
+      component: dev-container
+      commandLine: "npm install"
+      workingDir: "/projects/rhdh-adventure" # "${CHE_PROJECTS_ROOT}" # Use the root project directory
+      group:
+        kind: build
+        isDefault: true
+  - id: run-dev-site
+    exec:
+      component: dev-container
+      commandLine: "gulp"
+      workingDir: "/projects/rhdh-adventure"
+      group:
+        kind: run
+        isDefault: true
+events:
+  preStart:
+    - install-gulp
+    - install
+  #postStop:
+  #  - id: cleanup
+  #    exec:
+  #      component: nodejs
+  #      commandLine: "npm run clean"
+volumes:
+  - name: node-modules
+    size: 1Gi
