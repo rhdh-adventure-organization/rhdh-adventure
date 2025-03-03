@@ -8,10 +8,11 @@ metadata:
     - Antora
 projects:
   - name: rhdh-the-adventure
-    source:
-      type: git
-      location: "./" # Clones the current repository
-      branch: main
+    git:
+      remotes:
+        origin: "./" # Clones the current repository
+      checkoutFrom:
+        revision: main
 components:
   - name: dev-container
     container:
