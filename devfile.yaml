@@ -50,12 +50,6 @@ commands:
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
-  - id: setup-workspace
-    composite:
-      commands:
-        - npm-install-gulp
-        - npm-install
-      parallel: false
   - id: run-local-site
     exec:
       component: devtools
@@ -64,14 +58,6 @@ commands:
       group:
         kind: run
         isDefault: true
-events:
-  postStart:
-    - setup-workspace
-#  #postStop:
-#  #  - id: cleanup
-#  #    exec:
-#  #      component: nodejs
-#  #      commandLine: "npm run clean"
 #volumes:
 #  - name: node-modules
 #    size: 1Gi
