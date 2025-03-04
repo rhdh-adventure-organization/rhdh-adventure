@@ -58,10 +58,10 @@ commands:
       group:
         kind: run
         isDefault: true
-#events:
-#  preStart:
-#    - install-gulp
-#    - install-npm
+events:
+  preStart:
+    - install-gulp
+    - install-npm
 #  #postStop:
 #  #  - id: cleanup
 #  #    exec:
