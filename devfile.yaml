@@ -64,7 +64,7 @@ commands:
         kind: run
         isDefault: true
 events:
-  preStart:
+  postStart:
     - setup-workspace
 #  #postStop:
 #  #  - id: cleanup
