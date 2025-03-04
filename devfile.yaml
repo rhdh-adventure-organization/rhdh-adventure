@@ -1,4 +1,4 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.3.0
 metadata:
   name: rhdh-the-adventure-dev
   version: 1.0.0
@@ -23,10 +23,10 @@ components:
       #  - name: node-modules
       #    path: "/projects/rhdh-adventure/node_modules"
       endpoints:
-        - name: devtools
+        - name: nodejs
           targetPort: 3000
           exposure: public
-          protocol: http
+          protocol: https
   #- name: vscode-editor
   #  type: cheEditor
   #  attributes:
@@ -55,6 +55,7 @@ commands:
       commands:
         - npm-install-gulp
         - npm-install
+      parallel: false
   - id: run-local-site
     exec:
       component: devtools
