@@ -1,6 +1,7 @@
 # Red Hat Developer Hub Adventure
 
-[![Open](https://img.shields.io/static/v1?label=open%20in&message=developer%20sandbox&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com/#https://github.com/rmarting/rhdh-adventure.git)
+[link=https://workspaces.openshift.com/#https://github.com/rmarting/rhdh-adventure.git]
+image::https://img.shields.io/static/v1?label=open%20in&message=developer%20sandbox&logo=eclipseche&color=FDB940&labelColor=525C86[Open Workspace]
 
 ## 🌟 Mission
 
