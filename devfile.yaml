@@ -36,21 +36,26 @@ components:
   #      #- davidanson.vscode-markdownlint
   #      #- streetsidesoftware.code-spell-checker
 commands:
-  - id: install-gulp
+  - id: npm-install-gulp
     exec:
       component: devtools
       commandLine: "npm install -g gulp-cli"
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
-  - id: install-npm
+  - id: npm-install
     exec:
       component: devtools
       commandLine: "npm install"
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
-  - id: run-dev-site
+  - id: setup-workspace
+    composite:
+      commands:
+        - npm-install-gulp
+        - npm-install
+  - id: run-local-site
     exec:
       component: devtools
       commandLine: "gulp"
@@ -60,8 +65,7 @@ commands:
         isDefault: true
 events:
   preStart:
-    - install-gulp
-    - install-npm
+    - setup-workspace
 #  #postStop:
 #  #  - id: cleanup
 #  #    exec:
