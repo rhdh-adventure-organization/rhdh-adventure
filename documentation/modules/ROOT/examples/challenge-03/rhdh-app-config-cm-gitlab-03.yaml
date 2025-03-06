@@ -76,7 +76,7 @@ data:
       rbac:
         admin:
           users:
-            - name: user:default/adminID
+            - name: user:default/root
         policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
         pluginsWithPermission:
           - catalog
