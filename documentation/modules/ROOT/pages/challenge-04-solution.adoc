@@ -46,7 +46,6 @@ metadata:
   annotations:
     backstage.io/kubernetes-id: sample-library
     backstage.io/techdocs-ref: dir:.
-    github.com/project-slug: rhdh-adventure-organization/sample-library
 spec:
   type: library
   lifecycle: production

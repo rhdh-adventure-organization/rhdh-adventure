@@ -89,7 +89,7 @@ data:
       rbac:
         admin:
           users:
-            #- name: user:default/adminID
+            - name: user:default/adminID
             - name: user:default/rmarting
         policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
         policyFileReload: true

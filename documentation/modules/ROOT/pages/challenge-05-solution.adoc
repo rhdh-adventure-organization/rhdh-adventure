@@ -110,10 +110,10 @@ Software Template url: `https://github.com/rhdh-adventure-organization/angular-t
 GitLab::
 +
 --
-For example, this is a link:https://github.com/rhdh-adventure-organization/node-template-gl[software template]
-for a Node.JS app. Register it by the UI.
+For example, this is a link:https://github.com/rhdh-adventure-organization/angular-template-gl[software template]
+for an Angular app. Register it by the UI.
 
-Software Template url: `https://github.com/rhdh-adventure-organization/node-template-gl/blob/main/template.yaml`
+Software Template url: `https://github.com/rhdh-adventure-organization/angular-template-gl/blob/main/template.yaml`
 --
 ====
 
