@@ -5,7 +5,7 @@ image::https://img.shields.io/static/v1?label=open%20in&message=developer%20sand
 
 ## 🌟 Mission
 
-This is a workshop or an adventure to introduce your teams in features and capabilities
+This is an adventure to introduce your teams in features and capabilities
 of Red Hat Developer Hub improving Developer Experience and Developer Productivity.
 
 ## 🏃‍♀️ Running locally
@@ -26,7 +26,7 @@ npm install
 
 3. Start the _dev_ environment:
 
-```bash
+```shell
 gulp
 ```
 
