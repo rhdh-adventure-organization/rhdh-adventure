@@ -10,7 +10,7 @@ projects:
   - name: rhdh-adventure
     git:
       remotes:
-        origin: "https://github.com/rmarting/rhdh-adventure.git"
+        origin: "https://github.com/rhdh-adventure-organization/rhdh-adventure.git"
       checkoutFrom:
         revision: master
 components:

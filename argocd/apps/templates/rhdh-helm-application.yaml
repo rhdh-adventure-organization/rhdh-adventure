@@ -12,7 +12,7 @@ spec:
       helm:
       valueFiles:
         - $values/argocd/rhdh-helm/values.yaml
-    - repoURL: 'https://github.com/rmarting/rhdh-adventure.git'
+    - repoURL: 'https://github.com/rhdh-adventure-organization/rhdh-adventure.git'
       targetRevision: master
       ref: values
   destination:

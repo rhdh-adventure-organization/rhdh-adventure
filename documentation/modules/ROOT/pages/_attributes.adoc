@@ -1,7 +1,7 @@
 :experimental:
 :source-highlighter: highlightjs
 :profile: rhdh-adventure
-:tutorial-url: https://github.com/rmarting/rhdh-adventure.git
+:tutorial-url: https://github.com/rhdh-adventure-organization/rhdh-adventure.git
 :folder: rhdh-adventure
 
 :ocp-version: 4.16.9

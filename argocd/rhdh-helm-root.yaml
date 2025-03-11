@@ -6,7 +6,7 @@ metadata:
 spec:
   project: rhdh-adventure
   source:
-    repoURL: 'https://github.com/rmarting/rhdh-adventure.git'
+    repoURL: 'https://github.com/rhdh-adventure-organization/rhdh-adventure.git'
     targetRevision: master
     path: "argocd/apps"
   destination:
