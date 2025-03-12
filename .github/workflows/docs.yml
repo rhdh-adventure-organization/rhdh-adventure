@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'documentation/**/*'
-      - 'lib/**/*'
-      - 'supplemental-ui/**/*'
-      - 'site.yml'
     paths-ignore:
       - 'README.adoc'
       - 'CHANGELOG.md'
