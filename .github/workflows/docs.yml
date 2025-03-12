@@ -1,9 +1,20 @@
-name: docs
+name: 🌐 Build and publish GitHub pages site
 
 on:
   push:
     branches:
       - master
+    paths:
+      - 'documentation/**/*'
+      - 'lib/**/*'
+      - 'supplemental-ui/**/*'
+      - 'site.yml'
+    paths-ignore:
+      - 'README.adoc'
+      - 'CHANGELOG.md'
+      - 'CONTRIBUTING.md'
+      - 'CONTRIBUTORS.adoc'
+      - 'CODE_OF_CONDUCT.md'
 
 permissions:
   contents: write
@@ -42,7 +53,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
-          # ACCESS_TOKEN: # optional
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FOLDER: "${{ env.SITE_DIR }}"
           BRANCH: "gh-pages"
