@@ -17,7 +17,7 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.2
       - name: "Generate site using antora site action"
         uses: kameshsampath/antora-site-action@master
         with:
@@ -33,7 +33,7 @@ jobs:
     name: "Deploy GitHub Pages"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkoutv4.2.2
       - name: Download generated site
         uses: actions/download-artifact@v4
         with:
