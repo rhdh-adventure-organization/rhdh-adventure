@@ -136,7 +136,7 @@ The output is similar to:
 [source, bash, subs="+macros,+attributes"]
 ----
 NAME                                DISPLAY    VERSION   REPLACES                            PHASE
-gitlab-operator-kubernetes.v1.10.1  GitLab     1.10.1    gitlab-operator-kubernetes.v1.10.0  Succeeded
+gitlab-operator-kubernetes.v1.10.2  GitLab     1.10.2    gitlab-operator-kubernetes.v1.10.1  Succeeded
 ----
 
 To install a local instance of GitLab this command will create one. It will the base domain of the
