@@ -155,7 +155,7 @@ npx @janus-idp/cli@latest package export-dynamic-plugin
 ----
 cd ../..
 npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rmarting/backstage-community-plugin-todo:v0.1.2
+    --tag quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2
 ----
 
 This process will output the default configuration of the dynamic plugin to add into Red Hat Developer Hub:
@@ -164,7 +164,7 @@ This process will output the default configuration of the dynamic plugin to add 
 [source, yaml, subs="+macros,+attributes"]
 ----
     plugins:
-      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
         pluginConfig:
           dynamicPlugins:
             frontend:
@@ -176,7 +176,7 @@ This process will output the default configuration of the dynamic plugin to add 
                   - path: /todo
                     title: Todo
                     mountPoint: entity.page.todo
-      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
         disabled: false
 ----
 
@@ -185,7 +185,7 @@ This process will output the default configuration of the dynamic plugin to add 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-podman push quay.io/rmarting/backstage-community-plugin-todo:v0.1.2
+podman push quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2
 ----
 
 WARNING: Don't forget to make public the repository.
@@ -220,7 +220,7 @@ npx @janus-idp/cli@latest package export-dynamic-plugin
 [source, bash, subs="+macros,+attributes"]
 ----
 npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1
+    --tag quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1
 ----
 
 This command generates the default configuration to apply:
@@ -228,7 +228,7 @@ This command generates the default configuration to apply:
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-      - package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
         disabled: false
         pluginConfig:
           dynamicPlugins:
@@ -255,7 +255,7 @@ This command generates the default configuration to apply:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-podman push quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1
+podman push quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1
 ----
 
 WARNING: Don't forget to make public the repository.
