@@ -406,7 +406,7 @@ npx @janus-idp/cli@latest package export-dynamic-plugin</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ../..
 npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rmarting/backstage-community-plugin-todo:v0.1.2</code></pre>
+    --tag quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -415,7 +415,7 @@ npx @janus-idp/cli@latest package package-dynamic-plugins \
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    plugins:
-      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
         pluginConfig:
           dynamicPlugins:
             frontend:
@@ -427,7 +427,7 @@ npx @janus-idp/cli@latest package package-dynamic-plugins \
                   - path: /todo
                     title: Todo
                     mountPoint: entity.page.todo
-      - package: oci://quay.io/rmarting/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
         disabled: false</code></pre>
 </div>
 </div>
@@ -440,7 +440,7 @@ npx @janus-idp/cli@latest package package-dynamic-plugins \
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rmarting/backstage-community-plugin-todo:v0.1.2</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -499,7 +499,7 @@ yarn build</code></pre>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
+    --tag quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -507,7 +507,7 @@ yarn build</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - package: oci://quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - package: oci://quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
         disabled: false
         pluginConfig:
           dynamicPlugins:
@@ -538,7 +538,7 @@ yarn build</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rmarting/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
