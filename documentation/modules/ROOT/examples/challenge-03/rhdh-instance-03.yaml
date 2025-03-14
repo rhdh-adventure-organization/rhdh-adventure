@@ -18,7 +18,6 @@ spec:
       mountPath: /opt/app-root/src/rbac
       configMaps:
         - name: rbac-policies
-          key: rbac-policies.csv
     extraEnvs:
       envs:
         # Disabling TLS verification
