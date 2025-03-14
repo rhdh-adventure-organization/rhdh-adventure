@@ -308,6 +308,18 @@ This is the configuration to add in the <code>app-config-rhdh</code> ConfigMap:<
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    catalog:
       locations:
         - type: url
+          target: <a href="https://github.com/rhdh-adventure-organization/sample-template/blob/main/template.yaml" class="bare">https://github.com/rhdh-adventure-organization/sample-template/blob/main/template.yaml</a>
+          rules:
+            - allow: [Template]
+        - type: url
+          target: <a href="https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml" class="bare">https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml</a>
+          rules:
+            - allow: [Template]
+        - type: url
+          target: <a href="https://github.com/rhdh-adventure-organization/angular-template-gl/blob/main/template.yaml" class="bare">https://github.com/rhdh-adventure-organization/angular-template-gl/blob/main/template.yaml</a>
+          rules:
+            - allow: [Template]
+        - type: url
           target: <a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml" class="bare">https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml</a>
           rules:
             - allow: [Template]</code></pre>
