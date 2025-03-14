@@ -1,0 +1,22 @@
+# Reference: https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/authorization/index#con-rbac-conditional-policies-rhdh_title-authorization
+---
+# Team B can only see 'sample' templates
+result: CONDITIONAL
+roleEntityRef: 'role:default/team-b'
+pluginId: catalog
+resourceType: catalog-entity
+permissionMapping:
+  - read
+conditions:
+  anyOf:
+    - not:
+        rule: IS_ENTITY_KIND
+        resourceType: catalog-entity
+        params:
+          kinds:
+            - 'Template'
+    - rule: HAS_METADATA
+      resourceType: catalog-entity
+      params:
+        key: tags
+        value: sample

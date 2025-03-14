@@ -82,9 +82,9 @@ data:
       rbac:
         admin:
           users:
-            - name: user:default/adminID
-            - name: user:default/rmarting
+            - name: user:default/root
         policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        conditionalPoliciesFile: /opt/app-root/src/rbac/rbac-conditional-policies.yaml
         policyFileReload: true
         pluginsWithPermission:
           - catalog

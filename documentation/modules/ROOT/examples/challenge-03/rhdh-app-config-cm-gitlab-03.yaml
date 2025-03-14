@@ -78,6 +78,8 @@ data:
           users:
             - name: user:default/root
         policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        conditionalPoliciesFile: /opt/app-root/src/rbac/rbac-conditional-policies.yaml
+        policyFileReload: true
         pluginsWithPermission:
           - catalog
           - scaffolder

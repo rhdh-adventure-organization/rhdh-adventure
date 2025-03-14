@@ -73,6 +73,18 @@ data:
       # Locations
       locations:
         - type: url
+          target: https://github.com/rhdh-adventure-organization/sample-template/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/angular-template-gl/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
           target: https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml
           rules:
             - allow: [Template]
@@ -83,8 +95,9 @@ data:
       rbac:
         admin:
           users:
-            - name: user:default/adminID
+            - name: user:default/root
         policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        conditionalPoliciesFile: /opt/app-root/src/rbac/rbac-conditional-policies.yaml
         policyFileReload: true
         pluginsWithPermission:
           - catalog

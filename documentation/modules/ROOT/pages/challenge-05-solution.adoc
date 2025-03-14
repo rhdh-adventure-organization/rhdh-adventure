@@ -126,6 +126,18 @@ This is the configuration to add in the `app-config-rhdh` ConfigMap:
     catalog:
       locations:
         - type: url
+          target: https://github.com/rhdh-adventure-organization/sample-template/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/angular-template-gl/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
           target: https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml
           rules:
             - allow: [Template]

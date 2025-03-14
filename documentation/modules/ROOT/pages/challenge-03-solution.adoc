@@ -738,12 +738,24 @@ Create a new `rbac-policies.csv` file in a new ConfigMap to declare the authoriz
 include::example$challenge-03/rbac-policies.csv[]
 ----
 
+Red Hat Developer Hub provides additional capabilities to define conditional policies using
+the `rbac-conditional-policies.yaml` file. This rule for the `team-b` group allows to display
+templates tagged as `sample`:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+include::example$challenge-03/rbac-conditional-policies.yaml[]
+----
+
 This command will create the example:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc create configmap rbac-policies --from-file=./documentation/modules/ROOT/examples/challenge-03/rbac-policies.csv
+oc create configmap rbac-policies \
+  --from-file=./documentation/modules/ROOT/examples/challenge-03/rbac-policies.csv \
+  --from-file=./documentation/modules/ROOT/examples/challenge-03/rbac-conditional-policies.yaml
 ----
 
 Declare the policies file as part of the configuration inside the `app-config-rhdh` ConfigMap:
@@ -757,15 +769,17 @@ Declare the policies file as part of the configuration inside the `app-config-rh
       rbac:
         admin:
           users:
-            - name: user:default/adminID
+            - name: user:default/root
         policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        conditionalPoliciesFile: /opt/app-root/src/rbac/rbac-conditional-policies.yaml
+        policyFileReload: true
         pluginsWithPermission:
           - catalog
           - scaffolder
           - permission
 ----
 
-TIP: Declare one user of your organization as the default administrator. Replace `adminID` with a valid value.
+TIP: Declare one user of your organization as the default administrator. Replace `root` with a valid value.
 
 Apply the configuration for the right Git server:
 
@@ -923,7 +937,6 @@ Mount the policies file in the `Backstage` manifests as:
       mountPath: /opt/app-root/src/rbac
       configMaps:
         - name: rbac-policies
-          key: rbac-policies.csv
 ----
 
 This command will update the Backstage definition:
