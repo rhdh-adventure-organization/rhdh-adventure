@@ -14,6 +14,12 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
         disabled: false
+      # GitLab Plugins
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+        disabled: false
+      # RBAC Plugins
       - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
         disabled: false
       # Analytics
