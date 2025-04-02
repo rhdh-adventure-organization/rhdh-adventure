@@ -724,6 +724,17 @@ please replace that pattern in the command with the name of your instance.
 
 Red Hat Developer Hub is fully integrated with GitLab for authentication and discovery.
 
+TIP: Enabling the following plugins shows some tabs in each component published in a GitLab server. Those
+tabs shows the issues, merge requests and other useful information from the repository hosted in the GitLab server.
+
+```yaml
+      # GitLab Integration Plugins
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+        disabled: false
+```
+
 [#rbac-solution]
 == 🧞🛂 You won't break it Solution
 
