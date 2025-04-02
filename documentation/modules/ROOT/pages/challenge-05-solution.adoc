@@ -208,6 +208,8 @@ Here an example of usage for the Angular App Template:
 
 image::challenge-05/rhdh-onboard-template-01.png[Angular App Template]
 
+WARNING: Choose the template version that matches your Git provider (GitHub or GitLab).
+
 Identifying the new component:
 
 image::challenge-05/rhdh-onboard-template-02.png[Provide initial information]
