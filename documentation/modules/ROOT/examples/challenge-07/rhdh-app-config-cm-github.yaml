@@ -1,0 +1,118 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-app-config
+data:
+  rhdh-app-config.yaml: |
+    backend:
+      baseUrl: https://$rhdhname.$basedomain
+      cors:
+        origin: https://$rhdhname.$basedomain
+    organization:
+      name: "My Organization"
+    app:
+      baseUrl: https://$rhdhname.$basedomain
+      title: "My Adventure with Red Hat Developer Hub"
+      branding:
+        theme:
+          light:
+            primaryColor: '#38be8b'
+            headerColor1: 'hsl(204 100% 71%)'
+            headerColor2: 'color(a98-rgb 1 0 0)'
+            navigationIndicatorColor: '#be0000'
+          dark:
+            primaryColor: '#ab75cf'
+            headerColor1: '#0000d0'
+            headerColor2: 'rgb(255 246 140)'
+            navigationIndicatorColor: '#f4eea9'
+      # Enabling Analytics
+      analytics:
+        adoptionInsights:
+          maxBufferSize: 25
+          flushInterval: 6000
+          debug: false
+          licensedUsers: 1000
+
+    # Authorization GitHub
+    signInPage: github
+    dangerouslyAllowSignInWithoutUserInCatalog: false
+    auth:
+      environment: production
+      providers:
+        github:
+          production:
+            clientId: ${AUTH_GITHUB_CLIENT_ID}
+            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+
+    # Integrations
+    integrations:
+      github:
+        - host: github.com
+          #token: ${AUTH_GITHUB_TOKEN}
+          apps:
+            - appId: ${AUTH_GITHUB_APP_ID}
+              clientId: ${AUTH_GITHUB_CLIENT_ID}
+              clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+              webhookUrl: ${AUTH_GITHUB_WEBHOOK_URL}
+              webhookSecret: ${AUTH_GITHUB_WEBHOOK_SECRET}
+              privateKey: |
+                ${AUTH_GITHUB_PRIVATE_KEY_FILE}
+
+    # Catalog
+    catalog:
+      providers:
+        github:
+          providerId:
+            organization: ${GITHUB_ORGANIZATION}
+            schedule:
+              frequency:
+                minutes: 30
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 15
+        githubOrg:
+          githubUrl: "https://github.com"
+          orgs: [ "${GITHUB_ORGANIZATION}" ]
+          schedule:
+            frequency:
+              minutes: 30
+            initialDelay:
+              seconds: 15
+            timeout:
+              minutes: 15
+
+      # Locations
+      locations:
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/sample-template/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/angular-template-gh/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/rhdh-adventure-organization/angular-template-gl/blob/main/template.yaml
+          rules:
+            - allow: [Template]
+        - type: url
+          target: https://github.com/redhat-developer/red-hat-developer-hub-software-templates/blob/main/templates.yaml
+          rules:
+            - allow: [Template]
+
+    # RBAC
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/root
+        policies-csv-file: /opt/app-root/src/rbac/rbac-policies.csv
+        conditionalPoliciesFile: /opt/app-root/src/rbac/rbac-conditional-policies.yaml
+        policyFileReload: true
+        pluginsWithPermission:
+          - catalog
+          - scaffolder
+          - permission
