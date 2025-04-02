@@ -33,6 +33,8 @@
 # Bulk import
 #p, role:default/administrators, bulk-import, use, allow
 #p, role:default/administrators, bulk.import, use, allow
+# Adoption Insights permissions
+#p, role:default/admins, adoption-insights.events.read, read, allow
 
 # My Own Admin User
 #g, user:default/root, role:default/administrators
@@ -56,6 +58,8 @@ p, role:default/team-a, scaffolder.action.execute, use, allow
 p, role:default/team-a, scaffolder.task.read, read, allow
 p, role:default/team-a, scaffolder.task.create, create, allow
 p, role:default/team-a, scaffolder.task.cancel, use, allow
+# Adoption Insights permissions
+p, role:default/team-a, adoption-insights.events.read, read, allow
 
 # Team-B Role
 # Catalog permissions

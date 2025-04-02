@@ -19,9 +19,6 @@ global:
       # RBAC Plugins
       - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
         disabled: false
-      # Analytics
-      - package: './dynamic-plugins/dist/backstage-community-plugin-analytics-provider-segment'
-        disabled: false
       # DevQuotes
       - package: oci://quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
         disabled: false
@@ -58,6 +55,38 @@ global:
                     mountPoint: entity.page.todo
       - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
         disabled: false
+      # Adoption Analytics
+      - package: './dynamic-plugins/dist/backstage-community-plugin-analytics-provider-segment'
+        disabled: true
+      - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/red-hat-developer-hub-backstage-plugin-adoption-insights:bs_1.35.1__0.0.2!red-hat-developer-hub-backstage-plugin-adoption-insights
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              red-hat-developer-hub.backstage-plugin-adoption-insights:
+                appIcons:
+                  - name: adoptionInsightsIcon
+                    importName: AdoptionInsightsIcon
+                dynamicRoutes:
+                  - path: /adoption-insights
+                    importName: AdoptionInsightsPage
+                    menuItem:
+                      icon: adoptionInsightsIcon
+                      text: Adoption Insights
+                menuItems:
+                  adoption-insights:
+                    parent: admin
+                    icon: adoptionInsightsIcon
+      - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/red-hat-developer-hub-backstage-plugin-adoption-insights-backend:bs_1.35.1__0.0.2!red-hat-developer-hub-backstage-plugin-adoption-insights-backend-dynamic
+        disabled: false
+      - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/red-hat-developer-hub-backstage-plugin-analytics-module-adoption-insights:bs_1.35.1__0.0.2!red-hat-developer-hub-backstage-plugin-analytics-module-adoption-insights
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              red-hat-developer-hub.backstage-plugin-analytics-module-adoption-insights:
+                apiFactories:
+                  - importName: AdoptionInsightsAnalyticsApiFactory
 upstream:
   backstage:
     extraAppConfig:

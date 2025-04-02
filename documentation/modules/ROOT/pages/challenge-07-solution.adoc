@@ -30,17 +30,136 @@ this xref:01-setup.adoc#ocpsetup-monitoring[step] of the setup.
 Additionally Red Hat Developer Hub provides and integrates some functionalities to monitor the status of the application.
 These capabilities are:
 
-* Metrics for gather insights and monitor performance of the instance. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/monitoring_and_logging/index[here]
-* Audit logs to register user activities, system events, and data changes. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/audit_log/assembly-audit-log[here].
-* Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html-single/telemetry_data_collection/index[here].
+* Metrics for gather insights and monitor performance of the instance. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/monitoring_and_logging/index[here]
+* Audit logs to register user activities, system events, and data changes. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/audit_logs_in_red_hat_developer_hub/index[here].
+* Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/telemetry_data_collection/index[here].
 
-Additionally, Red Hat Developer Hub can be extended to integrate some plugins of the community to gather more information
-and insights. Some of those plugins are:
+Additionally, Red Hat Developer Hub provides a plugin to deliver detailed analytics and insights on adoption
+and engagement of the platform. This plugin is called Adoption Insights. To enable it, you need to install
+the plugin and configure it with the correct parameters. This configuration must be added into the `a`
 
-* link:https://github.com/backstage/community-plugins/blob/main/workspaces/analytics/plugins/analytics-module-matomo/README.md[Analytics Module: Matomo Analytics]
-* link:https://backstage.io/docs/plugins/analytics/[Plugin Analytics]
+Modify `rhdh-app-config` ConfigMap to add this configuration (as part of the `app` block) as:
 
-TIP: Those plugins could be installed using the dynamic plugin framework.
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+  rhdh-app-config.yaml: |
+    # ...Other configurations...
+    app:
+      # ...Other configurations...
+      # Enabling Analytics
+      analytics:
+        adoptionInsights:
+          maxBufferSize: 25
+          flushInterval: 6000
+          debug: false
+          licensedUsers: 1000
+----
+
+Apply the configuration for your Git provider:
+
+[tabs]
+====
+GitHub::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-07/rhdh-app-config-cm-github.yaml | oc apply -f -
+----
+
+The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc rollout restart deployment/rhdh-developer-hub
+----
+--
+GitLab::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-07/rhdh-app-config-cm-gitlab.yaml | oc apply -f -
+----
+
+The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc rollout restart deployment/rhdh-developer-hub
+----
+====
+
+Once we have the configuration for the Adoption Insights plugin, we can continue as:
+
+[tabs]
+====
+By Helm Chart::
++
+--
+Extend the `values.yaml` file to add the list of plugins to use and upgrade the Helm release:
+
+For GitHub:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-github.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+
+For GitLab:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+
+WARNING: The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name, please replace that pattern in the command with the name of your instance.
+--
+By Operator::
++
+--
+For GitHub:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-dynamic-plugins-cm-github-01.yaml
+----
+
+For GitLab:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-dynamic-plugins-cm-gitlab-01.yaml
+----
+--
+====
+
+Once the Red Hat Developer Hub is redeployed is created, the user can visualize the insights
+from the **Adoption Insights** menu under the **Administration** block. A similar dashboard
+is available:
+
+image::challenge-07/rhdh-adoption-insights-dashboard.png[]
 
 [#metrics-solution]
 == 🧞👨‍🔬 Metrics
