@@ -1241,6 +1241,11 @@ data:
       - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+        disabled: false
+      # GitLab Plugins
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
         disabled: false</code></pre>
 </div>
 </div>
@@ -1291,6 +1296,28 @@ please replace that pattern in the command with the name of your instance.</p>
 </div>
 <div class="paragraph">
 <p>Red Hat Developer Hub is fully integrated with GitLab for authentication and discovery.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Enabling the following plugins shows some tabs in each component published in a GitLab server. Those
+tabs shows the issues, merge requests and other useful information from the repository hosted in the GitLab server.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      # GitLab Integration Plugins
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+        disabled: false</code></pre>
+</div>
 </div>
 </div>
 </div>
