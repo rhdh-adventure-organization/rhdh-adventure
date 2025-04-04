@@ -25,5 +25,7 @@ jobs:
         with:
           publish: true
           prerelease: false
+          name: ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
