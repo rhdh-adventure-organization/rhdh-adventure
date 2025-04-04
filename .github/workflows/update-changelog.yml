@@ -53,7 +53,7 @@ jobs:
         name: Commit updated Changelog
         uses: stefanzweifel/git-auto-commit-action@v5.1.0
         with:
-          branch: main
+          branch: master
           commit_message: '🔖 Update changelog'
           file_pattern: CHANGELOG.md
           push_options: --force
