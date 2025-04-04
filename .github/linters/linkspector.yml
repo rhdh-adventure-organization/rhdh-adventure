@@ -2,7 +2,12 @@ aliveStatusCodes:
   - 200
   - 406
 dirs:
-  - .
+  - ./
+  - documentation/
+  - documentation/modules/
+  - documentation/modules/ROOT/
+  - documentation/modules/ROOT/pages/
+  - documentation/modules/ROOT/partials/
 excludedDirs:
   - .github
   - apps
