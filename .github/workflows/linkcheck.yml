@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Documentation
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Run linkspector
         uses: umbrelladocs/action-linkspector@v1.3.4
