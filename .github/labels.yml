@@ -1,0 +1,45 @@
+# Label templates
+
+- name: "📄 documentation"
+  description: Documenting something
+  color: "#0075ca"
+
+- name: "🚀 enhancement"
+  description: New feature or request
+  color: "#a2eeef"
+
+- name: "✨ feature"
+  description: New feature or request
+  color: "#DA40D7"
+
+- name: "🐞 bug"
+  description: Something isn't working
+  color: "#d73a4a"
+
+- name: "🐛 Fix"
+  description: Fixing something
+  color: "#6B8557"
+
+- name: "⚠️ changed"
+  description: Changing something
+  color: "#FEE006"
+
+- name: "⛔️ deprecated"
+  description: Deprecating something
+  color: "#7A038D"
+
+- name: "🗑 removed"
+  description: Removing something
+  color: "#7584A3"
+
+- name: "🔐 security"
+  description: Securing something
+  color: "#C7F25D"
+
+- name: "🧩 dependencies"
+  description: Dependency Updates
+  color: "#1FBB8E"
+
+- name: "⚙️ stale"
+  description: Stale
+  color: "#E01A80"
