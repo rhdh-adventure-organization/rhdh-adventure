@@ -43,3 +43,7 @@
 - name: "⚙️ stale"
   description: Stale
   color: "#E01A80"
+
+- name: "🗑️ duplicate"
+  color: cfd3d7
+  description: This issue or pull request already exists
