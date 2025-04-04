@@ -1,0 +1,12 @@
+aliveStatusCodes:
+  - 200
+  - 406
+dirs:
+  - .
+excludedDirs:
+  - .github
+  - apps
+  - argocd
+  - lib
+  - supplemental-ui
+useGitIgnore: true
