@@ -7,10 +7,17 @@ metadata:
   links:
     - title: Website
       url: https://rhdh-adventure-organization.github.io/rhdh-adventure/rhdh-adventure/index.html
+      icon: web
+    - title: OpenShift Dev Spaces (VS Code)
+      url: https://workspaces.openshift.com/#https://github.com/rhdh-adventure-organization/rhdh-adventure      
+      icon: web
   annotations:
     github.com/project-slug: 'rhdh-adventure-organization/rhdh-adventure'
     backstage.io/kubernetes-id: rhdh-adventure
     backstage.io/techdocs-ref: dir:.
+  tags:
+    - workshop
+    - rhdh    
 spec:
   type: website
   lifecycle: production
