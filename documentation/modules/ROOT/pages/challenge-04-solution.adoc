@@ -70,7 +70,7 @@ the `catalog-info.yaml` file should be listed in Catalog of Red Hat Developer Hu
 image::challenge-04/rhdh-catalog.png[Catalog of Components registered]
 
 Otherwise, there is another way to import or register a new component into the catalog.
-From the `Create...` menu, there is a button named as `Register Existing Component`:
+From the `Self Service` menu, there is a button named as `Register Existing Component`:
 
 image::challenge-04/rhdh-register-existing-component.png[Register Existing Component button]
 

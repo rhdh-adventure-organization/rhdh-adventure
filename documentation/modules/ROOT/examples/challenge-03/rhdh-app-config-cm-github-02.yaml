@@ -29,7 +29,6 @@ data:
 
     # Authorization GitHub
     signInPage: github
-    dangerouslyAllowSignInWithoutUserInCatalog: false
     auth:
       environment: production
       providers:
@@ -37,12 +36,15 @@ data:
           production:
             clientId: ${AUTH_GITHUB_CLIENT_ID}
             clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true
 
     # Integrations
     integrations:
       github:
         - host: github.com
-          #token: ${AUTH_GITHUB_TOKEN}
           apps:
             - appId: ${AUTH_GITHUB_APP_ID}
               clientId: ${AUTH_GITHUB_CLIENT_ID}
@@ -54,17 +56,29 @@ data:
 
     # Catalog
     catalog:
+      rules:
+        - allow: [Template, Location, Component, API, Group, Resource, Domain, System]
       providers:
         github:
           providerId:
             organization: ${GITHUB_ORGANIZATION}
             schedule:
               frequency:
-                minutes: 30
+                minutes: 10
               initialDelay:
                 seconds: 15
               timeout:
-                minutes: 15
+                minutes: 5
+          orgCatalog:
+            organization: ${GITHUB_ORGANIZATION}
+            catalogPath: '/**/org-catalog.yaml' # this will search all folders for org-catalog.yaml files
+            schedule:
+              frequency:
+                minutes: 10
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 5
         githubOrg:
           githubUrl: "https://github.com"
           orgs: [ "${GITHUB_ORGANIZATION}" ]
@@ -75,3 +89,4 @@ data:
               seconds: 15
             timeout:
               minutes: 15
+

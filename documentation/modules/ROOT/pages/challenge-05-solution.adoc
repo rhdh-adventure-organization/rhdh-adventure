@@ -189,7 +189,7 @@ oc rollout restart deployment/rhdh-developer-hub
 --
 ====
 
-Clicking the `Create...` menu the list of software templates available should appear:
+Clicking the `Self Service` button from the top bar the list of software templates available should appear:
 
 image::challenge-05/rhdh-software-templates.png[Software Templates available to be used]
 

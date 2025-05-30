@@ -29,11 +29,28 @@ data:
 
     # Authorization GitHub
     signInPage: github
-    dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
-      environment: production
+      environment: development
       providers:
         github:
-          production:
+          development:
             clientId: ${AUTH_GITHUB_CLIENT_ID}
             clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true
+
+    # Integrations
+    integrations:
+      github:
+        - host: github.com
+          #token: ${AUTH_GITHUB_TOKEN}
+          apps:
+            - appId: ${AUTH_GITHUB_APP_ID}
+              clientId: ${AUTH_GITHUB_CLIENT_ID}
+              clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+              webhookUrl: ${AUTH_GITHUB_WEBHOOK_URL}
+              webhookSecret: ${AUTH_GITHUB_WEBHOOK_SECRET}
+              privateKey: |
+                ${AUTH_GITHUB_PRIVATE_KEY_FILE}
