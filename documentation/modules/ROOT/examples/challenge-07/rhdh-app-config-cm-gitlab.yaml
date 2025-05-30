@@ -36,7 +36,6 @@ data:
 
     # Authorization GitLab
     signInPage: gitlab
-    dangerouslyAllowSignInWithoutUserInCatalog: false
     auth:
       environment: production
       providers:
@@ -45,6 +44,10 @@ data:
             clientId: ${AUTH_GITLAB_CLIENT_ID}
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
             audience: https://gitlab.${basedomain}
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true
 
     # Integrations
     integrations:
@@ -56,6 +59,8 @@ data:
 
     # Catalog
     catalog:
+      rules:
+        - allow: [Template, Location, Component, API, Group, Resource, Domain, System]
       providers:
         gitlab:
           myGitLab:
