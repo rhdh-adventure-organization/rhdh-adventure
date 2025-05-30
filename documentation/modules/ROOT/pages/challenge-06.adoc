@@ -39,10 +39,10 @@ It will be fun!!!
 
 To resolve this challenge you can start checking the following references:
 
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html-single/introduction_to_plugins/index[Introduction to plugins]
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/installing_and_viewing_plugins_in_red_hat_developer_hub/index[Installing and viewing plugins in Red Hat Developer Hub]
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/dynamic_plugins_reference/index[Dynamic plugins reference]
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/configuring_dynamic_plugins/index[Configuring dynamic plugins]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/introduction_to_plugins/index[Introduction to plugins]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/installing_and_viewing_plugins_in_red_hat_developer_hub/index[Installing and viewing plugins in Red Hat Developer Hub]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/dynamic_plugins_reference/index[Dynamic plugins reference]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/configuring_dynamic_plugins/index[Configuring dynamic plugins]
 * link:https://backstage.io/plugins/[Backstage Plugins]
 
 [#dynamicplugins-solution]
