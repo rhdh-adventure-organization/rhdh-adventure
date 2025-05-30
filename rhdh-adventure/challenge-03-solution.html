@@ -181,7 +181,7 @@ in the future. Let' 's dive in together! 🧞🚀</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Enabling GitHub authentication requires to create a GitHub application. This process  is described
-<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/authentication_in_red_hat_developer_hub/authenticating-with-github">here</a></p>
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/authentication_in_red_hat_developer_hub/authenticating-with-github">here</a></p>
 </div>
 <div class="paragraph">
 <p>To enable discovery, then you need to use a GitHub organization</p>
@@ -410,14 +410,17 @@ type: Opaque</code></pre>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    signInPage: github
-    dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
       environment: development
       providers:
         github:
           development:
             clientId: ${AUTH_GITHUB_CLIENT_ID}
-            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}</code></pre>
+            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -551,8 +554,8 @@ Consider configuring Red Hat Developer Hub to autodiscovery and provisioning use
 to the software catalog on schedule, rather than provisioning the users manually.</p>
 </div>
 <div class="paragraph">
-<p>The Red Hat Developer Hub catalog can be set up to ingest organizational data (users and groups)
-directly from GitHub. The result is a hierarchy of User and Group entities that mirrors your org setup.</p>
+<p>The Red Hat Developer Hub catalog can be set up to ingest organizational data (users, groups, domains, systems, resources)
+directly from GitHub. The result is a hierarchy of entities that mirrors your org setup.</p>
 </div>
 <div class="paragraph">
 <p>This feature will crawl the GitHub instance and register entities matching the configured paths.
@@ -581,29 +584,41 @@ This can be useful as an alternative to static locations or manually adding thin
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">dangerouslyAllowSignInWithoutUserInCatalog: false
-catalog:
-  providers:
-    github:
-      providerId:
-        organization: "${GITHUB_ORGANIZATION}"
-        schedule:
-          frequency:
-            minutes: 30
-          initialDelay:
-            seconds: 15
-          timeout:
-            minutes: 15
-    githubOrg:
-      githubUrl: "https://github.com"
-      orgs: [ "${GITHUB_ORGANIZATION}" ]
-      schedule:
-        frequency:
-          minutes: 30
-        initialDelay:
-          seconds: 15
-        timeout:
-          minutes: 15</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    # Catalog
+    catalog:
+      rules:
+        - allow: [Template, Location, Component, API, Group, Resource, Domain, System]
+      providers:
+        github:
+          providerId:
+            organization: ${GITHUB_ORGANIZATION}
+            schedule:
+              frequency:
+                minutes: 10
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 5
+          orgCatalog:
+            organization: ${GITHUB_ORGANIZATION}
+            catalogPath: '/**/org-catalog.yaml' # this will search all folders for org-catalog.yaml files
+            schedule:
+              frequency:
+                minutes: 10
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 5
+        githubOrg:
+          githubUrl: "https://github.com"
+          orgs: [ "${GITHUB_ORGANIZATION}" ]
+          schedule:
+            frequency:
+              minutes: 30
+            initialDelay:
+              seconds: 15
+            timeout:
+              minutes: 15</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -639,7 +654,7 @@ The list of dynamic plugins to enable for this fully integration with GitHub is:
 </ul>
 </div>
 <div class="paragraph">
-<p>More information about Dynamic Plugins <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html-single/introduction_to_plugins/index">here</a>.</p>
+<p>More information about Dynamic Plugins <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/introduction_to_plugins/index">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>The following steps will depend of the mechanism used to operate Red Hat Developer Hub:</p>
@@ -895,16 +910,20 @@ type: Opaque</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    signInPage: gitlab
-    dangerouslyAllowSignInWithoutUserInCatalog: true
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    # Authorization GitLab
+    signInPage: gitlab
     auth:
-      environment: production
+      environment: development
       providers:
         gitlab:
-          production:
+          development:
             clientId: ${AUTH_GITLAB_CLIENT_ID}
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
-            audience: <a href="https://gitlab.${basedomain}" class="bare">https://gitlab.${basedomain}</a></code></pre>
+            audience: <a href="https://gitlab.${basedomain}" class="bare">https://gitlab.${basedomain}</a>
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1169,7 +1188,7 @@ dynamic plugin provided by Red Hat Developer Hub.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>More information about Dynamic Plugins <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html-single/introduction_to_plugins/index">here</a>.</p>
+<p>More information about Dynamic Plugins <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/introduction_to_plugins/index">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>The following steps will depend of the mechanism used to operate Red Hat Developer Hub:</p>
@@ -1241,11 +1260,6 @@ data:
       - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
-        disabled: false
-      # GitLab Plugins
-      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
-        disabled: false
-      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
         disabled: false</code></pre>
 </div>
 </div>
@@ -1296,28 +1310,6 @@ please replace that pattern in the command with the name of your instance.</p>
 </div>
 <div class="paragraph">
 <p>Red Hat Developer Hub is fully integrated with GitLab for authentication and discovery.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Enabling the following plugins shows some tabs in each component published in a GitLab server. Those
-tabs shows the issues, merge requests and other useful information from the repository hosted in the GitLab server.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      # GitLab Integration Plugins
-      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
-        disabled: false
-      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
-        disabled: false</code></pre>
-</div>
 </div>
 </div>
 </div>
@@ -1586,6 +1578,8 @@ it must to enable it.</p>
     extraVolumeMounts:
       - mountPath: /opt/app-root/src/dynamic-plugins-root
         name: dynamic-plugins-root
+      - mountPath: /tmp
+        name: temp
       - mountPath: /opt/app-root/src/rbac # Mounting point for RBAC policies
         name: rbac-policies
     extraVolumes:

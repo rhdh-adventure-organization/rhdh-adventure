@@ -205,7 +205,7 @@ or rebuilding container images.</p>
 <div class="paragraph">
 <p>Red Hat Developer Hub is pre-loaded with a selection of dynamic plugins. Most of these dynamic plugins are disabled by default due
 to the need for mandatory configuration. For a complete list of dynamic plugins that are included, see the
-<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins">dynamic plugins matrix</a>
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins">dynamic plugins matrix</a>
 section of Red Hat Developer Hub.</p>
 </div>
 <div class="admonitionblock note">
@@ -352,7 +352,7 @@ For more information, see <a href="https://github.com/redhat-developer/rhdh/blob
 </div>
 <div class="paragraph">
 <p>A detailed guide to install third-party plugins is available
-<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh">here</a>.</p>
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>We will do the exercise to install some plugins using the dynamic plugin framework of Red Hat Developer Hub.</p>
@@ -616,7 +616,7 @@ The name used for the Red Hat Developer Hub instance is <code>rhdh</code>. If yo
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github-01.yaml</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -624,7 +624,7 @@ The name used for the Red Hat Developer Hub instance is <code>rhdh</code>. If yo
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab-01.yaml</code></pre>
 </div>
 </div>
 </div>
@@ -648,6 +648,147 @@ The name used for the Red Hat Developer Hub instance is <code>rhdh</code>. If yo
 </div>
 <div class="paragraph">
 <p>Congratulations! Your Red Hat Developer Hub is fully modular.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bonus_track_enabling_scm_plugins"><a class="anchor" href="#_bonus_track_enabling_scm_plugins"></a>(Bonus Track) Enabling SCM Plugins</h3>
+<div class="paragraph">
+<p>The <a href="challenge-03.html#intro" class="xref page">Lock It Down</a> challenge included a set of steps to integrate
+Red Hat Developer Hub and your favourite SCM (e.g: GitHub, GitLab). That integration included
+some features to discover organization data, including repositories to add automatically into
+the Red Hat Developer Hub catalog. However, the integration can be extended to include more
+features and plugins to enhance the experience of developers and platform engineers.</p>
+</div>
+<div class="paragraph">
+<p>There are different plugins available to integrate some of the features of the SCM systems like
+issues, pull requests, and actions. These plugins allow you to visualize and manage these features
+directly from the Red Hat Developer Hub interface, providing a seamless experience for developers.</p>
+</div>
+<div class="paragraph">
+<p>To enable these plugins, you need to modify the Red Hat Developer Hub configuration to include
+the necessary plugins for your SCM system. The configuration can be done either by modifying the
+<code>app-config.yaml</code> file or by using the Helm chart values file, depending on how you have deployed
+Red Hat Developer Hub.</p>
+</div>
+<div class="paragraph">
+<p>List of plugins for GitHub (but not limited to):</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      # GitHub Plugins for issues, pull requests, and actions
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-github-issues
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
+        disabled: false
+      #- package: ./dynamic-plugins/dist/backstage-community-github-pull-requests
+      #  disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
+        disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
+        disabled: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>List of plugins for GitLab (but not limited to):</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      # GitLab Plugins for issues, merge requests, and actions
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+        disabled: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once we have added the new plugins, we can continue as:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset3_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_by-helm-chart">
+<div class="paragraph">
+<p>Extend the <code>values.yaml</code> file to add the list of plugins to use and upgrade the Helm release:</p>
+</div>
+<div class="paragraph">
+<p>For GitHub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-02-github.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For GitLab:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-02-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The name used for the Red Hat Developer Hub instance is <code>rhdh</code>. If you choose a different name, please replace that pattern in the command with the name of your instance.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_by-operator">
+<div class="paragraph">
+<p>For GitHub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For GitLab:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>For a entity in the catalog integrated with GitHub, the plugins will be showed in the overview page similar as:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-06/rhdh-github-plugins.png" alt="GitHub Plugins in action">
+</div>
+</div>
+<div class="paragraph">
+<p>For a entity in the catalog integrated with GitLab, the plugins will be showed in the overview page similar as:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-06/rhdh-gitlab-plugins.png" alt="GitLab Plugins in action">
+</div>
 </div>
 </div>
 </div>
