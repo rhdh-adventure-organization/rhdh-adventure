@@ -414,7 +414,7 @@ For GitHub:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github-02.yaml
 ----
 
 For GitLab:
@@ -422,7 +422,7 @@ For GitLab:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab-02.yaml
 ----
 --
 ====
