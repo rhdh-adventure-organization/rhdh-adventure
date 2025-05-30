@@ -366,7 +366,7 @@ List of plugins for GitLab (but not limited to):
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-      # GitLab Plugins
+      # GitLab Plugins for issues, merge requests, and actions
       - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
         disabled: false
       - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab

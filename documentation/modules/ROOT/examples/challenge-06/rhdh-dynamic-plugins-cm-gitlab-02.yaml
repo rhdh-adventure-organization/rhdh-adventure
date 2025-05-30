@@ -1,10 +1,13 @@
-global:
-  clusterRouterBase: "${basedomain}"
-  dynamic:
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-dynamic-plugins
+data:
+  dynamic-plugins.yaml: |
     includes:
       - dynamic-plugins.default.yaml
     plugins:
-      # GitLab Plugins
       - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-dynamic
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
@@ -50,49 +53,8 @@ global:
                     mountPoint: entity.page.todo
       - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
         disabled: false
-upstream:
-  backstage:
-    extraAppConfig:
-      - configMapRef: rhdh-app-config
-        filename: rhdh-app-config.yaml
-    extraEnvVarsSecrets:
-      - rhdh-secrets
-      - git-secrets
-    extraVolumeMounts:
-      - mountPath: /opt/app-root/src/dynamic-plugins-root
-        name: dynamic-plugins-root
-      - mountPath: /tmp
-        name: temp
-      - mountPath: /opt/app-root/src/rbac
-        name: rbac-policies
-    extraVolumes:
-      - name: dynamic-plugins-root
-        ephemeral:
-          volumeClaimTemplate:
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 5Gi
-      - name: dynamic-plugins
-        configMap:
-          defaultMode: 420
-          name: 'rhdh-dynamic-plugins'
-          optional: true
-      - name: dynamic-plugins-npmrc
-        secret:
-          defaultMode: 420
-          optional: true
-          secretName: 'rhdh-dynamic-plugins-npmrc'
-      - name: dynamic-plugins-registry-auth
-        secret:
-          defaultMode: 416
-          optional: true
-          secretName: 'rhdh-dynamic-plugins-registry-auth'
-      - name: npmcacache
-      - name: temp
-      - configMap:
-          defaultMode: 420
-          name: rbac-policies
-        name: rbac-policies
+      # GitLab Plugins for issues, pull requests, and actions
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+        disabled: false

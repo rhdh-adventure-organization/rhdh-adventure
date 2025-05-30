@@ -29,7 +29,6 @@ data:
 
     # Authorization GitLab
     signInPage: gitlab
-    dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
       environment: development
       providers:
@@ -38,3 +37,7 @@ data:
             clientId: ${AUTH_GITLAB_CLIENT_ID}
             clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
             audience: https://gitlab.${basedomain}
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true

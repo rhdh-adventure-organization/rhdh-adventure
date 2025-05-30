@@ -138,3 +138,7 @@ upstream:
           defaultMode: 420
           name: rbac-policies
         name: rbac-policies
+  metrics:
+    serviceMonitor:
+      enabled: true
+      path: /metrics
