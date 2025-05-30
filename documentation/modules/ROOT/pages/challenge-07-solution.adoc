@@ -30,9 +30,9 @@ this xref:01-setup.adoc#ocpsetup-monitoring[step] of the setup.
 Additionally Red Hat Developer Hub provides and integrates some functionalities to monitor the status of the application.
 These capabilities are:
 
-* Metrics for gather insights and monitor performance of the instance. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/monitoring_and_logging/index[here]
-* Audit logs to register user activities, system events, and data changes. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/audit_logs_in_red_hat_developer_hub/index[here].
-* Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/telemetry_data_collection/index[here].
+* Metrics for gather insights and monitor performance of the instance. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/monitoring_and_logging/index[here]
+* Audit logs to register user activities, system events, and data changes. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/audit_logs_in_red_hat_developer_hub/index[here].
+* Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/telemetry_data_collection/index[here].
 
 Additionally, Red Hat Developer Hub provides a plugin to deliver detailed analytics and insights on adoption
 and engagement of the platform. This plugin is called Adoption Insights. To enable it, you need to install

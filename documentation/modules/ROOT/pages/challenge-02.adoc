@@ -36,9 +36,9 @@ modifying the application's deployment manifests directly, showcasing the flexib
 
 To resolve this challenge you can start checking the following references:
 
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/configuring_red_hat_developer_hub/provisioning-and-using-your-custom-configuration[Provisioning and using your custom Red Hat Developer Hub configuration]
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/customizing_red_hat_developer_hub/customizing-your-product-se-url[Customizing your Red Hat Developer Hub base URL]
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/customizing_red_hat_developer_hub/customizing-the-backend-secret[Customizing Red Hat Developer Hub backend secret]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/configuring_red_hat_developer_hub/provisioning-and-using-your-custom-configuration[Provisioning and using your custom Red Hat Developer Hub configuration]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/customizing_red_hat_developer_hub/customizing-your-product-se-url[Customizing your Red Hat Developer Hub base URL]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/customizing_red_hat_developer_hub/customizing-the-backend-secret[Customizing Red Hat Developer Hub backend secret]
 
 [#configuration-solution]
 === 🧞🛠️ External configuration Solution
@@ -54,7 +54,7 @@ custom settings into the application.
 
 To resolve this challenge you can start checking the following references:
 
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/customizing_red_hat_developer_hub/customizing-your-product-title[Customizing your Red Hat Developer Hub title]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/customizing_red_hat_developer_hub/customizing-your-product-title[Customizing your Red Hat Developer Hub title]
 
 
 [#title-solution]
@@ -71,7 +71,7 @@ user experience while maintaining separation of concerns between deployment and 
 
 To resolve this challenge you can start checking the following references:
 
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/customizing_red_hat_developer_hub/customizing-appearance[Customizing your Red Hat Developer Hub appearance]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/customizing_red_hat_developer_hub/customizing-appearance[Customizing your Red Hat Developer Hub appearance]
 
 [#colors-solution]
 === 🧞🌈 Looking better Solution

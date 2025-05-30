@@ -29,8 +29,8 @@ Which tools can be used? What is provided by Red Hat Developer Hub or Red Hat Op
 To resolve this challenge you can start checking the following references:
 
 * link:https://docs.openshift.com/container-platform/4.16/observability/monitoring/monitoring-overview.html[OpenShift Monitoring overview]
-* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/monitoring_and_logging/index[Monitoring and Logging]
-* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/audit_logs_in_red_hat_developer_hub/index[Audit Log]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/monitoring_and_logging/index[Monitoring and Logging]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/audit_logs_in_red_hat_developer_hub/index[Audit Log]
 
 [#tools-solution]
 === 🧞🧰 Tools Solution
@@ -44,9 +44,9 @@ Which metrics are exposed? How are they integrated in OpenShift? How could I get
 
 To resolve this challenge you can start checking the following references:
 
-* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/monitoring_and_logging/index[Monitoring and Logging]
-* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/telemetry_data_collection/index[Telemetry data collection]
-* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/adoption_insights_in_red_hat_developer_hub/index[Adoption Insights]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/monitoring_and_logging/index[Monitoring and Logging]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/telemetry_data_collection_and_analysis/index[Telemetry data collection]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/adoption_insights_in_red_hat_developer_hub/index[Adoption Insights]
 
 [#metrics-solution]
 === 🧞👨‍🔬 Metrics Solution

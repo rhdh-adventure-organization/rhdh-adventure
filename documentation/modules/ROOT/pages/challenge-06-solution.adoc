@@ -34,7 +34,7 @@ or rebuilding container images.
 
 Red Hat Developer Hub is pre-loaded with a selection of dynamic plugins. Most of these dynamic plugins are disabled by default due
 to the need for mandatory configuration. For a complete list of dynamic plugins that are included, see the
-https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins[dynamic plugins matrix]
+https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins[dynamic plugins matrix]
 section of Red Hat Developer Hub.
 
 NOTE: Red Hat fully supports certain plugins (Topology, Tekton, Quay), while others are community-supported projects.
@@ -116,7 +116,7 @@ The following resources includes a full list of the current plugins in the Backs
 * link:https://github.com/backstage/community-plugins[Backstage Community Plugins]
 
 A detailed guide to install third-party plugins is available
-https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.5/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh[here].
+https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh[here].
 
 We will do the exercise to install some plugins using the dynamic plugin framework of Red Hat Developer Hub.
 
