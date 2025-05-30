@@ -303,7 +303,7 @@ For GitHub:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github-01.yaml
 ----
 
 For GitLab:
@@ -311,7 +311,7 @@ For GitLab:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab-01.yaml
 ----
 --
 ====
@@ -325,3 +325,112 @@ And each component includes a new tab for the TODO plugin.
 image::challenge-06/rhdh-todo-plugin.png[]
 
 Congratulations! Your Red Hat Developer Hub is fully modular.
+
+=== (Bonus Track) Enabling SCM Plugins
+
+The xref:challenge-03.adoc#intro[Lock It Down] challenge included a set of steps to integrate
+Red Hat Developer Hub and your favourite SCM (e.g: GitHub, GitLab). That integration included
+some features to discover organization data, including repositories to add automatically into
+the Red Hat Developer Hub catalog. However, the integration can be extended to include more
+features and plugins to enhance the experience of developers and platform engineers.
+
+There are different plugins available to integrate some of the features of the SCM systems like
+issues, pull requests, and actions. These plugins allow you to visualize and manage these features
+directly from the Red Hat Developer Hub interface, providing a seamless experience for developers.
+
+To enable these plugins, you need to modify the Red Hat Developer Hub configuration to include
+the necessary plugins for your SCM system. The configuration can be done either by modifying the
+`app-config.yaml` file or by using the Helm chart values file, depending on how you have deployed
+Red Hat Developer Hub.
+
+List of plugins for GitHub (but not limited to):
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+      # GitHub Plugins for issues, pull requests, and actions
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-github-issues
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
+        disabled: false
+      #- package: ./dynamic-plugins/dist/backstage-community-github-pull-requests
+      #  disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-pull-requests
+        disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-github-insights
+        disabled: false
+----
+
+List of plugins for GitLab (but not limited to):
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+      # GitLab Plugins
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+        disabled: false
+----
+
+Once we have added the new plugins, we can continue as:
+
+[tabs]
+====
+By Helm Chart::
++
+--
+Extend the `values.yaml` file to add the list of plugins to use and upgrade the Helm release:
+
+For GitHub:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-02-github.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+
+For GitLab:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-06/values-02-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+
+WARNING: The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name, please replace that pattern in the command with the name of your instance.
+--
+By Operator::
++
+--
+For GitHub:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-github.yaml
+----
+
+For GitLab:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-06/rhdh-dynamic-plugins-cm-gitlab.yaml
+----
+--
+====
+
+For a entity in the catalog integrated with GitHub, the plugins will be showed in the overview page similar as:
+
+image::challenge-06/rhdh-github-plugins.png[GitHub Plugins in action]
+
+For a entity in the catalog integrated with GitLab, the plugins will be showed in the overview page similar as:
+
+image::challenge-06/rhdh-gitlab-plugins.png[GitLab Plugins in action]

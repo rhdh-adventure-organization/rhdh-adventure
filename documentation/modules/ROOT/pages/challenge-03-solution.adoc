@@ -118,7 +118,6 @@ Modify `rhdh-app-config` ConfigMap to add the authentication block (as the same 
 [source, yaml, subs="+macros,+attributes"]
 ----
     signInPage: github
-    dangerouslyAllowSignInWithoutUserInCatalog: true
     auth:
       environment: development
       providers:
@@ -126,6 +125,10 @@ Modify `rhdh-app-config` ConfigMap to add the authentication block (as the same 
           development:
             clientId: ${AUTH_GITHUB_CLIENT_ID}
             clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+            signIn:
+              resolvers:
+                - resolver: usernameMatchingUserEntityName
+                  dangerouslyAllowSignInWithoutUserInCatalog: true
 ----
 
 This sample configuration can help:
@@ -218,8 +221,8 @@ To authenticate users, Red Hat Developer Hub requires their presence in the soft
 Consider configuring Red Hat Developer Hub to autodiscovery and provisioning users from GitHub
 to the software catalog on schedule, rather than provisioning the users manually.
 
-The Red Hat Developer Hub catalog can be set up to ingest organizational data (users and groups)
-directly from GitHub. The result is a hierarchy of User and Group entities that mirrors your org setup.
+The Red Hat Developer Hub catalog can be set up to ingest organizational data (users, groups, domains, systems, resources)
+directly from GitHub. The result is a hierarchy of entities that mirrors your org setup.
 
 This feature will crawl the GitHub instance and register entities matching the configured paths.
 This can be useful as an alternative to static locations or manually adding things to the catalog.
@@ -247,29 +250,41 @@ Enabling member and repository discovery add the catalog definition to the `app-
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-dangerouslyAllowSignInWithoutUserInCatalog: false
-catalog:
-  providers:
-    github:
-      providerId:
-        organization: "${GITHUB_ORGANIZATION}"
-        schedule:
-          frequency:
-            minutes: 30
-          initialDelay:
-            seconds: 15
-          timeout:
-            minutes: 15
-    githubOrg:
-      githubUrl: "https://github.com"
-      orgs: [ "${GITHUB_ORGANIZATION}" ]
-      schedule:
-        frequency:
-          minutes: 30
-        initialDelay:
-          seconds: 15
-        timeout:
-          minutes: 15
+    # Catalog
+    catalog:
+      rules:
+        - allow: [Template, Location, Component, API, Group, Resource, Domain, System]
+      providers:
+        github:
+          providerId:
+            organization: ${GITHUB_ORGANIZATION}
+            schedule:
+              frequency:
+                minutes: 10
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 5
+          orgCatalog:
+            organization: ${GITHUB_ORGANIZATION}
+            catalogPath: '/**/org-catalog.yaml' # this will search all folders for org-catalog.yaml files
+            schedule:
+              frequency:
+                minutes: 10
+              initialDelay:
+                seconds: 15
+              timeout:
+                minutes: 5
+        githubOrg:
+          githubUrl: "https://github.com"
+          orgs: [ "${GITHUB_ORGANIZATION}" ]
+          schedule:
+            frequency:
+              minutes: 30
+            initialDelay:
+              seconds: 15
+            timeout:
+              minutes: 15
 ----
 
 To discover users and groups, it is needed to identify the GitHub organization.
@@ -863,6 +878,8 @@ upstream:
     extraVolumeMounts:
       - mountPath: /opt/app-root/src/dynamic-plugins-root
         name: dynamic-plugins-root
+      - mountPath: /tmp
+        name: temp
       - mountPath: /opt/app-root/src/rbac # Mounting point for RBAC policies
         name: rbac-policies
     extraVolumes:

@@ -104,25 +104,17 @@ upstream:
     extraVolumeMounts:
       - mountPath: /opt/app-root/src/dynamic-plugins-root
         name: dynamic-plugins-root
-      - mountPath: /tmp
-        name: temp
       - mountPath: /opt/app-root/src/rbac
         name: rbac-policies
     extraVolumes:
       - name: dynamic-plugins-root
-        ephemeral:
-          volumeClaimTemplate:
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 5Gi
-      - name: dynamic-plugins
-        configMap:
+        persistentVolumeClaim:
+          claimName: 'rhdh-dynamic-plugins-root'
+      - configMap:
           defaultMode: 420
           name: 'rhdh-dynamic-plugins'
           optional: true
+        name: dynamic-plugins
       - name: dynamic-plugins-npmrc
         secret:
           defaultMode: 420
@@ -134,8 +126,11 @@ upstream:
           optional: true
           secretName: 'rhdh-dynamic-plugins-registry-auth'
       - name: npmcacache
-      - name: temp
-      - name: rbac-policies
-        configMap:
+      - configMap:
           defaultMode: 420
           name: rbac-policies
+        name: rbac-policies
+  metrics:
+    serviceMonitor:
+      enabled: true
+      path: /metrics

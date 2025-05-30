@@ -35,8 +35,8 @@ These capabilities are:
 * Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/telemetry_data_collection/index[here].
 
 Additionally, Red Hat Developer Hub provides a plugin to deliver detailed analytics and insights on adoption
-and engagement of the platform. This plugin is called Adoption Insights. To enable it, you need to install
-the plugin and configure it with the correct parameters. This configuration must be added into the `a`
+and engagement of the platform. This plugin is called link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/adoption_insights_in_red_hat_developer_hub/index[Adoption Insights].
+To enable it, you need to install the plugin and configure it with the correct parameters.
 
 Modify `rhdh-app-config` ConfigMap to add this configuration (as part of the `app` block) as:
 
@@ -198,7 +198,7 @@ Run this command for your installation integrated with GitHub:
 ----
 helm upgrade --install rhdh \
     openshift-helm-charts/redhat-developer-hub \
-    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-github.yaml \
+    -f ./documentation/modules/ROOT/examples/challenge-07/values-02-github.yaml \
     --set global.clusterRouterBase=$basedomain
 ----
 
@@ -209,7 +209,7 @@ Or this command for your installation integrated with GitLab:
 ----
 helm upgrade --install rhdh \
     openshift-helm-charts/redhat-developer-hub \
-    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-gitlab.yaml \
+    -f ./documentation/modules/ROOT/examples/challenge-07/values-02-gitlab.yaml \
     --set global.clusterRouterBase=$basedomain
 ----
 --
