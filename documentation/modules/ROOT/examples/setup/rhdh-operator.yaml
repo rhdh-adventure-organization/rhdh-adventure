@@ -26,5 +26,5 @@ spec:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   channel: fast
-  startingCSV: rhdh-operator.v1.4.2
+  startingCSV: rhdh-operator.v1.6.0
   installPlanApproval: Automatic
