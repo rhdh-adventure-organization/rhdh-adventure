@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/rhdh-adventure-organization/rhdh-adventure/compare/v1.6.1...HEAD)
+## [Unreleased](https://github.com/rhdh-adventure-organization/rhdh-adventure/compare/v1.8.0...HEAD)
 
 Please do not update the unreleased notes.
 
 <!-- Content should be placed here -->
+## [v1.8.0](https://github.com/rhdh-adventure-organization/rhdh-adventure/compare/v1.6.1...v1.8.0) - 2025-11-17
+
+### What Changed 👀
+
+* No changes
+
+**Full Changelog**: https://github.com/rhdh-adventure-organization/rhdh-adventure/compare/v1.6.1...v1.8.0
+
 ## [v1.6.1](https://github.com/rhdh-adventure-organization/rhdh-adventure/compare/v1.5.3...v1.6.1) - 2025-05-30
 
 ### What Changed 👀
