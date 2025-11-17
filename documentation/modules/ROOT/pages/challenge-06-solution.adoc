@@ -34,7 +34,7 @@ or rebuilding container images.
 
 Red Hat Developer Hub is pre-loaded with a selection of dynamic plugins. Most of these dynamic plugins are disabled by default due
 to the need for mandatory configuration. For a complete list of dynamic plugins that are included, see the
-https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins[dynamic plugins matrix]
+https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins[dynamic plugins matrix]
 section of Red Hat Developer Hub.
 
 NOTE: Red Hat fully supports certain plugins (Topology, Tekton, Quay), while others are community-supported projects.
@@ -116,7 +116,7 @@ The following resources includes a full list of the current plugins in the Backs
 * link:https://github.com/backstage/community-plugins[Backstage Community Plugins]
 
 A detailed guide to install third-party plugins is available
-https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh[here].
+https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh[here].
 
 We will do the exercise to install some plugins using the dynamic plugin framework of Red Hat Developer Hub.
 
@@ -124,38 +124,77 @@ We will do the exercise to install some plugins using the dynamic plugin framewo
 
 This plugin lists `// TODO` comments in source code. It currently exports a single component extension for use on entity pages.
 
-The main steps:
+The main steps are based on the usage of the link:https://github.com/redhat-developer/rhdh-dynamic-plugin-factory[RHDH Dynamic Plugin Factor]:
 
-1. Clone and install locally
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-git clone https://github.com/backstage/community-plugins
-cd community-plugins/workspaces/todo
-yarn install
-yarn tsc
-----
-
-2. Export as dynamic plugin each module (backend, frontent):
+* Pull image version of the dynamic plugin factory:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-cd plugins/todo-backend
-npx @janus-idp/cli@latest package export-dynamic-plugin
-cd ../todo
-npx @janus-idp/cli@latest package export-dynamic-plugin
+podman pull quay.io/rhdh-community/dynamic-plugins-factory:1.8
 ----
 
-3. Export as container image:
+* Create a temporary folder to create the dynamic plugin, and the initial folder structure:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-cd ../..
-npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2
+mkdir -p /tmp/backstage-community-plugins
+mkdir -p /tmp/backstage-community-plugins/config
+mkdir -p /tmp/backstage-community-plugins/workspace
+mkdir -p /tmp/backstage-community-plugins/outputs
+cd /tmp/backstage-community-plugins
+----
+
+* Setup configuration files to manage this plugin by the `source.json`, `plugins-list.yaml` files as:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+cat > ./config/source.json << EOF
+{
+  "repo": "https://github.com/backstage/community-plugins",
+  "repo-ref":"main"
+}
+EOF
+cat > ./config/plugins-list.yaml << EOF
+plugins/todo:
+plugins/todo-backend:
+EOF
+----
+
+* Setup your environment to push images automatically into your container registry by the `.env` file as:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+cat > ./config/.env << EOF
+# Registry configuration
+REGISTRY_URL=<YOUR_REGISTRY>
+REGISTRY_INSECURE=false
+
+REGISTRY_USERNAME=<YOUR_USERNAME>
+REGISTRY_PASSWORD=<YOUR_PASSWORD>
+
+REGISTRY_NAMESPACE=<YOUR_NAMESPACE>
+EOF
+----
+
+Please, update it with your own configuration.
+
+* Build and publish the OCI image of the dynamic plugin into your container registry:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+podman run --rm -it \
+  --device /dev/fuse \
+  -v ./config:/config:z \
+  -v ./workspace:/workspace:z \
+  -v ./outputs:/outputs:z \
+  quay.io/rhdh-community/dynamic-plugins-factory:1.8 \
+  --workspace-path workspaces/todo \
+  --push-images
 ----
 
 This process will output the default configuration of the dynamic plugin to add into Red Hat Developer Hub:
@@ -164,7 +203,7 @@ This process will output the default configuration of the dynamic plugin to add 
 [source, yaml, subs="+macros,+attributes"]
 ----
     plugins:
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:0.13.0!backstage-community-plugin-todo
         pluginConfig:
           dynamicPlugins:
             frontend:
@@ -176,16 +215,8 @@ This process will output the default configuration of the dynamic plugin to add 
                   - path: /todo
                     title: Todo
                     mountPoint: entity.page.todo
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo-backend:0.14.0!backstage-community-plugin-todo-backend
         disabled: false
-----
-
-4. Push the image into a Container Image Registry:
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-podman push quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2
 ----
 
 WARNING: Don't forget to make public the repository.
@@ -194,33 +225,74 @@ WARNING: Don't forget to make public the repository.
 
 Display some random coding/programming related quotes on the Backstage homepage.
 
-1. Clone and install locally
+* Pull image version of the dynamic plugin factory:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-git clone https://github.com/Parsifal-M/backstage-dev-quotes
-cd backstage-dev-quotes/
-yarn install
-yarn tsc
-yarn build
+podman pull quay.io/rhdh-community/dynamic-plugins-factory:1.8
 ----
 
-2. Export as dynamic plugin each module (backend, frontent):
+* Create a temporary folder to create the dynamic plugin, and the initial folder structure:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-npx @janus-idp/cli@latest package export-dynamic-plugin
+mkdir -p /tmp/devquotes-plugin
+mkdir -p /tmp/devquotes-plugin/config
+mkdir -p /tmp/devquotes-plugin/workspace
+mkdir -p /tmp/devquotes-plugin/outputs
+cd /tmp/devquotes-plugin
 ----
 
-3. Export as container image:
+* Setup configuration files to manage this plugin by the `source.json`, `plugins-list.yaml` files as:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1
+cat > ./config/source.json << EOF
+{
+  "repo": "https://github.com/Parsifal-M/backstage-dev-quotes",
+  "repo-ref": "main"
+}
+EOF
+cat > ./config/plugins-list.yaml << EOF
+.:
+EOF
+----
+
+* Setup your environment to push images automatically into your container registry by the `.env` file as:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+cat > ./config/.env << EOF
+# Registry configuration
+REGISTRY_URL=<YOUR_REGISTRY>
+REGISTRY_INSECURE=false
+
+REGISTRY_USERNAME=<YOUR_USERNAME>
+REGISTRY_PASSWORD=<YOUR_PASSWORD>
+
+REGISTRY_NAMESPACE=<YOUR_NAMESPACE>
+EOF
+----
+
+Please, update it with your own configuration.
+
+* Build and publish the OCI image of the dynamic plugin into your container registry:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+podman run --rm -it \
+  --device /dev/fuse \
+  -v ./config:/config:z \
+  -v ./workspace:/workspace:z \
+  -v ./outputs:/outputs:z \
+  quay.io/rhdh-community/dynamic-plugins-factory:1.8 \
+  --workspace-path ./ \
+  --push-images
 ----
 
 This command generates the default configuration to apply:
@@ -228,7 +300,8 @@ This command generates the default configuration to apply:
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+      - package:                                                                                                                 
+         oci://quay.io/rhdh-adventure-organization/parsifal-m-plugin-dev-quotes-homepage:3.0.8!parsifal-m-plugin-dev-quotes-homepage  
         disabled: false
         pluginConfig:
           dynamicPlugins:
@@ -248,14 +321,6 @@ This command generates the default configuration to apply:
                     menuItem:
                       text: Quote
                     path: /devquote
-----
-
-4. Push the image into a Container Image Registry:
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-podman push quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1
 ----
 
 WARNING: Don't forget to make public the repository.

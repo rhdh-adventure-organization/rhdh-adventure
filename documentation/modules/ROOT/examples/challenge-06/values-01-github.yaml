@@ -14,6 +14,14 @@ global:
       # RBAC Plugins
       - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
         disabled: false
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false        
       # DevQuotes
       - package: oci://quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
         disabled: false
@@ -36,7 +44,7 @@ global:
                       text: Quote
                     path: /devquote
       # TODO Plugin
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:0.13.0!backstage-community-plugin-todo
         pluginConfig:
           dynamicPlugins:
             frontend:
@@ -48,7 +56,7 @@ global:
                   - path: /todo
                     title: Todo
                     mountPoint: entity.page.todo
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo-backend:0.14.0!backstage-community-plugin-todo-backend
         disabled: false
 upstream:
   backstage:
