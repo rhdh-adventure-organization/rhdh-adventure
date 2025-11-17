@@ -498,7 +498,7 @@ NOTE: Notice that we set the `signInPage` to `gitlab`, the default is `github`.
 
 TIP: To disable guest login set the `environment` to `production`.
 
-Appling the configuration:
+Applying the configuration:
 
 [tabs]
 ====
@@ -655,8 +655,10 @@ Finally, we need to enable some extra dynamic plugins to setup finally the integ
 * backstage-plugin-catalog-backend-module-gitlab-dynamic
 * backstage-plugin-catalog-backend-module-gitlab-org-dynamic
 * backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+* immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+* immobiliarelabs-backstage-plugin-gitlab
 
-More information about Dynamic Plugins https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/introduction_to_plugins/index[here].
+More information about Dynamic Plugins https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/introduction_to_plugins/index[here].
 
 The following steps will depend of the mechanism used to operate Red Hat Developer Hub:
 
@@ -684,6 +686,9 @@ global:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
         disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
 ----
 
 Now, we must apply the changes and upgrade the Helm release:

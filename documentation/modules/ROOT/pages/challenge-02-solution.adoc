@@ -80,6 +80,13 @@ applied during the installation. Here a simple use case:
 include::example$challenge-02/rhdh-app-config-cm-01.yaml[]
 ----
 
+[TIP]
+====
+Since Red Hat Developer Hub 1.6 is not longer required to define base URL for the instance. The operator will
+calculate the correct value an inject in the default configuration. If you need it, you can still override these settings.
+More details link:(https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/red_hat_developer_hub_release_notes/index#enhancement-rhidp-6173)[here].
+====
+
 Customizing Red Hat Developer Hub will require at some point the usage of sensitive data (e.g: credentials, tokens...)
 and we must declare in the most secure way. Using a Secret we could declare those values properly and add
 into the configuration too. For example, the `BACKEND_SECRET` variable is defined to be used for service

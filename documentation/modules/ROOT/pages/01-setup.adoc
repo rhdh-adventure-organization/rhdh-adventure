@@ -14,7 +14,7 @@ Please have them installed and configured before you get started with any of the
 
 | `oc client {ocp-version}`
 | https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-mac-{ocp-version}.tar.gz[Download]
-| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-linux-{ocp-version}.tar.gz[Download]
+| https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-linux-{ocp-version}.tar.gz[Download]
 | https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{ocp-version}/openshift-client-windows-{ocp-version}.zip[Download]
 
 | `helm client {helm-version}`
@@ -57,7 +57,7 @@ It the output is similar to, then it is not needed to install it.
 [source, bash, subs="+macros,+attributes"]
 ----
 NAME                            DISPLAY                                       VERSION   REPLACES                        PHASE
-cert-manager-operator.v1.16.0   cert-manager Operator for Red Hat OpenShift   1.16.0    cert-manager-operator.v1.15.1   Succeeded
+cert-manager-operator.v1.18.0   cert-manager Operator for Red Hat OpenShift   1.18.0    cert-manager-operator.v1.17.0   Succeeded
 ----
 
 To install it:
@@ -102,7 +102,7 @@ The output is similar to:
 [source, bash, subs="+macros,+attributes"]
 ----
 NAME                   DISPLAY                          VERSION   REPLACES               PHASE
-rhdh-operator.v1.6.1   Red Hat Developer Hub Operator   1.6.1     rhdh-operator.v1.6.0   Succeeded
+rhdh-operator.v1.8.0   Red Hat Developer Hub Operator   1.8.0     rhdh-operator.v1.7.1   Succeeded
 ----
 
 [#ocpsetup-gitlab]
@@ -114,7 +114,7 @@ OpenShift cluster.
 
 Follow this instructions if you want to have your own instance of GitLab.
 
-Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecyle Manager:
+Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecycle Manager:
 
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
@@ -136,7 +136,7 @@ The output is similar to:
 [source, bash, subs="+macros,+attributes"]
 ----
 NAME                                DISPLAY    VERSION   REPLACES                            PHASE
-gitlab-operator-kubernetes.v2.0.1   GitLab     2.0.1     gitlab-operator-kubernetes.v2.0.0   Succeeded
+gitlab-operator-kubernetes.v2.5.2   GitLab     2.5.2     gitlab-operator-kubernetes.v2.5.1   Succeeded
 ----
 
 To install a local instance of GitLab this command will create one. It will the base domain of the
@@ -245,7 +245,7 @@ With an output similar to:
 [source, bash, subs="+macros,+attributes"]
 ----
 NAME                             DISPLAY         VERSION   REPLACES                         PHASE
-gitlab-runner-operator.v1.35.0   GitLab Runner   1.35.0    gitlab-runner-operator.v1.34.0   Succeeded
+gitlab-runner-operator.v1.42.0   GitLab Runner   1.42.0    gitlab-runner-operator.v1.41.1   Succeeded
 ----
 
 Deploy a GitLab runner to run pipelines:
@@ -353,6 +353,6 @@ The output is similar to:
 [.console-output]
 [source, bash, subs="+macros,+attributes"]
 ----
-NAME                   DISPLAY          VERSION   REPLACES               PHASE
-web-terminal.v1.12.1   Web Terminal     1.12.1    web-terminal.v1.11.1   Succeeded
+NAME                   DISPLAY          VERSION   REPLACES                              PHASE
+web-terminal.v1.13.0   Web Terminal     1.13.0    web-terminal.v1.12.1-0.1745393748.p   Succeeded
 ----

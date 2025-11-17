@@ -40,7 +40,7 @@ Use a public organization or your own user in link:https://github.com[GitHub] as
 
 To resolve this challenge you can start checking the following references:
 
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/authentication_in_red_hat_developer_hub/authenticating-with-github[Authenticating with GitHub]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/authentication_in_red_hat_developer_hub/index#enabling-authentication-with-github[Authenticating with GitHub]
 * link:https://backstage.io/docs/auth/github/provider/[GitHub Authentication Provider]
 * link:https://developers.redhat.com/learn/streamline-development-github-integration-and-software-templates-red-hat-developer-hub[Streamline Development: GitHub Integration and Software Templates in Red Hat Developer Hub]
 
@@ -84,7 +84,7 @@ access to specific features or actions, ensuring users have the correct permissi
 
 To resolve this challenge you can start checking the following references:
 
-* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/authorization_in_red_hat_developer_hub/index#enabling-and-giving-access-to-rbac[Enabling and giving access to the RBAC feature]
+* https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/authorization_in_red_hat_developer_hub/index#enabling-and-giving-access-to-rbac[Enabling and giving access to the RBAC feature]
 
 [#rbac-solution]
 === 🧞🛂 You won't break it Solution
