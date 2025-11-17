@@ -4,5 +4,5 @@
 :tutorial-url: https://github.com/rhdh-adventure-organization/rhdh-adventure.git
 :folder: rhdh-adventure
 
-:ocp-version: 4.16.9
-:helm-version: 3.16.4
+:ocp-version: 4.18.27
+:helm-version: 3.17.1
