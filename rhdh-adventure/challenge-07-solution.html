@@ -203,20 +203,19 @@ These capabilities are:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Metrics for gather insights and monitor performance of the instance. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/monitoring_and_logging/index">here</a></p>
+<p>Metrics for gather insights and monitor performance of the instance. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/monitoring_and_logging/index">here</a></p>
 </li>
 <li>
-<p>Audit logs to register user activities, system events, and data changes. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/audit_logs_in_red_hat_developer_hub/index">here</a>.</p>
+<p>Audit logs to register user activities, system events, and data changes. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/audit_logs_in_red_hat_developer_hub/index">here</a>.</p>
 </li>
 <li>
-<p>Telemetry data for collecting and analyzing to improve the experience. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/telemetry_data_collection/index">here</a>.</p>
+<p>Telemetry data for collecting and analyzing to improve the experience. Information <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/telemetry_data_collection/index">here</a>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>Additionally, Red Hat Developer Hub provides a plugin to deliver detailed analytics and insights on adoption
-and engagement of the platform. This plugin is called <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/adoption_insights_in_red_hat_developer_hub/index">Adoption Insights</a>.
-To enable it, you need to install the plugin and configure it with the correct parameters.</p>
+and engagement of the platform. This plugin is called <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/adoption_insights_in_red_hat_developer_hub/index">Adoption Insights</a>.</p>
 </div>
 <div class="paragraph">
 <p>Modify <code>rhdh-app-config</code> ConfigMap to add this configuration (as part of the <code>app</code> block) as:</p>
@@ -290,80 +289,6 @@ to rollout the deployment.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Once we have the configuration for the Adoption Insights plugin, we can continue as:</p>
-</div>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset2_by-helm-chart"></a>By Helm Chart</p>
-</li>
-<li>
-<p><a id="tabset2_by-operator"></a>By Operator</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_by-helm-chart">
-<div class="paragraph">
-<p>Extend the <code>values.yaml</code> file to add the list of plugins to use and upgrade the Helm release:</p>
-</div>
-<div class="paragraph">
-<p>For GitHub:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
-    openshift-helm-charts/redhat-developer-hub \
-    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-github.yaml \
-    --set global.clusterRouterBase=$basedomain</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For GitLab:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
-    openshift-helm-charts/redhat-developer-hub \
-    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-gitlab.yaml \
-    --set global.clusterRouterBase=$basedomain</code></pre>
-</div>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-The name used for the Red Hat Developer Hub instance is <code>rhdh</code>. If you choose a different name, please replace that pattern in the command with the name of your instance.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_by-operator">
-<div class="paragraph">
-<p>For GitHub:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-dynamic-plugins-cm-github-01.yaml</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For GitLab:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-dynamic-plugins-cm-gitlab-01.yaml</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
 <p>Once the Red Hat Developer Hub is redeployed is created, the user can visualize the insights
 from the <strong>Adoption Insights</strong> menu under the <strong>Administration</strong> block. A similar dashboard
 is available:</p>
@@ -394,15 +319,15 @@ to create a <code>ServiceMonitor</code> object to scrape metrics from that servi
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset3_by-helm-chart"></a>By Helm Chart</p>
+<p><a id="tabset2_by-helm-chart"></a>By Helm Chart</p>
 </li>
 <li>
-<p><a id="tabset3_by-operator"></a>By Operator</p>
+<p><a id="tabset2_by-operator"></a>By Operator</p>
 </li>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset3_by-helm-chart">
+<div class="tab-pane" aria-labelledby="tabset2_by-helm-chart">
 <div class="paragraph">
 <p>The Helm Chart provides a configuration to create automatically the ServiceMonitor during the Helm release
 life cycle. That configuration is similar to:</p>
@@ -439,35 +364,16 @@ life cycle. That configuration is similar to:</p>
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset3_by-operator">
+<div class="tab-pane" aria-labelledby="tabset2_by-operator">
 <div class="paragraph">
-<p>Currently, the Red Hat Developer Hub Operator does not support creating a ServiceMonitor by default.
-You must complete the following steps to create a ServiceMonitor to scrape metrics from the endpoint.</p>
-</div>
-<div class="paragraph">
-<p>Here, there is an example of the ServiceMonitor to scrape metrics:</p>
+<p>The Operator provides a configuration to create automatically the ServiceMonitor during the Backstage
+life cycle. That configuration is similar to:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: rhdh
-  labels:
-    app.kubernetes.io/instance: rhdh
-    app.kubernetes.io/name: backstage
-spec:
-  namespaceSelector:
-    matchNames:
-      - rhdh-by-operator
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: rhdh
-      app.kubernetes.io/name: backstage
-  endpoints:
-    - port: http-metrics
-      path: '/metrics'</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  monitoring:
+    enabled: true</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -475,7 +381,7 @@ spec:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-07/service-monitor-operator.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-instance.yaml</code></pre>
 </div>
 </div>
 </div>

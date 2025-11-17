@@ -186,16 +186,16 @@ Please have them installed and configured before you get started with any of the
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>oc client 4.16.9</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-mac-4.16.9.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-linux-4.16.9.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.16.9/openshift-client-windows-4.16.9.zip">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>oc client 4.18.27</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.18.27/openshift-client-mac-4.18.27.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.18.27/openshift-client-linux-4.18.27.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.18.27/openshift-client-windows-4.18.27.zip">Download</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>helm client 3.16.4</code></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://get.helm.sh/helm-v3.16.4-darwin-amd64.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://get.helm.sh/helm-v3.16.4-linux-386.tar.gz">Download</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://get.helm.sh/helm-v3.16.4-windows-amd64.zip">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>helm client 3.17.1</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://get.helm.sh/helm-v3.17.1-darwin-amd64.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://get.helm.sh/helm-v3.17.1-linux-386.tar.gz">Download</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://get.helm.sh/helm-v3.17.1-windows-amd64.zip">Download</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -205,7 +205,7 @@ Please have them installed and configured before you get started with any of the
 <h2 id="ocpsetup"><a class="anchor" href="#ocpsetup"></a>Set up OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This adventure requires a Red Hat OpenShift Container Platform 4.16.9 available and with a set of operators
+<p>This adventure requires a Red Hat OpenShift Container Platform 4.18.27 available and with a set of operators
 installed before starting this adventure.</p>
 </div>
 <div class="paragraph">
@@ -237,7 +237,7 @@ with a user with <code>cluster-admin</code> privileges. This is because a set of
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                            DISPLAY                                       VERSION   REPLACES                        PHASE
-cert-manager-operator.v1.16.0   cert-manager Operator for Red Hat OpenShift   1.16.0    cert-manager-operator.v1.15.1   Succeeded</code></pre>
+cert-manager-operator.v1.18.0   cert-manager Operator for Red Hat OpenShift   1.18.0    cert-manager-operator.v1.17.0   Succeeded</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -285,7 +285,7 @@ spec:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   channel: fast
-  startingCSV: rhdh-operator.v1.6.0
+  startingCSV: rhdh-operator.v1.8.0
   installPlanApproval: Automatic</code></pre>
 </div>
 </div>
@@ -311,7 +311,7 @@ spec:
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                   DISPLAY                          VERSION   REPLACES               PHASE
-rhdh-operator.v1.6.1   Red Hat Developer Hub Operator   1.6.1     rhdh-operator.v1.6.0   Succeeded</code></pre>
+rhdh-operator.v1.8.0   Red Hat Developer Hub Operator   1.8.0     rhdh-operator.v1.7.1   Succeeded</code></pre>
 </div>
 </div>
 </div>
@@ -326,7 +326,7 @@ OpenShift cluster.</p>
 <p>Follow this instructions if you want to have your own instance of GitLab.</p>
 </div>
 <div class="paragraph">
-<p>Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecyle Manager:</p>
+<p>Deploy the GitLab Operator, available in Red Hat OpenShift Operator Lifecycle Manager:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -347,7 +347,7 @@ OpenShift cluster.</p>
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                                DISPLAY    VERSION   REPLACES                            PHASE
-gitlab-operator-kubernetes.v2.0.1   GitLab     2.0.1     gitlab-operator-kubernetes.v2.0.0   Succeeded</code></pre>
+gitlab-operator-kubernetes.v2.5.2   GitLab     2.5.2     gitlab-operator-kubernetes.v2.5.1   Succeeded</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -476,7 +476,7 @@ This section will install the GitLab Runner operator and prepare to be used by t
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                             DISPLAY         VERSION   REPLACES                         PHASE
-gitlab-runner-operator.v1.35.0   GitLab Runner   1.35.0    gitlab-runner-operator.v1.34.0   Succeeded</code></pre>
+gitlab-runner-operator.v1.42.0   GitLab Runner   1.42.0    gitlab-runner-operator.v1.41.1   Succeeded</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -585,7 +585,7 @@ spec:
   name: web-terminal
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: web-terminal.v1.11.0</code></pre>
+  startingCSV: web-terminal.v1.13.0</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -609,8 +609,8 @@ spec:
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                   DISPLAY          VERSION   REPLACES               PHASE
-web-terminal.v1.12.1   Web Terminal     1.12.1    web-terminal.v1.11.1   Succeeded</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                   DISPLAY          VERSION   REPLACES                              PHASE
+web-terminal.v1.13.0   Web Terminal     1.13.0    web-terminal.v1.12.1-0.1745393748.p   Succeeded</code></pre>
 </div>
 </div>
 </div>

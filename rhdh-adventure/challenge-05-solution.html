@@ -345,7 +345,7 @@ This is the configuration to add in the <code>app-config-rhdh</code> ConfigMap:<
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
     -e "s|\$basedomain|$basedomain|g" \
-    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml | oc apply -f -</code></pre>
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github-01.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -363,7 +363,7 @@ to rollout the deployment.</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
     -e "s|\$basedomain|$basedomain|g" \
-    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml | oc apply -f -</code></pre>
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab-01.yaml | oc apply -f -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -379,11 +379,218 @@ to rollout the deployment.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Clicking the <code>Self Service</code> button from the top bar the list of software templates available should appear:</p>
+<p>Clicking the <code>Self-Service</code> button from the top bar the list of software templates available should appear:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/challenge-05/rhdh-software-templates.png" alt="Software Templates available to be used">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>From Red Hat Developer Hub 1.8.0 there is a way to create a relationship between the component and the software template
+to track the changes along the time. This process requires enable the
+<code>backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic</code> plugin
+to add the <code>spec.scaffoldedFrom</code> property into the catalog definition. Having that property Red Hat Developer Hub
+will visualize the relationship between both entities.</p>
+</div>
+<div class="paragraph">
+<p>Additionally we can enable notifications when a new version of the template is deployed, so, we can track
+that our component was created from a previous version. It can be very helpful to review the new version
+of the template and apply some changes into our current version of the component. To enable notifications
+the <code>backstage-plugin-notifications</code> and <code>backstage-plugin-notifications-backend-dynamic</code> must be enabled.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Apply this configuration depends of the deployment mechanism:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_by-helm-chart"></a>By Helm Chart</p>
+</li>
+<li>
+<p><a id="tabset3_by-operator"></a>By Operator</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_by-helm-chart">
+<div class="paragraph">
+<p>This configuration must be done in the <code>values.yaml</code> file similar to:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">global:
+  # Other configurations
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # Other Plugins
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To apply this configuration for GitHub use this command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-05/values-02-github.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of GitLab use this command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-05/values-02-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_by-operator">
+<div class="paragraph">
+<p>Update the <code>rhdh-dynamic-plugins</code> ConfigMap to add the definition of the new plugin:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-dynamic-plugins
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # Other Plugins
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To apply this configuration for GitHub use this command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-dynamic-plugins-cm-github-02.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of GitLab use this command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-dynamic-plugins-cm-gitlab-02.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The last part is enable the notifications adding the following configuration to Red Hat Developer Hub:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    scaffolder:
+      notifications:
+        templateUpdate:
+          enabled: true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Apply this configuration based on your SCM server:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_github"></a>GitHub</p>
+</li>
+<li>
+<p><a id="tabset4_gitlab"></a>GitLab</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_github">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github-02.yaml | oc apply -f -</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_gitlab">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab-02.yaml | oc apply -f -</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/rhdh-developer-hub</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -460,6 +667,36 @@ Choose the template version that matches your Git provider (GitHub or GitLab).
 <div class="content">
 <img src="_images/challenge-05/rhdh-onboard-template-06.png" alt="New component overview page">
 </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To verify the dependency between components and templates, let&#8217;s create a new component
+using the sample template as we did previously in this exercise. After its creation verify that the <code>spec.scaffolderFrom</code>
+exists in the <code>catalog-info.yaml</code> file generated, and we can see the relationship in the <code>Dependencies</code> tab
+of the component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-component-template-relation.png" alt="Dependency between a component and a template">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>BONUS TRACK</strong>: If we change the version of the template used, a notification will appear similar to:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/challenge-05/rhdh-notifications.png" alt="Notifications">
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

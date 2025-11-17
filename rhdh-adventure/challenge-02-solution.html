@@ -285,6 +285,22 @@ data:
       baseUrl: <a href="https://$rhdhname.$basedomain" class="bare">https://$rhdhname.$basedomain</a></code></pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since Red Hat Developer Hub 1.6 is not longer required to define base URL for the instance. The operator will
+calculate the correct value an inject in the default configuration. If you need it, you can still override these settings.
+More details link:(<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/red_hat_developer_hub_release_notes/index#enhancement-rhidp-6173)">here</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Customizing Red Hat Developer Hub will require at some point the usage of sensitive data (e.g: credentials, tokens&#8230;&#8203;)
 and we must declare in the most secure way. Using a Secret we could declare those values properly and add
@@ -397,7 +413,7 @@ Here an example of that configuration:</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
-apiVersion: rhdh.redhat.com/v1alpha2
+apiVersion: rhdh.redhat.com/v1alpha4
 kind: Backstage
 metadata:
   name: rhdh

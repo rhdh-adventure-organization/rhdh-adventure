@@ -205,7 +205,7 @@ or rebuilding container images.</p>
 <div class="paragraph">
 <p>Red Hat Developer Hub is pre-loaded with a selection of dynamic plugins. Most of these dynamic plugins are disabled by default due
 to the need for mandatory configuration. For a complete list of dynamic plugins that are included, see the
-<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins">dynamic plugins matrix</a>
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/dynamic_plugins_reference/con-preinstalled-dynamic-plugins#red-hat-supported-plugins">dynamic plugins matrix</a>
 section of Red Hat Developer Hub.</p>
 </div>
 <div class="admonitionblock note">
@@ -352,7 +352,7 @@ For more information, see <a href="https://github.com/redhat-developer/rhdh/blob
 </div>
 <div class="paragraph">
 <p>A detailed guide to install third-party plugins is available
-<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh">here</a>.</p>
+<a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#ref-example-third-party-plugin-installation_assembly-install-third-party-plugins-rhdh">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>We will do the exercise to install some plugins using the dynamic plugin framework of Red Hat Developer Hub.</p>
@@ -363,50 +363,98 @@ For more information, see <a href="https://github.com/redhat-developer/rhdh/blob
 <p>This plugin lists <code>// TODO</code> comments in source code. It currently exports a single component extension for use on entity pages.</p>
 </div>
 <div class="paragraph">
-<p>The main steps:</p>
+<p>The main steps are based on the usage of the <a href="https://github.com/redhat-developer/rhdh-dynamic-plugin-factory">RHDH Dynamic Plugin Factor</a>:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Clone and install locally</p>
+<p>Pull image version of the dynamic plugin factory:</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/backstage/community-plugins" class="bare">https://github.com/backstage/community-plugins</a>
-cd community-plugins/workspaces/todo
-yarn install
-yarn tsc</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull quay.io/rhdh-community/dynamic-plugins-factory:1.8</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Export as dynamic plugin each module (backend, frontent):</p>
+<p>Create a temporary folder to create the dynamic plugin, and the initial folder structure:</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd plugins/todo-backend
-npx @janus-idp/cli@latest package export-dynamic-plugin
-cd ../todo
-npx @janus-idp/cli@latest package export-dynamic-plugin</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p /tmp/backstage-community-plugins
+mkdir -p /tmp/backstage-community-plugins/config
+mkdir -p /tmp/backstage-community-plugins/workspace
+mkdir -p /tmp/backstage-community-plugins/outputs
+cd /tmp/backstage-community-plugins</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Export as container image:</p>
+<p>Setup configuration files to manage this plugin by the <code>source.json</code>, <code>plugins-list.yaml</code> files as:</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ../..
-npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt; ./config/source.json &lt;&lt; EOF
+{
+  "repo": "https://github.com/backstage/community-plugins",
+  "repo-ref":"main"
+}
+EOF
+cat &gt; ./config/plugins-list.yaml &lt;&lt; EOF
+plugins/todo:
+plugins/todo-backend:
+EOF</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Setup your environment to push images automatically into your container registry by the <code>.env</code> file as:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt; ./config/.env &lt;&lt; EOF
+# Registry configuration
+REGISTRY_URL=&lt;YOUR_REGISTRY&gt;
+REGISTRY_INSECURE=false
+
+REGISTRY_USERNAME=&lt;YOUR_USERNAME&gt;
+REGISTRY_PASSWORD=&lt;YOUR_PASSWORD&gt;
+
+REGISTRY_NAMESPACE=&lt;YOUR_NAMESPACE&gt;
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please, update it with your own configuration.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Build and publish the OCI image of the dynamic plugin into your container registry:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it \
+  --device /dev/fuse \
+  -v ./config:/config:z \
+  -v ./workspace:/workspace:z \
+  -v ./outputs:/outputs:z \
+  quay.io/rhdh-community/dynamic-plugins-factory:1.8 \
+  --workspace-path workspaces/todo \
+  --push-images</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -415,7 +463,7 @@ npx @janus-idp/cli@latest package package-dynamic-plugins \
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    plugins:
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:0.13.0!backstage-community-plugin-todo
         pluginConfig:
           dynamicPlugins:
             frontend:
@@ -427,20 +475,8 @@ npx @janus-idp/cli@latest package package-dynamic-plugins \
                   - path: /todo
                     title: Todo
                     mountPoint: entity.page.todo
-      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2!backstage-community-plugin-todo-backend-dynamic
+      - package: oci://quay.io/rhdh-adventure-organization/backstage-community-plugin-todo-backend:0.14.0!backstage-community-plugin-todo-backend
         disabled: false</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Push the image into a Container Image Registry:</p>
-</li>
-</ol>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rhdh-adventure-organization/backstage-community-plugin-todo:v0.1.2</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -461,45 +497,95 @@ Don&#8217;t forget to make public the repository.
 <div class="paragraph">
 <p>Display some random coding/programming related quotes on the Backstage homepage.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Clone and install locally</p>
+<p>Pull image version of the dynamic plugin factory:</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone <a href="https://github.com/Parsifal-M/backstage-dev-quotes" class="bare">https://github.com/Parsifal-M/backstage-dev-quotes</a>
-cd backstage-dev-quotes/
-yarn install
-yarn tsc
-yarn build</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman pull quay.io/rhdh-community/dynamic-plugins-factory:1.8</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Export as dynamic plugin each module (backend, frontent):</p>
+<p>Create a temporary folder to create the dynamic plugin, and the initial folder structure:</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">npx @janus-idp/cli@latest package export-dynamic-plugin</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p /tmp/devquotes-plugin
+mkdir -p /tmp/devquotes-plugin/config
+mkdir -p /tmp/devquotes-plugin/workspace
+mkdir -p /tmp/devquotes-plugin/outputs
+cd /tmp/devquotes-plugin</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Export as container image:</p>
+<p>Setup configuration files to manage this plugin by the <code>source.json</code>, <code>plugins-list.yaml</code> files as:</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">npx @janus-idp/cli@latest package package-dynamic-plugins \
-    --tag quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt; ./config/source.json &lt;&lt; EOF
+{
+  "repo": "https://github.com/Parsifal-M/backstage-dev-quotes",
+  "repo-ref": "main"
+}
+EOF
+cat &gt; ./config/plugins-list.yaml &lt;&lt; EOF
+.:
+EOF</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Setup your environment to push images automatically into your container registry by the <code>.env</code> file as:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat &gt; ./config/.env &lt;&lt; EOF
+# Registry configuration
+REGISTRY_URL=&lt;YOUR_REGISTRY&gt;
+REGISTRY_INSECURE=false
+
+REGISTRY_USERNAME=&lt;YOUR_USERNAME&gt;
+REGISTRY_PASSWORD=&lt;YOUR_PASSWORD&gt;
+
+REGISTRY_NAMESPACE=&lt;YOUR_NAMESPACE&gt;
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please, update it with your own configuration.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Build and publish the OCI image of the dynamic plugin into your container registry:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it \
+  --device /dev/fuse \
+  -v ./config:/config:z \
+  -v ./workspace:/workspace:z \
+  -v ./outputs:/outputs:z \
+  quay.io/rhdh-community/dynamic-plugins-factory:1.8 \
+  --workspace-path ./ \
+  --push-images</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -507,7 +593,8 @@ yarn build</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - package: oci://quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1!parsifal-m-plugin-dev-quotes-homepage
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - package:
+         oci://quay.io/rhdh-adventure-organization/parsifal-m-plugin-dev-quotes-homepage:3.0.8!parsifal-m-plugin-dev-quotes-homepage
         disabled: false
         pluginConfig:
           dynamicPlugins:
@@ -527,18 +614,6 @@ yarn build</code></pre>
                     menuItem:
                       text: Quote
                     path: /devquote</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Push the image into a Container Image Registry:</p>
-</li>
-</ol>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push quay.io/rhdh-adventure-organization/backstage-dev-quotes-dynamic-plugin:v0.0.1</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">

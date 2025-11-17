@@ -997,7 +997,7 @@ To disable guest login set the <code>environment</code> to <code>production</cod
 </table>
 </div>
 <div class="paragraph">
-<p>Appling the configuration:</p>
+<p>Applying the configuration:</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -1185,10 +1185,16 @@ dynamic plugin provided by Red Hat Developer Hub.</p>
 <li>
 <p>backstage-plugin-scaffolder-backend-module-gitlab-dynamic</p>
 </li>
+<li>
+<p>immobiliarelabs-backstage-plugin-gitlab-backend-dynamic</p>
+</li>
+<li>
+<p>immobiliarelabs-backstage-plugin-gitlab</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>More information about Dynamic Plugins <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/introduction_to_plugins/index">here</a>.</p>
+<p>More information about Dynamic Plugins <a href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/introduction_to_plugins/index">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>The following steps will depend of the mechanism used to operate Red Hat Developer Hub:</p>
@@ -1224,7 +1230,10 @@ dynamic plugin provided by Red Hat Developer Hub.</p>
       - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-gitlab-org-dynamic
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
-        disabled: false</code></pre>
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab</code></pre>
 </div>
 </div>
 <div class="paragraph">
