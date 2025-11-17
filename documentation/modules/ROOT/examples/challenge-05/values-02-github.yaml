@@ -1,0 +1,71 @@
+global:
+  clusterRouterBase: "${basedomain}"
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # GitHub Plugins
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-catalog-backend-module-github-org-dynamic
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-github-dynamic
+        disabled: false
+      # RBAC Plugins
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+        disabled: false
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false        
+upstream:
+  backstage:
+    extraAppConfig:
+      - configMapRef: rhdh-app-config
+        filename: rhdh-app-config.yaml
+    extraEnvVarsSecrets:
+      - rhdh-secrets
+      - git-secrets
+    extraVolumeMounts:
+      - mountPath: /opt/app-root/src/dynamic-plugins-root
+        name: dynamic-plugins-root
+      - mountPath: /tmp
+        name: temp
+      - mountPath: /opt/app-root/src/rbac
+        name: rbac-policies
+    extraVolumes:
+      - name: dynamic-plugins-root
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 5Gi
+      - name: dynamic-plugins
+        configMap:
+          defaultMode: 420
+          name: 'rhdh-dynamic-plugins'
+          optional: true
+      - name: dynamic-plugins-npmrc
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: 'rhdh-dynamic-plugins-npmrc'
+      - name: dynamic-plugins-registry-auth
+        secret:
+          defaultMode: 416
+          optional: true
+          secretName: 'rhdh-dynamic-plugins-registry-auth'
+      - name: npmcacache
+      - name: temp
+      - name: rbac-policies
+        configMap:
+          defaultMode: 420
+          name: rbac-policies
+
