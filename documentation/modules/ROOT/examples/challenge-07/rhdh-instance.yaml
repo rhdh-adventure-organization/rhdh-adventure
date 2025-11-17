@@ -30,3 +30,5 @@ spec:
       enabled: true
   database:
     enableLocalDb: true
+  monitoring:
+    enabled: true
