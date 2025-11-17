@@ -30,13 +30,12 @@ this xref:01-setup.adoc#ocpsetup-monitoring[step] of the setup.
 Additionally Red Hat Developer Hub provides and integrates some functionalities to monitor the status of the application.
 These capabilities are:
 
-* Metrics for gather insights and monitor performance of the instance. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/monitoring_and_logging/index[here]
-* Audit logs to register user activities, system events, and data changes. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/audit_logs_in_red_hat_developer_hub/index[here].
-* Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/telemetry_data_collection/index[here].
+* Metrics for gather insights and monitor performance of the instance. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/monitoring_and_logging/index[here]
+* Audit logs to register user activities, system events, and data changes. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/audit_logs_in_red_hat_developer_hub/index[here].
+* Telemetry data for collecting and analyzing to improve the experience. Information link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/telemetry_data_collection/index[here].
 
 Additionally, Red Hat Developer Hub provides a plugin to deliver detailed analytics and insights on adoption
-and engagement of the platform. This plugin is called link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/adoption_insights_in_red_hat_developer_hub/index[Adoption Insights].
-To enable it, you need to install the plugin and configure it with the correct parameters.
+and engagement of the platform. This plugin is called link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html/adoption_insights_in_red_hat_developer_hub/index[Adoption Insights].
 
 Modify `rhdh-app-config` ConfigMap to add this configuration (as part of the `app` block) as:
 
@@ -101,60 +100,6 @@ oc rollout restart deployment/rhdh-developer-hub
 ----
 ====
 
-Once we have the configuration for the Adoption Insights plugin, we can continue as:
-
-[tabs]
-====
-By Helm Chart::
-+
---
-Extend the `values.yaml` file to add the list of plugins to use and upgrade the Helm release:
-
-For GitHub:
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-helm upgrade --install rhdh \
-    openshift-helm-charts/redhat-developer-hub \
-    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-github.yaml \
-    --set global.clusterRouterBase=$basedomain
-----
-
-For GitLab:
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-helm upgrade --install rhdh \
-    openshift-helm-charts/redhat-developer-hub \
-    -f ./documentation/modules/ROOT/examples/challenge-07/values-01-gitlab.yaml \
-    --set global.clusterRouterBase=$basedomain
-----
-
-WARNING: The name used for the Red Hat Developer Hub instance is `rhdh`. If you choose a different name, please replace that pattern in the command with the name of your instance.
---
-By Operator::
-+
---
-For GitHub:
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-dynamic-plugins-cm-github-01.yaml
-----
-
-For GitLab:
-
-[.console-input]
-[source, bash, subs="+macros,+attributes"]
-----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-dynamic-plugins-cm-gitlab-01.yaml
-----
---
-====
-
 Once the Red Hat Developer Hub is redeployed is created, the user can visualize the insights
 from the **Adoption Insights** menu under the **Administration** block. A similar dashboard
 is available:
@@ -216,15 +161,15 @@ helm upgrade --install rhdh \
 By Operator::
 +
 --
-Currently, the Red Hat Developer Hub Operator does not support creating a ServiceMonitor by default.
-You must complete the following steps to create a ServiceMonitor to scrape metrics from the endpoint.
-
-Here, there is an example of the ServiceMonitor to scrape metrics:
+The Operator provides a configuration to create automatically the ServiceMonitor during the Backstage
+life cycle. That configuration is similar to:
 
 [.console-input]
 [source, yaml, subs="+macros,+attributes"]
 ----
-include::example$/challenge-07/service-monitor-operator.yaml[]
+spec:
+  monitoring:
+    enabled: true
 ----
 
 This command will create it:
@@ -232,7 +177,7 @@ This command will create it:
 [.console-input]
 [source, bash, subs="+macros,+attributes"]
 ----
-oc apply -f ./documentation/modules/ROOT/examples/challenge-07/service-monitor-operator.yaml
+oc apply -f ./documentation/modules/ROOT/examples/challenge-07/rhdh-instance.yaml
 ----
 --
 ====

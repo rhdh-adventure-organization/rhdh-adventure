@@ -111,3 +111,8 @@ data:
           - catalog
           - scaffolder
           - permission
+
+    scaffolder:
+      notifications:
+        templateUpdate:
+          enabled: true
