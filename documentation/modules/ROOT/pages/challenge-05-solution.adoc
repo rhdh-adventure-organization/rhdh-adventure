@@ -155,7 +155,7 @@ GitHub::
 ----
 sed -e "s|\$rhdhname|$rhdhname|g" \
     -e "s|\$basedomain|$basedomain|g" \
-    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github.yaml | oc apply -f -
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github-01.yaml | oc apply -f -
 ----
 
 The operator will redeploy the instance to apply the new changes. For a Helm release, we need
@@ -175,7 +175,7 @@ GitLab::
 ----
 sed -e "s|\$rhdhname|$rhdhname|g" \
     -e "s|\$basedomain|$basedomain|g" \
-    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab.yaml | oc apply -f -
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab-01.yaml | oc apply -f -
 ----
 
 The operator will redeploy the instance to apply the new changes. For a Helm release, we need
@@ -189,9 +189,191 @@ oc rollout restart deployment/rhdh-developer-hub
 --
 ====
 
-Clicking the `Self Service` button from the top bar the list of software templates available should appear:
+Clicking the `Self-Service` button from the top bar the list of software templates available should appear:
 
 image::challenge-05/rhdh-software-templates.png[Software Templates available to be used]
+
+[TIP]
+====
+From Red Hat Developer Hub 1.8.0 there is a way to create a relationship between the component and the software template
+to track the changes along the time. This process requires enable the
+`backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic` plugin
+to add the `spec.scaffoldedFrom` property into the catalog definition. Having that property Red Hat Developer Hub
+will visualize the relationship between both entities.
+
+Additionally we can enable notifications when a new version of the template is deployed, so, we can track
+that our component was created from a previous version. It can be very helpful to review the new version
+of the template and apply some changes into our current version of the component. To enable notifications
+the `backstage-plugin-notifications` and `backstage-plugin-notifications-backend-dynamic` must be enabled.
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false
+----
+====
+
+Apply this configuration depends of the deployment mechanism:
+
+[tabs]
+====
+By Helm Chart::
++
+--
+This configuration must be done in the `values.yaml` file similar to:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+global:
+  # Other configurations
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # Other Plugins
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false
+----
+
+To apply this configuration for GitHub use this command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-05/values-02-github.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+
+In the case of GitLab use this command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+helm upgrade --install rhdh \
+    openshift-helm-charts/redhat-developer-hub \
+    -f ./documentation/modules/ROOT/examples/challenge-05/values-02-gitlab.yaml \
+    --set global.clusterRouterBase=$basedomain
+----
+--
+By Operator::
++
+--
+Update the `rhdh-dynamic-plugins` ConfigMap to add the definition of the new plugin:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhdh-dynamic-plugins
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      # Other Plugins
+      # Scaffolder Relation Processor
+      - package: ./dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-scaffolder-relation-processor-dynamic
+        disabled: false
+      # Notifications
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications
+        disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-notifications-backend-dynamic
+        disabled: false
+----
+
+To apply this configuration for GitHub use this command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-dynamic-plugins-cm-github-02.yaml
+----
+
+In the case of GitLab use this command:
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc apply -f ./documentation/modules/ROOT/examples/challenge-05/rhdh-dynamic-plugins-cm-gitlab-02.yaml
+----
+--
+====
+
+The last part is enable the notifications adding the following configuration to Red Hat Developer Hub:
+
+[.console-input]
+[source, yaml, subs="+macros,+attributes"]
+----
+    scaffolder:
+      notifications:
+        templateUpdate:
+          enabled: true
+----
+
+Apply this configuration based on your SCM server:
+
+[tabs]
+====
+GitHub::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-github-02.yaml | oc apply -f -
+----
+
+The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc rollout restart deployment/rhdh-developer-hub
+----
+--
+GitLab::
++
+--
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+sed -e "s|\$rhdhname|$rhdhname|g" \
+    -e "s|\$basedomain|$basedomain|g" \
+    ./documentation/modules/ROOT/examples/challenge-05/rhdh-app-config-cm-gitlab-02.yaml | oc apply -f -
+----
+
+The operator will redeploy the instance to apply the new changes. For a Helm release, we need
+to rollout the deployment.
+
+[.console-input]
+[source, bash, subs="+macros,+attributes"]
+----
+oc rollout restart deployment/rhdh-developer-hub
+----
+--
+====
 
 [#onboard-solution]
 == 🧞🛬 Onboarding
@@ -229,3 +411,17 @@ image::challenge-05/rhdh-onboard-template-05.png[Results of the onboarding workf
 New component registered in Red Hat Developer Hub
 
 image::challenge-05/rhdh-onboard-template-06.png[New component overview page]
+
+[TIP]
+====
+To verify the dependency between components and templates, let's create a new component
+using the sample template as we did previously in this exercise. After its creation verify that the `spec.scaffolderFrom`
+exists in the `catalog-info.yaml` file generated, and we can see the relationship in the `Dependencies` tab
+of the component.
+
+image::challenge-05/rhdh-component-template-relation.png[Dependency between a component and a template]
+
+**BONUS TRACK**: If we change the version of the template used, a notification will appear similar to:
+
+image::challenge-05/rhdh-notifications.png[Notifications]
+====

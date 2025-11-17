@@ -38,6 +38,7 @@ To resolve this challenge you can start checking the following references:
 * link:https://redhatquickcourses.github.io/devhub-build/devhub-build/1/chapter1/templates.html[A deeper dive into Software Templates]
 * link:https://github.com/redhat-developer/red-hat-developer-hub-software-templates[Red Hat Developer Hub Software Templates Library]
 * link:https://developers.redhat.com/learn/streamline-development-github-integration-and-software-templates-red-hat-developer-hub[Streamline Development: GitHub Integration and Software Templates in Red Hat Developer Hub]
+* link:https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.8/html-single/customizing_red_hat_developer_hub/index#proc-enabling-software-template-version-update-notifications_configuring-templates[Enabling Software Template version update notifications in Red Hat Developer Hub]
 
 [#softwaretemplate-solution]
 === 🧞💀 Software Template Solution
